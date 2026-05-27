@@ -1,9 +1,17 @@
-const productionEntry = "/Portfolio/assets/app.js";
+const productionStylesheet = "/Portfolio/assets/index-2pSaNgVX.css?v=20260527-luxury";
+const productionEntry = "/Portfolio/assets/index-Cu1ibP2T.js?v=20260527-luxury";
 const portraitFallbackSources = [
   "/Portfolio/assets/rod-allen-profile-web-BRP0ZP85.jpg",
   "/Portfolio/rod-allen-profile-clean.jpg?v=20260527c",
   "https://raw.githubusercontent.com/Dahon19/dahon19.github.io/master/Portfolio/rod-allen-profile-clean.jpg"
 ];
+
+if (!document.querySelector(`link[href^="${productionStylesheet.split("?")[0]}"]`)) {
+  const stylesheet = document.createElement("link");
+  stylesheet.rel = "stylesheet";
+  stylesheet.href = productionStylesheet;
+  document.head.appendChild(stylesheet);
+}
 
 import(/* @vite-ignore */ productionEntry);
 
