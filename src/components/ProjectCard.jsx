@@ -60,7 +60,7 @@ export function ProjectCard({ project, TechIcon, delay = 0 }) {
 
         <div className="project-card__actions">
           <span className="project-card__action">
-            <span>Tech Stack</span>
+            <span>Architecture Summary</span>
             <ArrowUpRight size={16} />
           </span>
           <span className="project-card__action project-card__action--muted">

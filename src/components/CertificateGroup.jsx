@@ -20,8 +20,8 @@ export function CertificateGroup({ title, certificates, icon: Icon, delay = 0 })
             key={`${certificate.title}-${certificate.date}`}
           >
             <strong>{certificate.title}</strong>
-            <span>{certificate.location}</span>
             <small>{certificate.date}</small>
+            <span>{certificate.location}</span>
           </div>
         ))}
       </div>

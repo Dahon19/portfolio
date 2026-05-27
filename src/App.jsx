@@ -311,12 +311,14 @@ function useSectionObservers() {
 function HomeSection({ typedRole, reducedMotion }) {
   return (
     <section className="hero section" id="home">
+      <div className="hero__mesh" aria-hidden="true" />
       <div className="hero__ambient hero__ambient--one" aria-hidden="true" />
       <div className="hero__ambient hero__ambient--two" aria-hidden="true" />
       <div className="hero__container container">
         <div className="hero__grid">
           <div className="hero__copy" data-reveal>
             <span className="hero__eyebrow">Professional Information Technology Portfolio</span>
+            <p className="hero__kicker">Luxury presentation for software engineering, IT instruction, and systems work</p>
             <h1 className="hero__title">{portfolioData.profile.name}</h1>
             <p className="hero__role">
               <span className="hero__role-static">Fresh Graduate</span>
@@ -327,6 +329,12 @@ function HomeSection({ typedRole, reducedMotion }) {
               </span>
             </p>
             <p className="hero__description">{portfolioData.profile.intro}</p>
+
+            <div className="hero__meta-list" aria-label="Primary value areas">
+              <span>System Development</span>
+              <span>Technical Support</span>
+              <span>IT Instruction</span>
+            </div>
 
             <div className="hero__actions">
               <a href="#projects" className="button" aria-label="View portfolio projects">
@@ -380,6 +388,9 @@ function HomeSection({ typedRole, reducedMotion }) {
                   <span key={item}>{item}</span>
                 ))}
               </div>
+              <p className="hero-card__note">
+                Built to present practical development capability, instructional potential, and recruiter-ready clarity.
+              </p>
             </div>
           </aside>
         </div>
@@ -402,6 +413,7 @@ function AboutSection() {
         <div className="about__grid">
           <div className="about__story surface" data-reveal>
             <p>{portfolioData.profile.about}</p>
+            <div className="about__signature-line" />
           </div>
 
           <div className="about__highlights">
@@ -583,6 +595,13 @@ function ContactSection() {
               <div>
                 <h3>Best fit roles</h3>
                 <p>IT instructor, technical support, system development, and entry-level software roles.</p>
+              </div>
+            </article>
+            <article className="contact-card" data-reveal style={{ "--delay": "180ms" }}>
+              <ArrowRight size={20} />
+              <div>
+                <h3>Portfolio objective</h3>
+                <p>A clear, polished showcase for interviews, faculty applications, and junior software opportunities.</p>
               </div>
             </article>
           </div>
