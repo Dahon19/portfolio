@@ -1,13 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@500;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap");
 
 :root {
   --header-height: 5.9rem;
   --bg-deep: #07101d;
   --bg-deeper: #091427;
   --bg-soft: #111f37;
-  --bg-section: #f5f5f1;
-  --bg-section-alt: #ebe9e1;
-  --surface: rgba(255, 255, 255, 0.88);
+  --bg-section: #f6f3ec;
+  --bg-section-alt: #ece8df;
+  --surface: rgba(255, 255, 255, 0.9);
   --surface-strong: rgba(15, 25, 39, 0.92);
   --surface-dark: rgba(10, 19, 31, 0.92);
   --surface-border: rgba(43, 69, 112, 0.15);
@@ -20,12 +20,15 @@
   --heading-dark: #101a27;
   --accent: #c5a668;
   --accent-strong: #a88346;
+  --accent-ink: #59401d;
+  --blue: #4f7cff;
+  --blue-soft: rgba(79, 124, 255, 0.12);
   --accent-soft: rgba(197, 166, 104, 0.12);
   --accent-glow: rgba(197, 166, 104, 0.26);
   --success-soft: rgba(76, 214, 176, 0.14);
-  --shadow-sm: 0 14px 30px rgba(12, 18, 28, 0.08);
-  --shadow-md: 0 24px 60px rgba(7, 15, 26, 0.12);
-  --shadow-lg: 0 34px 100px rgba(4, 10, 20, 0.28);
+  --shadow-sm: 0 10px 24px rgba(12, 18, 28, 0.08);
+  --shadow-md: 0 24px 64px rgba(7, 15, 26, 0.13);
+  --shadow-lg: 0 40px 120px rgba(4, 10, 20, 0.34);
   --radius-sm: 1rem;
   --radius-md: 1.5rem;
   --radius-lg: 2rem;
@@ -50,9 +53,9 @@ body {
   font-family: "Inter", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(197, 166, 104, 0.12), transparent 22%),
-    radial-gradient(circle at top right, rgba(71, 107, 188, 0.16), transparent 28%),
-    linear-gradient(180deg, #060d17 0%, #0a1424 22%, #ebe8df 22.01%, #f8f5ee 100%);
+    radial-gradient(circle at 15% 5%, rgba(197, 166, 104, 0.18), transparent 24rem),
+    radial-gradient(circle at 80% 10%, rgba(79, 124, 255, 0.18), transparent 28rem),
+    linear-gradient(180deg, #050b14 0%, #071221 24rem, #ebe8df 24.05rem, #f8f5ee 100%);
   overflow-x: hidden;
 }
 
@@ -72,9 +75,9 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Cormorant Garamond", serif;
-  line-height: 0.98;
-  font-weight: 700;
+  font-family: "Manrope", "Inter", sans-serif;
+  line-height: 1.04;
+  font-weight: 800;
 }
 
 p,
@@ -121,7 +124,7 @@ textarea {
 
 .section {
   position: relative;
-  padding: 4.4rem 0;
+  padding: 5.25rem 0;
 }
 
 [data-reveal] {
@@ -144,8 +147,8 @@ textarea {
 
 .section-heading {
   display: grid;
-  gap: 0.9rem;
-  margin-bottom: 2.8rem;
+  gap: 1rem;
+  margin-bottom: 3.1rem;
 }
 
 .section-heading--center {
@@ -180,22 +183,24 @@ textarea {
 }
 
 .section-heading__title {
-  max-width: 12ch;
+  max-width: 18ch;
   color: var(--heading-dark);
-  font-size: 3.75rem;
+  font-size: 3.65rem;
   letter-spacing: 0;
+  text-wrap: balance;
 }
 
 .section-heading__subtitle {
   max-width: 720px;
   color: var(--text-dark-soft);
-  font-size: 1rem;
+  font-size: 1.06rem;
 }
 
 .surface {
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.82);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 252, 246, 0.84));
   box-shadow: var(--shadow-md);
   backdrop-filter: blur(22px);
 }
@@ -236,7 +241,7 @@ textarea {
   background:
     linear-gradient(145deg, rgba(197, 166, 104, 0.95), rgba(150, 117, 59, 0.9));
   color: #fff9ef;
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Space Grotesk", "Manrope", sans-serif;
   font-weight: 800;
   box-shadow: 0 16px 34px rgba(141, 110, 57, 0.32);
 }
@@ -309,8 +314,11 @@ textarea {
 }
 
 .hero {
-  padding: 3rem 0 3.2rem;
+  min-height: calc(100dvh - var(--header-height));
+  padding: 4.2rem 0 5rem;
   isolation: isolate;
+  display: grid;
+  align-items: center;
 }
 
 .hero__mesh {
@@ -355,13 +363,13 @@ textarea {
 
 .hero__grid {
   display: grid;
-  gap: 1.6rem;
-  align-items: stretch;
+  gap: 2rem;
+  align-items: center;
 }
 
 .hero__copy {
   display: grid;
-  gap: 1.1rem;
+  gap: 1.15rem;
   align-content: center;
   animation: content-enter 420ms var(--ease-out) both;
 }
@@ -380,9 +388,9 @@ textarea {
 }
 
 .hero__title {
-  max-width: 7ch;
+  max-width: 11ch;
   color: var(--heading);
-  font-size: 6rem;
+  font-size: 5.75rem;
   letter-spacing: 0;
   text-wrap: balance;
 }
@@ -421,9 +429,9 @@ textarea {
 }
 
 .hero__description {
-  max-width: 38rem;
-  color: #cfd8e6;
-  font-size: 1.06rem;
+  max-width: 42rem;
+  color: #d9e2f0;
+  font-size: 1.12rem;
 }
 
 .hero__meta-list {
@@ -437,12 +445,32 @@ textarea {
   align-items: center;
   min-height: 2.2rem;
   padding: 0.55rem 0.88rem;
-  border: 1px solid rgba(197, 166, 104, 0.16);
+  border: 1px solid rgba(197, 166, 104, 0.22);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.045);
   color: #e8edf6;
   font-size: 0.84rem;
   font-weight: 600;
+}
+
+.hero__proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  max-width: 45rem;
+}
+
+.hero__proof span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.15rem;
+  padding: 0.48rem 0.75rem;
+  border: 1px solid rgba(141, 178, 255, 0.16);
+  border-radius: 0.85rem;
+  background: rgba(141, 178, 255, 0.055);
+  color: #b9c9e2;
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .hero__actions {
@@ -556,6 +584,7 @@ textarea {
 .hero__panel {
   display: grid;
   gap: 1rem;
+  align-self: stretch;
 }
 
 .hero-card {
@@ -569,6 +598,12 @@ textarea {
     transform 280ms var(--ease-out),
     border-color 280ms ease,
     box-shadow 280ms ease;
+}
+
+.hero-card--focus {
+  background:
+    radial-gradient(circle at top left, rgba(197, 166, 104, 0.12), transparent 45%),
+    linear-gradient(180deg, rgba(13, 24, 39, 0.96), rgba(9, 17, 28, 0.98));
 }
 
 .hero-card:hover {
@@ -599,7 +634,7 @@ textarea {
   border-radius: 1.65rem;
   overflow: hidden;
   aspect-ratio: 4 / 4.75;
-  min-height: 23rem;
+  min-height: 24rem;
   background:
     radial-gradient(circle at top, rgba(197, 166, 104, 0.14), rgba(255, 255, 255, 0.03) 48%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
@@ -684,6 +719,7 @@ textarea {
 .hero-card__topics span {
   background: rgba(197, 166, 104, 0.09);
   color: #dec89c;
+  border: 1px solid rgba(197, 166, 104, 0.12);
 }
 
 .hero-card__note {
@@ -706,21 +742,24 @@ textarea {
 .timeline,
 .services,
 .certificates {
-  background: linear-gradient(180deg, var(--bg-section-alt), var(--bg-section));
+  background:
+    radial-gradient(circle at 12% 0%, rgba(79, 124, 255, 0.06), transparent 22rem),
+    radial-gradient(circle at 88% 22%, rgba(197, 166, 104, 0.07), transparent 20rem),
+    linear-gradient(180deg, var(--bg-section-alt), var(--bg-section));
 }
 
 .about__grid,
 .timeline__layout,
 .contact__panel {
   display: grid;
-  gap: 1.25rem;
+  gap: 1.4rem;
 }
 
 .about__story,
 .highlight-card,
 .timeline__aside,
 .projects__intro {
-  padding: 1.8rem;
+  padding: 2rem;
 }
 
 .about__story p,
@@ -736,7 +775,8 @@ textarea {
 }
 
 .about__story p {
-  font-size: 1.06rem;
+  color: #303b4a;
+  font-size: 1.08rem;
 }
 
 .about__signature-line {
@@ -755,7 +795,7 @@ textarea {
 .projects__intro h3 {
   margin: 0.75rem 0;
   color: var(--heading-dark);
-  font-size: 2rem;
+  font-size: 1.85rem;
   letter-spacing: 0;
 }
 
@@ -771,7 +811,7 @@ textarea {
 .projects__grid,
 .certificates__grid {
   display: grid;
-  gap: 1.35rem;
+  gap: 1.45rem;
 }
 
 .skill-card,
@@ -798,17 +838,41 @@ textarea {
 .highlight-card:hover,
 .about__story:hover,
 .projects__intro:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 48px rgba(7, 18, 34, 0.16);
-  border-color: rgba(74, 125, 255, 0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 26px 68px rgba(7, 18, 34, 0.18);
+  border-color: rgba(79, 124, 255, 0.24);
 }
 
 .skill-card {
-  padding: 1.55rem;
+  position: relative;
+  padding: 1.65rem;
   border-radius: var(--radius-lg);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(250, 247, 241, 0.92));
+  background:
+    radial-gradient(circle at top right, rgba(79, 124, 255, 0.075), transparent 45%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(250, 247, 241, 0.92));
   border: 1px solid var(--surface-border);
   box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.skill-card::after {
+  content: "";
+  position: absolute;
+  inset: auto 1.5rem 0;
+  height: 3px;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(90deg, var(--accent), var(--blue));
+  opacity: 0;
+  transform: scaleX(0.35);
+  transition:
+    opacity 220ms ease,
+    transform 220ms var(--ease-out);
+  transform-origin: left;
+}
+
+.skill-card:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .skill-card__header {
@@ -1003,17 +1067,19 @@ textarea {
 
 .projects__grid {
   grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: stretch;
 }
 
 .project-card {
   position: relative;
   grid-column: span 6;
-  padding: 1.8rem;
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.25rem;
   border-radius: var(--radius-xl);
   border: 1px solid var(--surface-border);
   background:
-    radial-gradient(circle at top right, rgba(197, 166, 104, 0.08), transparent 30%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(248, 245, 239, 0.94));
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(249, 246, 239, 0.96));
   box-shadow: var(--shadow-md);
   overflow: hidden;
 }
@@ -1039,6 +1105,68 @@ textarea {
 
 .project-card:nth-child(3n + 1) {
   grid-column: span 12;
+  grid-template-columns: minmax(230px, 0.36fr) minmax(0, 0.64fr);
+  align-items: stretch;
+}
+
+.project-card__preview {
+  position: relative;
+  min-height: 12.5rem;
+  display: grid;
+  align-content: end;
+  gap: 0.7rem;
+  padding: 1.25rem;
+  border-radius: 1.8rem;
+  background:
+    linear-gradient(135deg, rgba(9, 17, 28, 0.95), rgba(12, 30, 58, 0.94)),
+    radial-gradient(circle at top right, rgba(197, 166, 104, 0.32), transparent 40%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.project-card__preview::before,
+.project-card__preview::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.project-card__preview::before {
+  top: -3rem;
+  right: -2rem;
+  width: 9rem;
+  height: 9rem;
+  background: rgba(197, 166, 104, 0.22);
+  filter: blur(4px);
+}
+
+.project-card__preview::after {
+  left: 1.15rem;
+  top: 1.15rem;
+  width: 4.8rem;
+  height: 4.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.12), transparent),
+    radial-gradient(circle, rgba(79, 124, 255, 0.24), transparent 68%);
+}
+
+.project-card__preview span {
+  position: relative;
+  color: #ead8ad;
+  font-family: "Space Grotesk", "Manrope", sans-serif;
+  font-size: 2.3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.project-card__preview strong {
+  position: relative;
+  max-width: 15rem;
+  color: #dfe8f8;
+  font-size: 0.86rem;
+  line-height: 1.45;
 }
 
 .project-card__top {
@@ -1052,15 +1180,16 @@ textarea {
 .project-card__body {
   display: grid;
   gap: 1.15rem;
-  margin-top: 1.15rem;
 }
 
 .project-card__title {
-  font-size: 2.18rem;
+  font-size: 2rem;
+  line-height: 1.12;
 }
 
 .project-card__description {
-  font-size: 1rem;
+  color: #384557;
+  font-size: 1.02rem;
 }
 
 .project-card__meta {
@@ -1085,12 +1214,13 @@ textarea {
 }
 
 .stack-chip {
-  background: #f4f1ea;
-  border: 1px solid rgba(167, 134, 75, 0.08);
+  background: #f6f1e6;
+  border: 1px solid rgba(167, 134, 75, 0.16);
+  color: #1b2636;
 }
 
 .stack-chip:hover {
-  background: #efe6d4;
+  background: #efe3cb;
 }
 
 .stack-chip__icon {
@@ -1106,7 +1236,7 @@ textarea {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   padding-top: 1.1rem;
-  border-top: 1px solid rgba(96, 124, 173, 0.12);
+  border-top: 1px solid rgba(96, 124, 173, 0.16);
 }
 
 .project-card__details ul {
@@ -1172,11 +1302,15 @@ textarea {
 }
 
 .certificate-group {
-  padding: 1.6rem;
+  position: relative;
+  padding: 1.65rem;
   border-radius: var(--radius-lg);
   border: 1px solid var(--surface-border);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(249, 246, 240, 0.92));
+  background:
+    radial-gradient(circle at top right, rgba(197, 166, 104, 0.08), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(249, 246, 240, 0.93));
   box-shadow: var(--shadow-md);
+  overflow: hidden;
 }
 
 .certificate-group__header,
@@ -1195,18 +1329,32 @@ textarea {
 .certificate-group__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.9rem;
+  gap: 0.85rem;
 }
 
 .certificate-card {
-  padding: 1.1rem 1.05rem;
+  position: relative;
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem 1rem 1rem 2rem;
   border-radius: 1.35rem;
   border: 1px solid rgba(96, 124, 173, 0.14);
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.76);
   transition:
     transform 220ms ease,
     box-shadow 220ms ease,
     border-color 220ms ease;
+}
+
+.certificate-card__marker {
+  position: absolute;
+  left: 0.95rem;
+  top: 1.15rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), var(--blue));
+  box-shadow: 0 0 0 5px rgba(197, 166, 104, 0.1);
 }
 
 .certificate-card:hover {
@@ -1218,7 +1366,8 @@ textarea {
 .certificate-card strong {
   display: block;
   color: var(--heading-dark);
-  font-size: 0.98rem;
+  font-size: 0.96rem;
+  line-height: 1.42;
 }
 
 .certificate-card span,
@@ -1233,15 +1382,20 @@ textarea {
 }
 
 .contact {
-  padding: 4rem 0;
+  padding: 5rem 0;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(197, 166, 104, 0.08), transparent 22rem),
+    linear-gradient(180deg, var(--bg-section), #f8f5ee);
 }
 
 .contact__panel {
   position: relative;
-  padding: 1.75rem;
+  padding: 2rem;
   border-radius: calc(var(--radius-xl) + 0.2rem);
   border: 1px solid var(--surface-border-strong);
-  background: linear-gradient(135deg, rgba(8, 18, 32, 0.98), rgba(16, 28, 43, 0.97));
+  background:
+    radial-gradient(circle at 80% 20%, rgba(79, 124, 255, 0.2), transparent 28%),
+    linear-gradient(135deg, rgba(8, 18, 32, 0.99), rgba(16, 28, 43, 0.97));
   box-shadow: var(--shadow-lg);
   overflow: hidden;
 }
@@ -1293,7 +1447,8 @@ textarea {
   padding: 1.2rem;
   border-radius: 1.25rem;
   border: 1px solid rgba(197, 166, 104, 0.1);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.055);
+  backdrop-filter: blur(14px);
 }
 
 .contact-card svg {
@@ -1322,6 +1477,7 @@ textarea {
 
   .project-card:nth-child(3n + 1) {
     grid-column: span 6;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1400,11 +1556,25 @@ textarea {
   .about__grid,
   .timeline__layout,
   .contact__panel {
-    grid-template-columns: minmax(0, 1.16fr) minmax(340px, 0.84fr);
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
   }
 
   .skills__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .skill-card {
+    grid-column: span 2;
+  }
+
+  .skill-card:nth-child(4),
+  .skill-card:nth-child(5) {
+    grid-column: span 3;
+  }
+
+  .skill-card:nth-child(6),
+  .skill-card:nth-child(7) {
+    grid-column: span 3;
   }
 }
 
@@ -1442,6 +1612,7 @@ textarea {
   .project-card,
   .project-card:nth-child(3n + 1) {
     grid-column: auto;
+    grid-template-columns: 1fr;
   }
 
   .certificate-group__grid {
@@ -1457,6 +1628,7 @@ textarea {
   .project-card,
   .project-card:nth-child(3n + 1) {
     grid-column: auto;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1490,6 +1662,10 @@ textarea {
     font-size: 4.4rem;
   }
 
+  .hero {
+    min-height: auto;
+  }
+
   .hero__panel {
     grid-template-columns: 1fr;
   }
@@ -1513,6 +1689,10 @@ textarea {
 
   .project-card__details {
     grid-template-columns: 1fr;
+  }
+
+  .project-card__preview {
+    min-height: 10rem;
   }
 }
 
@@ -1560,7 +1740,7 @@ textarea {
 
   .hero__title {
     max-width: 7ch;
-    font-size: 4rem;
+    font-size: 3.7rem;
     overflow-wrap: anywhere;
   }
 
@@ -1591,6 +1771,10 @@ textarea {
   .hero__meta-list span {
     width: 100%;
     justify-content: center;
+  }
+
+  .hero__proof span {
+    width: 100%;
   }
 
   .hero__actions,
@@ -1649,7 +1833,7 @@ textarea {
   }
 
   .section-heading__title {
-    font-size: 2.45rem;
+    font-size: 2.25rem;
   }
 
   .section-heading__subtitle,
@@ -1684,7 +1868,7 @@ textarea {
   }
 
   .hero__title {
-    font-size: 3.25rem;
+    font-size: 3rem;
   }
 
   .hero__role {

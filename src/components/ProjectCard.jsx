@@ -1,8 +1,15 @@
 import { ArrowUpRight } from "lucide-react";
 
-export function ProjectCard({ project, TechIcon, delay = 0 }) {
+export function ProjectCard({ project, TechIcon, delay = 0, index = 0 }) {
+  const projectNumber = String(index + 1).padStart(2, "0");
+
   return (
     <article className="project-card" data-reveal style={{ "--delay": `${delay}ms` }}>
+      <div className="project-card__preview" aria-hidden="true">
+        <span>{projectNumber}</span>
+        <strong>{project.category}</strong>
+      </div>
+
       <div className="project-card__top">
         <span className="project-card__category">{project.category}</span>
         <span className="project-card__reference">{project.reference}</span>

@@ -336,6 +336,12 @@ function HomeSection({ typedRole, reducedMotion }) {
               <span>Instruction</span>
             </div>
 
+            <div className="hero__proof" aria-label="Professional focus summary">
+              <span>Concise project summaries</span>
+              <span>Clear technical documentation</span>
+              <span>Practical systems thinking</span>
+            </div>
+
             <div className="hero__actions">
               <a href="#projects" className="button" aria-label="View portfolio projects">
                 View Projects <ArrowRight size={18} />
@@ -528,6 +534,7 @@ function ProjectsSection() {
               key={project.slug}
               project={project}
               TechIcon={TechIcon}
+              index={index}
               delay={index * 80}
             />
           ))}

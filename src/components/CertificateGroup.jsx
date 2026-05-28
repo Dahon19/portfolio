@@ -14,11 +14,13 @@ export function CertificateGroup({ title, certificates, icon: Icon, delay = 0 })
       </div>
 
       <div className="certificate-group__grid">
-        {certificates.map((certificate) => (
+        {certificates.map((certificate, index) => (
           <div
             className="certificate-card"
             key={`${certificate.title}-${certificate.date}`}
+            style={{ "--delay": `${index * 35}ms` }}
           >
+            <span className="certificate-card__marker" aria-hidden="true" />
             <strong>{certificate.title}</strong>
             <small>{certificate.date}</small>
             <span>{certificate.location}</span>
