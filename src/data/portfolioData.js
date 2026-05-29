@@ -1,4 +1,4 @@
-const certificatePreviewModules = import.meta.glob("../assets/certificate-previews/*.webp", {
+const certificatePreviewModules = import.meta.glob("../assets/certificate-previews/*.{webp,svg}", {
   eager: true,
   import: "default"
 });
@@ -175,7 +175,8 @@ export const portfolioData = {
       title: "Oplan Paskong Sigurado",
       date: "May 29, 2026",
       type: "Webinars / Seminars Attended",
-      location: "Google Drive shortcut"
+      location: "Google Drive",
+      preview: certificatePreview("oplan-paskong-sigurado.svg")
     },
     {
       title: "Data Analytics and Visualization Essentials",
@@ -235,9 +236,10 @@ export const portfolioData = {
     },
     {
       title: "Batch 2 of Hour of Code: Learn AI & Coding the Fun Way!",
-      date: "December 4, 2025",
+      date: "November 22, 2025",
       type: "Webinars / Seminars Attended",
-      location: "Google Drive shortcut"
+      location: "DICT MIMAROPA",
+      preview: certificatePreview("batch-2-hour-of-code.svg")
     },
     {
       title: "Hour of Code Session under the AI SmartCT",
