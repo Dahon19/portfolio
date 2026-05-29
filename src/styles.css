@@ -1354,7 +1354,7 @@ textarea {
   position: relative;
   display: grid;
   gap: 0.2rem;
-  padding: 1rem 1rem 1rem 2rem;
+  padding: 1rem;
   border-radius: 1.35rem;
   border: 1px solid rgba(70, 54, 30, 0.1);
   background: rgba(255, 253, 248, 0.86);
@@ -1362,6 +1362,22 @@ textarea {
     transform 220ms ease,
     box-shadow 220ms ease,
     border-color 220ms ease;
+}
+
+.certificate-card:not(:has(.certificate-card__preview)) {
+  padding-left: 2rem;
+}
+
+.certificate-card__preview {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  display: block;
+  object-fit: cover;
+  border-radius: 1rem;
+  margin-bottom: 0.55rem;
+  border: 1px solid rgba(70, 54, 30, 0.11);
+  background: #f6efe3;
+  box-shadow: 0 12px 24px rgba(30, 24, 16, 0.1);
 }
 
 .certificate-card__marker {

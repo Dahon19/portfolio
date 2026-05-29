@@ -20,7 +20,16 @@ export function CertificateGroup({ title, certificates, icon: Icon, delay = 0 })
             key={`${certificate.title}-${certificate.date}`}
             style={{ "--delay": `${index * 35}ms` }}
           >
-            <span className="certificate-card__marker" aria-hidden="true" />
+            {certificate.preview ? (
+              <img
+                src={certificate.preview}
+                alt={`${certificate.title} sanitized certificate preview`}
+                className="certificate-card__preview"
+                loading="lazy"
+              />
+            ) : (
+              <span className="certificate-card__marker" aria-hidden="true" />
+            )}
             <strong>{certificate.title}</strong>
             <small>{certificate.date}</small>
             <span>{certificate.location}</span>

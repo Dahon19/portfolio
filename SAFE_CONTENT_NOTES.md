@@ -7,6 +7,7 @@ This portfolio was prepared as a public-safe build based on local `SysProjects` 
 - Presentable project summaries only
 - Public-safe skill summaries
 - Sanitized certificate summaries grouped by relevance
+- Sanitized certificate preview thumbnails generated from selected certificate files
 - A contact section layout without private personal contact details
 
 ## What was excluded for privacy
@@ -30,6 +31,8 @@ This portfolio was prepared as a public-safe build based on local `SysProjects` 
 ## Certificate handling
 
 - Certificate entries were summarized from folder/file inventory and presented as text
+- Selected certificate previews were cropped, resized, lightly blurred, and masked to hide certificate identifiers, QR codes, verification links, and signature areas
+- Raw Drive files are not published in the portfolio
 - Only IT-relevant entries were included
 - Categories were normalized into:
   - Seminars/Webinars
@@ -39,4 +42,4 @@ This portfolio was prepared as a public-safe build based on local `SysProjects` 
 ## Notes for future updates
 
 - If you want to publish contact information later, add only the details you explicitly approve
-- If you want certificate thumbnails in the future, generate cropped public-safe images that remove identifiers before adding them to the site
+- If you want more certificate thumbnails in the future, generate cropped public-safe images that remove identifiers before adding them to the site

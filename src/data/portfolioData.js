@@ -1,3 +1,12 @@
+import advancedNetworkingDefensePreview from "../assets/certificate-previews/advanced-networking-defense.webp";
+import aiSocialImpactPreview from "../assets/certificate-previews/ai-social-impact.webp";
+import ciscoPacketTracerPreview from "../assets/certificate-previews/cisco-packet-tracer.webp";
+import computerSystemsServicingPreview from "../assets/certificate-previews/computer-systems-servicing.webp";
+import decipherAiWorkforcePreview from "../assets/certificate-previews/decipher-ai-workforce.webp";
+import designThinkingMobileWireframingPreview from "../assets/certificate-previews/design-thinking-mobile-wireframing.webp";
+import hardwareUpgradeSupportPreview from "../assets/certificate-previews/hardware-upgrade-support.webp";
+import uniathenaMasterChatgptPreview from "../assets/certificate-previews/uniathena-master-chatgpt.webp";
+
 export const portfolioData = {
   profile: {
     name: "Rod Allen B. Agregado",
@@ -22,7 +31,7 @@ export const portfolioData = {
   },
   stats: [
     { label: "Projects", value: "7" },
-    { label: "Learning Records", value: "18" },
+    { label: "Learning Records", value: "20" },
     { label: "Focus", value: "IT Systems" }
   ],
   skills: [
@@ -200,7 +209,8 @@ export const portfolioData = {
       title: "Design Thinking and Mobile App Wireframing",
       date: "December 11, 2025",
       type: "Webinars / Seminars Attended",
-      location: "Online"
+      location: "Online",
+      preview: designThinkingMobileWireframingPreview
     },
     {
       title: "The Human Side of AI: Ethics, Integrity, and Impact",
@@ -230,7 +240,22 @@ export const portfolioData = {
       title: "Decipher the Code: Challenges and Opportunities of AI Adoption Through the Lens of Multigenerational Workforce",
       date: "November 30, 2025",
       type: "Webinars / Seminars Attended",
-      location: "Online"
+      location: "Online",
+      preview: decipherAiWorkforcePreview
+    },
+    {
+      title: "Master ChatGPT",
+      date: "December 20, 2025",
+      type: "Online Courses Taken",
+      location: "UniAthena",
+      preview: uniathenaMasterChatgptPreview
+    },
+    {
+      title: "Hardware and Upgrade Support",
+      date: "December 17, 2025",
+      type: "Online Courses Taken",
+      location: "Online",
+      preview: hardwareUpgradeSupportPreview
     },
     {
       title: "Linux Fundamentals",
@@ -248,7 +273,8 @@ export const portfolioData = {
       title: "Embracing Cyber Security for Tomorrow: Advanced Networking and Defense",
       date: "November 22, 2024",
       type: "Webinars / Seminars Attended",
-      location: "Online"
+      location: "Online",
+      preview: advancedNetworkingDefensePreview
     },
     {
       title: "Data Privacy and Protection in the Digital Age",
@@ -272,7 +298,8 @@ export const portfolioData = {
       title: "Artificial Intelligence for Social Impact",
       date: "December 11, 2025",
       type: "Online Courses Taken",
-      location: "ADBI E-Learning"
+      location: "ADBI E-Learning",
+      preview: aiSocialImpactPreview
     },
     {
       title: "Computer Hardware Basics",
@@ -296,13 +323,15 @@ export const portfolioData = {
       title: "Cisco Packet Tracer",
       date: "December 2, 2025",
       type: "Online Courses Taken",
-      location: "Cisco"
+      location: "Cisco",
+      preview: ciscoPacketTracerPreview
     },
     {
       title: "Computer Systems Servicing",
       date: "November 30, 2025",
       type: "Online Courses Taken",
-      location: "Online"
+      location: "Online",
+      preview: computerSystemsServicingPreview
     }
   ],
   resume: {
