@@ -124,7 +124,7 @@ textarea {
 
 .section {
   position: relative;
-  padding: 5.25rem 0;
+  padding: clamp(3.6rem, 6vw, 5rem) 0;
 }
 
 [data-reveal] {
@@ -147,8 +147,8 @@ textarea {
 
 .section-heading {
   display: grid;
-  gap: 1rem;
-  margin-bottom: 3.1rem;
+  gap: 0.9rem;
+  margin-bottom: clamp(2rem, 4vw, 2.8rem);
 }
 
 .section-heading--center {
@@ -835,6 +835,7 @@ textarea {
 .skills__grid {
   align-items: stretch;
   grid-auto-rows: 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .skill-card,
@@ -870,7 +871,7 @@ textarea {
   position: relative;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  min-height: clamp(20rem, 23vw, 23.5rem);
+  min-height: 20rem;
   height: 100%;
   padding: 1.45rem;
   border-radius: var(--radius-lg);
@@ -949,7 +950,7 @@ textarea {
 
 .skill-card__items {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10.5rem), 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-content: start;
   gap: 0.68rem;
   min-height: 0;
@@ -961,7 +962,7 @@ textarea {
   align-items: center;
   gap: 0.48rem;
   min-width: 0;
-  min-height: 2.9rem;
+  min-height: 3rem;
   padding: 0.62rem 0.76rem;
   border-radius: 0.95rem;
   border: 1px solid rgba(70, 54, 30, 0.08);
@@ -1107,17 +1108,18 @@ textarea {
 }
 
 .projects__grid {
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
+  grid-auto-rows: 1fr;
 }
 
 .project-card {
   position: relative;
   display: grid;
   grid-template-rows: auto auto minmax(0, 1fr);
-  gap: 1.25rem;
+  gap: 1.05rem;
   height: 100%;
-  padding: 1.25rem;
+  padding: 1.18rem;
   border-radius: var(--radius-xl);
   border: 1px solid rgba(70, 54, 30, 0.13);
   background:
@@ -1153,7 +1155,7 @@ textarea {
 
 .project-card__preview {
   position: relative;
-  min-height: 12.5rem;
+  min-height: 9.8rem;
   display: grid;
   align-content: end;
   gap: 0.7rem;
@@ -1198,7 +1200,7 @@ textarea {
   position: relative;
   color: #ead8ad;
   font-family: "Space Grotesk", "Manrope", sans-serif;
-  font-size: 2.3rem;
+  font-size: 2rem;
   font-weight: 700;
   line-height: 1;
 }
@@ -1220,15 +1222,16 @@ textarea {
 }
 
 .project-card__body {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
   min-height: 0;
-  flex-direction: column;
-  gap: 1.15rem;
+  gap: 1rem;
 }
 
 .project-card__title {
-  font-size: 2rem;
+  font-size: clamp(1.28rem, 2vw, 1.72rem);
   line-height: 1.12;
+  overflow-wrap: anywhere;
 }
 
 .project-card__description {
@@ -1252,15 +1255,21 @@ textarea {
 }
 
 .project-card__stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.72rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 8.4rem), 1fr));
+  gap: 0.58rem;
 }
 
 .stack-chip {
   background: #f8f0df;
   border: 1px solid rgba(118, 82, 30, 0.14);
   color: #1b2636;
+}
+
+.project-card__stack .stack-chip {
+  width: 100%;
+  min-width: 0;
+  justify-content: flex-start;
 }
 
 .stack-chip:hover {
@@ -1311,7 +1320,8 @@ textarea {
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-top: auto;
+  align-self: end;
+  margin-top: 0;
   padding-top: 1rem;
   border-top: 1px solid rgba(96, 124, 173, 0.14);
 }
@@ -1374,17 +1384,18 @@ textarea {
 
 .certificate-group__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  align-items: stretch;
   gap: 0.75rem;
 }
 
 .certificate-card {
   position: relative;
   display: grid;
+  grid-template-rows: auto minmax(3.25rem, auto) auto auto;
   align-content: start;
-  gap: 0.16rem;
-  height: auto;
+  gap: 0.2rem;
+  height: 100%;
   padding: 0.82rem;
   border-radius: 1.15rem;
   border: 1px solid rgba(70, 54, 30, 0.1);
@@ -1410,7 +1421,7 @@ textarea {
 
 .certificate-card__preview {
   width: 100%;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 10.5;
   display: block;
   object-fit: cover;
   border-radius: 0.9rem;
@@ -1442,6 +1453,7 @@ textarea {
   color: var(--heading-dark);
   font-size: 0.9rem;
   line-height: 1.34;
+  overflow-wrap: anywhere;
 }
 
 .certificate-card span,
@@ -1557,7 +1569,7 @@ textarea {
   }
 
   .project-card:nth-child(3n + 1) {
-    grid-column: span 6;
+    grid-column: auto;
     grid-template-columns: 1fr;
   }
 }
@@ -1640,14 +1652,6 @@ textarea {
     grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
   }
 
-  .skills__grid {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  }
-
-  .projects__grid {
-    grid-auto-rows: 1fr;
-  }
-
   .skill-card,
   .skill-card:nth-child(4),
   .skill-card:nth-child(5),
@@ -1682,9 +1686,12 @@ textarea {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .skills__grid,
-  .projects__grid {
+  .skills__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .projects__grid {
+    grid-template-columns: 1fr;
   }
 
   .project-card,
@@ -1695,10 +1702,6 @@ textarea {
 }
 
 @media (max-width: 1023px) {
-  .projects__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .project-card,
   .project-card:nth-child(3n + 1) {
     grid-column: auto;
@@ -1767,6 +1770,10 @@ textarea {
 
   .project-card__details {
     grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    min-height: auto;
   }
 
   .project-card__preview {
@@ -1842,7 +1849,7 @@ textarea {
   }
 
   .skill-card__items {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .hero__stats {
@@ -1993,15 +2000,28 @@ textarea {
   }
 
   .stack-chip,
-  .skill-card__item,
   .about__tags span,
   .list-grid span {
     width: 100%;
     justify-content: flex-start;
   }
 
+  .skill-card__items {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-group__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .certificate-group__title-wrap {
     width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .certificate-group__grid {
+    grid-template-columns: 1fr;
   }
 }
 
