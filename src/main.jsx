@@ -1,5 +1,5 @@
-const productionStylesheet = "/Portfolio/assets/app-DbEsZ1T-.css?v=20260529-full-ui-optimization";
-const productionEntry = "/Portfolio/assets/app-Hzb9I45D.js?v=20260529-full-ui-optimization";
+const productionStylesheet = "/Portfolio/assets/app-BqvCXp7J.css?v=20260529-brutalist-premium";
+const productionEntry = "/Portfolio/assets/app-Af647Psx.js?v=20260529-brutalist-premium";
 const devHosts = new Set(["localhost", "127.0.0.1"]);
 
 function loadProductionEntry() {
