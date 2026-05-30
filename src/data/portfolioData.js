@@ -148,13 +148,14 @@ export const portfolioData = {
       title: "U-Turn Accident Prevention System",
       category: "Client Project",
       description:
-        "A client-focused project designed to support accident prevention using Arduino-based control and detection components.",
+        "A client-focused project designed to support accident prevention using Arduino-based control, sensor input, and detection components.",
       techStack: {
         languages: ["C++"],
-        tools: ["Arduino", "Arduino IDE"]
+        tools: ["Arduino", "Arduino IDE", "Sensors"]
       },
       features: [
         "Arduino-based control implementation",
+        "Sensor-assisted detection support",
         "Prevention-oriented hardware logic",
         "Client-focused embedded system setup"
       ],
