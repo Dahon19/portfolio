@@ -33,18 +33,6 @@ async function main() {
 
   await copyDirectoryContents(path.join(distDir, "assets"), assetsTarget);
 
-  const distEntries = await fs.readdir(distDir, { withFileTypes: true });
-
-  for (const entry of distEntries) {
-    if (entry.isDirectory()) {
-      continue;
-    }
-
-    const sourcePath = path.join(distDir, entry.name);
-    const targetPath = path.join(rootDir, entry.name);
-    await fs.copyFile(sourcePath, targetPath);
-  }
-
   await fs.writeFile(path.join(rootDir, ".nojekyll"), "");
 }
 
