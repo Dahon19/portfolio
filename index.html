@@ -23,9 +23,19 @@
           stylesheet.rel = "stylesheet";
           stylesheet.href = "/portfolio/assets/app-B53Im2lX.css?v=20260530-contrast-pass";
           document.head.appendChild(stylesheet);
+
+          const script = document.createElement("script");
+          script.type = "module";
+          script.crossOrigin = "";
+          script.src = "/portfolio/assets/main-DBQtuBkg.js?v=20260530-contrast-pass";
+          document.body.appendChild(script);
         }
       })();
     </script>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module">
+      if (["localhost", "127.0.0.1"].includes(window.location.hostname)) {
+        import("/src/main.jsx");
+      }
+    </script>
   </body>
 </html>
