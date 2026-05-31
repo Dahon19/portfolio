@@ -3,16 +3,19 @@ import { ArrowUpRight } from "lucide-react";
 export function ProjectCard({ project, TechIcon, delay = 0, index = 0, lensLabel = "Project" }) {
   const projectNumber = String(index + 1).padStart(2, "0");
   const techStack = [...new Set([...project.techStack.languages, ...project.techStack.tools])];
+  const hasPreviewImage = Boolean(project.preview?.src);
 
   return (
     <article className="project-card" data-lens={lensLabel.toLowerCase()} data-reveal style={{ "--delay": `${delay}ms` }}>
       <div className="project-card__preview">
-        <img
-          src={project.preview.src}
-          alt={project.preview.alt}
-          className="project-card__preview-image"
-          loading="lazy"
-        />
+        {hasPreviewImage ? (
+          <img
+            src={project.preview.src}
+            alt={project.preview.alt}
+            className="project-card__preview-image"
+            loading="lazy"
+          />
+        ) : null}
         <div className="project-card__preview-overlay" aria-hidden="true">
           <span>{projectNumber}</span>
           <strong>{lensLabel}</strong>

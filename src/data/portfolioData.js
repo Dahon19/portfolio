@@ -158,9 +158,9 @@ export const portfolioData = {
         tools: ["Arduino", "Arduino IDE", "Sensors"]
       },
       preview: {
-        src: projectPreview("bacmatic-output.svg"),
-        alt: "Concept sketch of the IoT water monitoring dashboard and sensor pool view.",
-        source: "Local project preview"
+        src: null,
+        alt: "",
+        source: "Image pending"
       },
       features: [
         "Sensor-based water condition tracking",

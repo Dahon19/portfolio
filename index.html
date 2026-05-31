@@ -17,8 +17,10 @@
     <script>
       (function () {
         const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+        const isViteDevPort = ["4173", "5173", "5174", "5175"].includes(window.location.port);
+        const isViteDevServer = isLocalHost && isViteDevPort;
 
-        if (!isLocalHost) {
+        if (!isViteDevServer) {
           const stylesheet = document.createElement("link");
           stylesheet.rel = "stylesheet";
           stylesheet.href = "/portfolio/assets/app-L4VxEolr.css";
@@ -27,13 +29,16 @@
           const script = document.createElement("script");
           script.type = "module";
           script.crossOrigin = "";
-          script.src = "/portfolio/assets/app-BmpRuGk1.js";
+          script.src = "/portfolio/assets/app-D0_uMM-4.js";
           document.body.appendChild(script);
         }
       })();
     </script>
     <script type="module">
-      if (["localhost", "127.0.0.1"].includes(window.location.hostname)) {
+      const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+      const isViteDevPort = ["4173", "5173", "5174", "5175"].includes(window.location.port);
+
+      if (isLocalHost && isViteDevPort) {
         import("/src/main.jsx");
       }
     </script>
