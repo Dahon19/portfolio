@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="description"
+      content="Rod Allen B. Agregado portfolio for IT instruction, technical support, and software development."
+    />
+    <title>Rod Allen B. Agregado | IT Portfolio</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      (function () {
+        const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+        const isViteDevPort = ["4173", "5173", "5174", "5175"].includes(window.location.port);
+        const isViteDevServer = isLocalHost && isViteDevPort;
+
+        if (!isViteDevServer) {
+          const stylesheet = document.createElement("link");
+          stylesheet.rel = "stylesheet";
+          stylesheet.href = "/portfolio/assets/app-Bc8hkoJt.css";
+          document.head.appendChild(stylesheet);
+
+          const script = document.createElement("script");
+          script.type = "module";
+          script.crossOrigin = "";
+          script.src = "/portfolio/assets/app-DfbUy0Av.js";
+          document.body.appendChild(script);
+        }
+      })();
+    </script>
+    <script type="module">
+      const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+      const isViteDevPort = ["4173", "5173", "5174", "5175"].includes(window.location.port);
+
+      if (isLocalHost && isViteDevPort) {
+        import("/src/main.jsx");
+      }
+    </script>
+  </body>
+</html>
+

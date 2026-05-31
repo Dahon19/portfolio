@@ -667,7 +667,7 @@ function ProjectsSection() {
         <SectionHeading
           eyebrow="Projects"
           title="Project showcase"
-          subtitle="A scan-friendly carousel of systems, workflow builds, and practical technical implementations."
+          subtitle="Landscape-first case studies for systems, workflow builds, and practical technical implementations."
           align="left"
         />
 
@@ -675,7 +675,7 @@ function ProjectsSection() {
           <div className="projects-showcase__header">
             <div className="projects-showcase__copy">
               <span className="projects-showcase__eyebrow">Selected work</span>
-              <h3>A cinematic case-study carousel for systems, workflow, mobile, and hardware builds.</h3>
+              <h3>A cinematic project reel with cleaner landscape previews and focused technical summaries.</h3>
               <p>
                 Each project is presented as a concise case-study panel with clear scope, contribution,
                 and technical context for fast recruiter review.
