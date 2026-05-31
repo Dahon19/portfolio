@@ -743,7 +743,6 @@ function ProjectsSection() {
               key={project.slug}
               project={project}
               TechIcon={TechIcon}
-              index={index + 1}
               delay={index * 80}
               lensLabel={projectLensLabels[getProjectLens(project)]}
             />
