@@ -1,9 +1,9 @@
-import { ArrowUpRight } from "lucide-react";
-
 export function ProjectCard({ project, TechIcon, delay = 0, index = 0, lensLabel = "Project" }) {
   const projectNumber = String(index + 1).padStart(2, "0");
   const techStack = [...new Set([...project.techStack.languages, ...project.techStack.tools])];
   const hasPreviewImage = Boolean(project.preview?.src);
+  const visibleTechStack = techStack.slice(0, 4);
+  const extraTechCount = Math.max(techStack.length - visibleTechStack.length, 0);
 
   return (
     <article className="project-card" data-lens={lensLabel.toLowerCase()} data-reveal style={{ "--delay": `${delay}ms` }}>
@@ -15,7 +15,12 @@ export function ProjectCard({ project, TechIcon, delay = 0, index = 0, lensLabel
             className="project-card__preview-image"
             loading="lazy"
           />
-        ) : null}
+        ) : (
+          <div className="project-card__preview-empty" aria-hidden="true">
+            <span>{projectNumber}</span>
+            <strong>Preview pending</strong>
+          </div>
+        )}
         <div className="project-card__preview-overlay" aria-hidden="true">
           <span>{projectNumber}</span>
           <strong>{lensLabel}</strong>
@@ -35,7 +40,7 @@ export function ProjectCard({ project, TechIcon, delay = 0, index = 0, lensLabel
           <div className="project-card__stack-group">
             <h4>Tech stack</h4>
             <div className="project-card__stack">
-              {techStack.map((item) => (
+              {visibleTechStack.map((item) => (
                 <span className="stack-chip" key={`${project.slug}-stack-${item}`}>
                   <span className="stack-chip__icon">
                     <TechIcon name={item} />
@@ -43,32 +48,25 @@ export function ProjectCard({ project, TechIcon, delay = 0, index = 0, lensLabel
                   <span>{item}</span>
                 </span>
               ))}
+              {extraTechCount > 0 ? (
+                <span className="stack-chip stack-chip--count">+{extraTechCount}</span>
+              ) : null}
             </div>
           </div>
         </div>
 
         <div className="project-card__details">
-          <div>
-            <h4>Key features</h4>
-            <ul>
-              {project.features.slice(0, 3).map((feature) => (
-                <li key={feature}>{feature}</li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h4>Contribution</h4>
-            <p>{project.contribution}</p>
-          </div>
+          <h4>Key features</h4>
+          <ul>
+            {project.features.slice(0, 2).map((feature) => (
+              <li key={feature}>{feature}</li>
+            ))}
+          </ul>
         </div>
 
-        <div className="project-card__actions">
-          <span className="project-card__action">
-            <span>Project Scope</span>
-            <ArrowUpRight size={16} />
-          </span>
-          <span className="project-card__action project-card__action--muted">
+        <div className="project-card__footer">
+          <span className="project-card__footer-chip">{project.reference}</span>
+          <span className="project-card__footer-chip project-card__footer-chip--muted">
             {project.preview.source}
           </span>
         </div>

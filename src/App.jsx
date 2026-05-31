@@ -604,6 +604,10 @@ function ProjectsSection() {
   const featuredStack = featuredProject
     ? [...new Set([...featuredProject.techStack.languages, ...featuredProject.techStack.tools])]
     : [];
+  const featuredLensLabel = featuredProject
+    ? projectLensLabels[getProjectLens(featuredProject)]
+    : "Project";
+  const hasFeaturedPreviewImage = Boolean(featuredProject?.preview?.src);
   const projectFilterOptions = useMemo(
     () => Object.entries(projectLensLabels).map(([id, label]) => ({
       id,
@@ -637,49 +641,76 @@ function ProjectsSection() {
                 <span className="projects-feature__eyebrow">Featured Build</span>
                 <h3>{featuredProject.title}</h3>
               </div>
-              <span className="projects-feature__reference">{featuredProject.reference}</span>
+              <div className="projects-feature__header-meta">
+                <span className="projects-feature__reference">{featuredProject.reference}</span>
+                <span className="projects-feature__lens">{featuredLensLabel}</span>
+              </div>
             </div>
 
             <div className="projects-feature__body">
               <div className="projects-feature__visual">
-                <img
-                  src={featuredProject.preview.src}
-                  alt={featuredProject.preview.alt}
-                  className="projects-feature__image"
-                  loading="lazy"
-                />
+                {hasFeaturedPreviewImage ? (
+                  <img
+                    src={featuredProject.preview.src}
+                    alt={featuredProject.preview.alt}
+                    className="projects-feature__image"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="projects-feature__placeholder" aria-hidden="true">
+                    <span>Preview pending</span>
+                    <strong>{featuredLensLabel}</strong>
+                  </div>
+                )}
                 <span className="projects-feature__source">{featuredProject.preview.source}</span>
               </div>
 
-              <div className="projects-feature__lead">
-                <span className="projects-feature__category">{featuredProject.category}</span>
-                <p>{featuredProject.description}</p>
+              <div className="projects-feature__content">
+                <div className="projects-feature__lead">
+                  <span className="projects-feature__category">{featuredProject.category}</span>
+                  <p>{featuredProject.description}</p>
 
-                <div className="projects-feature__stack" aria-label="Featured project tech stack">
-                  {featuredStack.map((item) => (
-                    <span className="stack-chip" key={`${featuredProject.slug}-featured-${item}`}>
-                      <span className="stack-chip__icon">
-                        <TechIcon name={item} />
+                  <dl className="projects-feature__facts">
+                    <div>
+                      <dt>Type</dt>
+                      <dd>{featuredLensLabel}</dd>
+                    </div>
+                    <div>
+                      <dt>Stack</dt>
+                      <dd>{featuredStack.length} tools</dd>
+                    </div>
+                    <div>
+                      <dt>Modules</dt>
+                      <dd>{featuredProject.features.length} areas</dd>
+                    </div>
+                  </dl>
+
+                  <div className="projects-feature__stack" aria-label="Featured project tech stack">
+                    {featuredStack.map((item) => (
+                      <span className="stack-chip" key={`${featuredProject.slug}-featured-${item}`}>
+                        <span className="stack-chip__icon">
+                          <TechIcon name={item} />
+                        </span>
+                        <span>{item}</span>
                       </span>
-                      <span>{item}</span>
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="projects-feature__details">
-                <div className="projects-feature__block">
-                  <h4>What it handles</h4>
-                  <ul>
-                    {featuredProject.features.map((feature) => (
-                      <li key={feature}>{feature}</li>
                     ))}
-                  </ul>
+                  </div>
                 </div>
 
-                <div className="projects-feature__block">
-                  <h4>Contribution</h4>
-                  <p>{featuredProject.contribution}</p>
+                <div className="projects-feature__details">
+                  <div className="projects-feature__block">
+                    <h4>What it handles</h4>
+                    <ul>
+                      {featuredProject.features.map((feature) => (
+                        <li key={feature}>{feature}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="projects-feature__block">
+                    <h4>Contribution</h4>
+                    <p>{featuredProject.contribution}</p>
+                  </div>
                 </div>
               </div>
             </div>
