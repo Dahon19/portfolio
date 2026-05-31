@@ -172,7 +172,7 @@ const certificateGroupLabels = {
   "Online Courses Taken": "Online Courses"
 };
 
-const certificateGroupOrder = ["Certifications", "Badges", "Seminars & Webinars", "Online Courses"];
+const certificateGroupOrder = ["Certifications", "Seminars & Webinars", "Online Courses", "Badges"];
 
 function HeadsetIcon(props) {
   return <MonitorSmartphone {...props} />;
@@ -589,7 +589,7 @@ function CertificatesSection() {
         <SectionHeading
           eyebrow="Professional Development"
           title="Learning records for technical review"
-          subtitle="Organized into certifications, badges, seminars, webinars, and online courses."
+          subtitle="Organized into certifications, seminars, webinars, online courses, and badges."
           align="left"
         />
 
