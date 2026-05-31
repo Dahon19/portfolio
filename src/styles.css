@@ -6022,3 +6022,33 @@ body {
   transform: translateY(1px);
 }
 
+/* Project image consistency: keep preview areas square without cropping images. */
+.projects-feature__visual {
+  min-height: clamp(16rem, 32vw, 22rem) !important;
+  aspect-ratio: auto !important;
+}
+
+.projects-feature__image {
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: 0.9rem !important;
+}
+
+.project-card__preview,
+.project-card:first-child .project-card__preview {
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: 1 / 1 !important;
+}
+
+.project-card__preview-image {
+  object-fit: contain !important;
+  object-position: center !important;
+  padding: 0.8rem !important;
+  transition: transform 220ms ease !important;
+}
+
+.project-card:hover .project-card__preview-image {
+  transform: none !important;
+}
+
