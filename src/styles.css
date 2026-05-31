@@ -5528,14 +5528,6 @@ body {
   font-size: 0.72rem;
 }
 
-.project-card__stack .stack-chip--count {
-  justify-content: center;
-  min-width: 2rem;
-  color: #f2d99f;
-  border-color: rgba(255, 221, 156, 0.16);
-  background: rgba(255, 221, 156, 0.08);
-}
-
 .project-card__details {
   display: grid;
   gap: 0.45rem;
@@ -7043,12 +7035,6 @@ body {
   border-color: rgba(255, 255, 255, 0.08);
   color: #e8f0fb;
   font-size: 0.72rem;
-}
-
-.projects-card-carousel__viewport .project-card--showcase .project-card__stack .stack-chip--count {
-  color: #f2d99f;
-  border-color: rgba(255, 221, 156, 0.16);
-  background: rgba(255, 221, 156, 0.08);
 }
 
 .projects-card-carousel__viewport .project-card--showcase .project-card__footer {
