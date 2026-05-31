@@ -1,0 +1,2 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/app-CtRVKf9F.js","assets/app-CH3BB1Fz.css"])))=>i.map(i=>d[i]);
+import{_ as o}from"./main-CTvQkmhj.js";const e="/portfolio/assets/app-CH3BB1Fz.css",s="/portfolio/assets/app-CtRVKf9F.js",n=new Set(["localhost","127.0.0.1"]);function r(){if(!document.querySelector(`link[href^="${e.split("?")[0]}"]`)){const t=document.createElement("link");t.rel="stylesheet",t.href=e,document.head.appendChild(t)}return import(s)}n.has(window.location.hostname)?o(()=>import("./app-CtRVKf9F.js"),__vite__mapDeps([0,1])):r();

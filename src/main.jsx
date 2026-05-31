@@ -1,5 +1,5 @@
-const productionStylesheet = "/portfolio/assets/app-DTr5mLP3.css?v=20260531-recovery-polish";
-const productionEntry = "/portfolio/assets/app-BrbW-zVf.js?v=20260531-recovery-polish";
+const productionStylesheet = "/portfolio/assets/app-CH3BB1Fz.css";
+const productionEntry = "/portfolio/assets/app-CtRVKf9F.js";
 const devHosts = new Set(["localhost", "127.0.0.1"]);
 
 function loadProductionEntry() {
