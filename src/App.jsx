@@ -5,6 +5,8 @@ import {
   BookOpenText,
   Code2,
   Cpu,
+  ChevronLeft,
+  ChevronRight,
   Database,
   BriefcaseBusiness,
   GraduationCap,
@@ -49,7 +51,6 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { SectionHeading } from "./components/SectionHeading";
 import { SkillCategoryCard } from "./components/SkillCategoryCard";
-import { ProjectCard } from "./components/ProjectCard";
 import { CertificateGroup } from "./components/CertificateGroup";
 import { TimelineItem } from "./components/TimelineItem";
 import { portfolioData } from "./data/portfolioData";
@@ -602,152 +603,243 @@ function QualificationSection() {
 
 function ProjectsSection() {
   const [activeProjectLens, setActiveProjectLens] = useState("all");
-  const [featuredProject, ...supportingProjects] = portfolioData.projects;
-  const featuredStack = featuredProject
-    ? [...new Set([...featuredProject.techStack.languages, ...featuredProject.techStack.tools])]
-    : [];
-  const featuredLensLabel = featuredProject
-    ? projectLensLabels[getProjectLens(featuredProject)]
-    : "Project";
-  const hasFeaturedPreviewImage = Boolean(featuredProject?.preview?.src);
+  const [activeProjectSlug, setActiveProjectSlug] = useState(portfolioData.projects[0]?.slug ?? "");
+  const allProjects = portfolioData.projects;
   const projectFilterOptions = useMemo(
     () => Object.entries(projectLensLabels).map(([id, label]) => ({
       id,
       label,
       count:
         id === "all"
-          ? supportingProjects.length
-          : supportingProjects.filter((project) => getProjectLens(project) === id).length
+          ? allProjects.length
+          : allProjects.filter((project) => getProjectLens(project) === id).length
     })),
-    [supportingProjects]
+    [allProjects]
   );
   const filteredProjects =
     activeProjectLens === "all"
-      ? supportingProjects
-      : supportingProjects.filter((project) => getProjectLens(project) === activeProjectLens);
+      ? allProjects
+      : allProjects.filter((project) => getProjectLens(project) === activeProjectLens);
+  const activeProject = filteredProjects.find((project) => project.slug === activeProjectSlug) ?? filteredProjects[0] ?? null;
+  const activeProjectIndex = activeProject
+    ? filteredProjects.findIndex((project) => project.slug === activeProject.slug)
+    : -1;
+  const activeProjectLensLabel = activeProject
+    ? projectLensLabels[getProjectLens(activeProject)]
+    : "Project";
+  const activeProjectStack = activeProject
+    ? [...new Set([...activeProject.techStack.languages, ...activeProject.techStack.tools])]
+    : [];
+  const hasActivePreviewImage = Boolean(activeProject?.preview?.src);
+  const activePositionLabel =
+    activeProjectIndex >= 0 ? String(activeProjectIndex + 1).padStart(2, "0") : "00";
+
+  useEffect(() => {
+    if (!filteredProjects.length) {
+      if (activeProjectSlug !== "") {
+        setActiveProjectSlug("");
+      }
+
+      return;
+    }
+
+    const hasActiveProject = filteredProjects.some((project) => project.slug === activeProjectSlug);
+
+    if (!hasActiveProject) {
+      setActiveProjectSlug(filteredProjects[0].slug);
+    }
+  }, [activeProjectSlug, filteredProjects]);
+
+  const handleCarouselStep = (direction) => {
+    if (!filteredProjects.length) {
+      return;
+    }
+
+    const currentIndex = Math.max(activeProjectIndex, 0);
+    const nextIndex = (currentIndex + direction + filteredProjects.length) % filteredProjects.length;
+
+    setActiveProjectSlug(filteredProjects[nextIndex].slug);
+  };
 
   return (
     <section className="projects section" id="projects">
       <div className="container">
         <SectionHeading
           eyebrow="Projects"
-          title="Selected technical projects"
-          subtitle="Focused on systems, workflow tools, and practical technical implementations."
+          title="Project showcase"
+          subtitle="A scan-friendly carousel of systems, workflow builds, and practical technical implementations."
           align="left"
         />
 
-        {featuredProject ? (
-          <article className="projects-feature surface" data-reveal>
-            <div className="projects-feature__header">
-              <div>
-                <span className="projects-feature__eyebrow">Featured Build</span>
-                <h3>{featuredProject.title}</h3>
-              </div>
-              <div className="projects-feature__header-meta">
-                <span className="projects-feature__reference">{featuredProject.reference}</span>
-                <span className="projects-feature__lens">{featuredLensLabel}</span>
-              </div>
+        <article className="projects-showcase surface" data-reveal>
+          <div className="projects-showcase__header">
+            <div className="projects-showcase__copy">
+              <span className="projects-showcase__eyebrow">Selected work</span>
+              <h3>A cinematic case-study carousel for systems, workflow, mobile, and hardware builds.</h3>
+              <p>
+                Each project is presented as a concise case-study panel with clear scope, contribution,
+                and technical context for fast recruiter review.
+              </p>
             </div>
 
-            <div className="projects-feature__body">
-              <div className="projects-feature__visual">
-                {hasFeaturedPreviewImage ? (
-                  <img
-                    src={featuredProject.preview.src}
-                    alt={featuredProject.preview.alt}
-                    className="projects-feature__image"
-                    loading="lazy"
-                  />
-                ) : (
-                  <div className="projects-feature__placeholder" aria-hidden="true">
-                    <span>Preview pending</span>
-                    <strong>{featuredLensLabel}</strong>
-                  </div>
-                )}
-                <span className="projects-feature__source">{featuredProject.preview.source}</span>
+            <div className="projects-showcase__meta">
+              <div className="projects__filters" role="tablist" aria-label="Project category filters">
+                {projectFilterOptions.map((option) => (
+                  <button
+                    type="button"
+                    key={option.id}
+                    className={`projects__filter${activeProjectLens === option.id ? " is-active" : ""}`}
+                    onClick={() => setActiveProjectLens(option.id)}
+                    aria-pressed={activeProjectLens === option.id}
+                  >
+                    <span>{option.label}</span>
+                    <small>{option.count}</small>
+                  </button>
+                ))}
               </div>
 
-              <div className="projects-feature__content">
-                <div className="projects-feature__lead">
-                  <span className="projects-feature__category">{featuredProject.category}</span>
-                  <p>{featuredProject.description}</p>
-
-                  <dl className="projects-feature__facts">
-                    <div>
-                      <dt>Type</dt>
-                      <dd>{featuredLensLabel}</dd>
-                    </div>
-                    <div>
-                      <dt>Stack</dt>
-                      <dd>{featuredStack.length} tools</dd>
-                    </div>
-                    <div>
-                      <dt>Modules</dt>
-                      <dd>{featuredProject.features.length} areas</dd>
-                    </div>
-                  </dl>
-
-                  <div className="projects-feature__stack" aria-label="Featured project tech stack">
-                    {featuredStack.map((item) => (
-                      <span className="stack-chip" key={`${featuredProject.slug}-featured-${item}`}>
-                        <span className="stack-chip__icon">
-                          <TechIcon name={item} />
-                        </span>
-                        <span>{item}</span>
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="projects-feature__details">
-                  <div className="projects-feature__block">
-                    <h4>What it handles</h4>
-                    <ul>
-                      {featuredProject.features.map((feature) => (
-                        <li key={feature}>{feature}</li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <div className="projects-feature__block">
-                    <h4>Contribution</h4>
-                    <p>{featuredProject.contribution}</p>
-                  </div>
-                </div>
+              <div className="projects-showcase__counter" aria-live="polite">
+                <strong>{activePositionLabel}</strong>
+                <span>/ {String(filteredProjects.length).padStart(2, "0")}</span>
               </div>
             </div>
-          </article>
-        ) : null}
-
-        <div className="projects__toolbar" data-reveal>
-          <p className="projects__toolbar-copy">Browse the rest by project type.</p>
-          <div className="projects__filters" role="tablist" aria-label="Project category filters">
-            {projectFilterOptions.map((option) => (
-              <button
-                type="button"
-                key={option.id}
-                className={`projects__filter${activeProjectLens === option.id ? " is-active" : ""}`}
-                onClick={() => setActiveProjectLens(option.id)}
-                aria-pressed={activeProjectLens === option.id}
-              >
-                <span>{option.label}</span>
-                <small>{option.count}</small>
-              </button>
-            ))}
           </div>
-        </div>
 
-        <div className="projects__grid">
-          {filteredProjects.map((project, index) => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-              TechIcon={TechIcon}
-              delay={index * 80}
-              lensLabel={projectLensLabels[getProjectLens(project)]}
-            />
-          ))}
-        </div>
+          {activeProject ? (
+            <>
+              <div className="projects-carousel">
+                <button
+                  type="button"
+                  className="projects-carousel__nav"
+                  onClick={() => handleCarouselStep(-1)}
+                  aria-label="Show previous project"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+
+                <div className="projects-slide">
+                  <div className="projects-slide__visual">
+                    {hasActivePreviewImage ? (
+                      <img
+                        src={activeProject.preview.src}
+                        alt={activeProject.preview.alt}
+                        className="projects-slide__image"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="projects-slide__placeholder" aria-hidden="true">
+                        <strong>Preview pending</strong>
+                        <span>{activeProjectLensLabel}</span>
+                      </div>
+                    )}
+
+                    <div className="projects-slide__media-chips">
+                      <span className="projects-slide__chip">{activeProject.category}</span>
+                      <span className="projects-slide__chip projects-slide__chip--accent">
+                        {activeProjectLensLabel}
+                      </span>
+                    </div>
+
+                    <span className="projects-slide__source">
+                      {hasActivePreviewImage ? activeProject.preview.source : "Image pending"}
+                    </span>
+                  </div>
+
+                  <div className="projects-slide__content">
+                    <div className="projects-slide__topline">
+                      <span className="projects-slide__reference">{activeProject.reference}</span>
+                    </div>
+
+                    <div className="projects-slide__title-group">
+                      <span className="projects-slide__kicker">Current case study</span>
+                      <h3>{activeProject.title}</h3>
+                      <p>{activeProject.description}</p>
+                    </div>
+
+                    <dl className="projects-slide__facts">
+                      <div>
+                        <dt>Project type</dt>
+                        <dd>{activeProjectLensLabel}</dd>
+                      </div>
+                      <div>
+                        <dt>Stack size</dt>
+                        <dd>{activeProjectStack.length} tools</dd>
+                      </div>
+                      <div>
+                        <dt>Coverage</dt>
+                        <dd>{activeProject.features.length} feature areas</dd>
+                      </div>
+                    </dl>
+
+                    <div className="projects-slide__stack" aria-label="Active project tech stack">
+                      {activeProjectStack.map((item) => (
+                        <span className="stack-chip" key={`${activeProject.slug}-carousel-${item}`}>
+                          <span className="stack-chip__icon">
+                            <TechIcon name={item} />
+                          </span>
+                          <span>{item}</span>
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="projects-slide__panels">
+                      <div className="projects-slide__panel">
+                        <h4>Contribution</h4>
+                        <p>{activeProject.contribution}</p>
+                      </div>
+
+                      <div className="projects-slide__panel">
+                        <h4>Feature highlights</h4>
+                        <ul>
+                          {activeProject.features.map((feature) => (
+                            <li key={feature}>{feature}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  className="projects-carousel__nav"
+                  onClick={() => handleCarouselStep(1)}
+                  aria-label="Show next project"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+
+              <div className="projects-rail" role="list" aria-label="Project quick selection">
+                {filteredProjects.map((project, index) => {
+                  const isActive = project.slug === activeProject.slug;
+                  const projectLensLabel = projectLensLabels[getProjectLens(project)];
+
+                  return (
+                    <button
+                      type="button"
+                      key={project.slug}
+                      className={`projects-rail__item${isActive ? " is-active" : ""}`}
+                      onClick={() => setActiveProjectSlug(project.slug)}
+                      aria-pressed={isActive}
+                    >
+                      <span className="projects-rail__index">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="projects-rail__body">
+                        <strong>{project.title}</strong>
+                        <span>{project.reference}</span>
+                      </span>
+                      <span className="projects-rail__tag">{projectLensLabel}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </>
+          ) : (
+            <div className="projects-showcase__empty">
+              <p>No projects available for this filter.</p>
+            </div>
+          )}
+        </article>
       </div>
     </section>
   );
