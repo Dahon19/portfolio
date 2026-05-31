@@ -650,6 +650,7 @@ function ProjectsSection() {
                     key={activeProject.slug}
                     project={activeProject}
                     TechIcon={TechIcon}
+                    variant="showcase"
                   />
                 </div>
 

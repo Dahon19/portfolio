@@ -1,12 +1,13 @@
-export function ProjectCard({ project, TechIcon }) {
+export function ProjectCard({ project, TechIcon, variant = "default" }) {
   const techStack = [...new Set([...project.techStack.languages, ...project.techStack.tools])];
   const hasPreviewImage = Boolean(project.preview?.src);
   const visibleTechStack = techStack.slice(0, 4);
   const extraTechCount = Math.max(techStack.length - visibleTechStack.length, 0);
   const visibleFeatures = project.features.slice(0, 3);
+  const cardClassName = variant === "showcase" ? "project-card project-card--showcase" : "project-card";
 
   return (
-    <article className="project-card">
+    <article className={cardClassName}>
       <div className="project-card__preview">
         {hasPreviewImage ? (
           <img
