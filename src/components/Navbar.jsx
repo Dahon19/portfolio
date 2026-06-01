@@ -1,4 +1,5 @@
 export function Navbar({ activeSection }) {
+  const logoSrc = `${import.meta.env.BASE_URL}favicon.svg`;
   const links = [
     ["Home", "#home"],
     ["About", "#about"],
@@ -13,7 +14,9 @@ export function Navbar({ activeSection }) {
     <header className="site-header">
       <div className="site-header__inner">
         <a className="brand" href="#home">
-          <span className="brand-mark">RA</span>
+          <span className="brand-mark" aria-hidden="true">
+            <img className="brand-logo" src={logoSrc} alt="" />
+          </span>
           <span className="brand-copy">
             <strong>Rod Allen</strong>
             <small>IT Instructor / Developer</small>
