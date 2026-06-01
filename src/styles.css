@@ -8276,10 +8276,10 @@ body,
   display: grid;
   place-items: center;
   transform-style: preserve-3d;
-  --portrait-backdrop-top: 2.15rem;
-  --portrait-backdrop-right: 0.35rem;
-  --portrait-backdrop-bottom: 2.15rem;
-  --portrait-backdrop-left: 4.05rem;
+  --portrait-backdrop-top: 5.2rem;
+  --portrait-backdrop-right: 2rem;
+  --portrait-backdrop-bottom: 5.2rem;
+  --portrait-backdrop-left: 5.1rem;
 }
 
 .hero__portrait-backdrop {
@@ -8304,9 +8304,9 @@ body,
   display: block;
   object-fit: cover;
   object-position: center 18%;
-  opacity: 0.42;
+  opacity: 0.38;
   filter: blur(1.8px) saturate(0.82) contrast(1.08) brightness(0.7);
-  transform: scale(1.04);
+  transform: scale(1.02);
 }
 
 .hero__portrait-backdrop::before,
@@ -8325,7 +8325,7 @@ body,
 
 .hero__portrait-backdrop::after {
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.62) 0 7%, transparent 7% 88%, rgba(0, 0, 0, 0.7) 88% 100%);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.54) 0 5%, transparent 5% 90%, rgba(0, 0, 0, 0.58) 90% 100%);
 }
 
 .hero__portrait-light {
@@ -8361,9 +8361,8 @@ body,
     var(--portrait-backdrop-left);
   z-index: -1;
   border: 1px solid rgba(222, 188, 126, 0.16);
-  border-left-color: transparent;
   border-radius: 1.15rem;
-  transform: translate3d(1.05rem, 0, -1px);
+  transform: translate3d(0, 0, -1px);
   pointer-events: none;
 }
 
@@ -8417,10 +8416,10 @@ body,
   .hero__portrait-stage {
     width: min(31rem, 100%);
     min-height: 34rem;
-    --portrait-backdrop-top: 1.1rem;
-    --portrait-backdrop-right: 1rem;
-    --portrait-backdrop-bottom: 1.1rem;
-    --portrait-backdrop-left: 1rem;
+    --portrait-backdrop-top: 3.1rem;
+    --portrait-backdrop-right: 2rem;
+    --portrait-backdrop-bottom: 3.1rem;
+    --portrait-backdrop-left: 2rem;
   }
 
   .hero__portrait-backdrop {
@@ -8447,10 +8446,10 @@ body,
 
   .hero__portrait-stage {
     min-height: 29rem;
-    --portrait-backdrop-top: 0.75rem;
-    --portrait-backdrop-right: 0;
-    --portrait-backdrop-bottom: 0.75rem;
-    --portrait-backdrop-left: 0;
+    --portrait-backdrop-top: 2.25rem;
+    --portrait-backdrop-right: 1rem;
+    --portrait-backdrop-bottom: 2.25rem;
+    --portrait-backdrop-left: 1rem;
   }
 
   .hero__portrait-backdrop {
