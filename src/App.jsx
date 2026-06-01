@@ -39,8 +39,10 @@ import {
   SiDart,
   SiExpo,
   SiFirebase,
+  SiFlask,
   SiFlutter,
   SiMysql,
+  SiPython,
   SiSupabase,
   SiTailwindcss,
   SiTypescript,
@@ -121,7 +123,7 @@ const itemIconMap = {
   PHP: FaPhp,
   JavaScript: FaJs,
   "C++": Cpu,
-  Python: Code2,
+  Python: SiPython,
   TypeScript: SiTypescript,
   SQL: FaDatabase,
   HTML: FaHtml5,
@@ -184,7 +186,7 @@ const techIconMap = {
   "Node.js": FaNodeJs,
   Arduino: SiArduino,
   Sensors: Cpu,
-  Flask: Code2,
+  Flask: SiFlask,
   SQL: FaDatabase,
   Supabase: SiSupabase,
   Expo: SiExpo,
@@ -298,7 +300,7 @@ function ItemIcon({ name }) {
 }
 
 function BadgeFallbackIcon(props) {
-  return <Code2 {...props} />;
+  return <MonitorCog {...props} />;
 }
 
 function useSectionObservers() {
