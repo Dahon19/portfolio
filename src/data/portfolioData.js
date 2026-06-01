@@ -38,8 +38,8 @@ export const portfolioData = {
   },
   stats: [
     { label: "Technical Projects", value: "5" },
-    { label: "Certificates", value: "50+" },
-    { label: "Internship Experience", value: "1" }
+    { label: "Internship Experience", value: "1" },
+    { label: "Certificates", value: "50+" }
   ],
   skills: [
     {
@@ -72,6 +72,7 @@ export const portfolioData = {
     {
       slug: "hrms",
       title: "HRSync: Human Resource Management System",
+      featured: true,
       category: "Administrative Information System",
       description:
         "An HR platform for employee records, attendance workflows, leave handling, documents, and administrative reporting.",
@@ -94,6 +95,8 @@ export const portfolioData = {
       ],
       contribution:
         "Developed HR workflows, attendance experiences, and module integrations for administrative operations.",
+      outcome:
+        "Shows capability in database-backed HR workflows, admin dashboards, reporting, and user-facing process design.",
       reference: "HR workflow overview"
     },
     {
@@ -121,6 +124,8 @@ export const portfolioData = {
       ],
       contribution:
         "Built the CMS structure, public page rendering, and admin content workflows.",
+      outcome:
+        "Shows capability in education content management, public web presentation, and role-based admin updates.",
       reference: "CMS overview"
     },
     {
@@ -148,6 +153,8 @@ export const portfolioData = {
       ],
       contribution:
         "Created the app structure and time-management workflow with a mobile-first experience for internship documentation.",
+      outcome:
+        "Shows capability in mobile workflow planning, OJT tracking, and cloud-backed app structure.",
       reference: "Mobile app overview"
     },
     {
@@ -174,6 +181,8 @@ export const portfolioData = {
       ],
       contribution:
         "Developed the capstone solution and configured the hardware-software workflow.",
+      outcome:
+        "Shows capability in sensor-based monitoring, embedded logic, and capstone documentation.",
       reference: "Academic build"
     },
     {
@@ -201,6 +210,8 @@ export const portfolioData = {
       ],
       contribution:
         "Handled setup and implementation for the embedded workflow.",
+      outcome:
+        "Shows capability in Arduino setup, sensor input, and prevention-oriented hardware logic.",
       reference: "Client build"
     }
   ],
@@ -575,12 +586,27 @@ export const portfolioData = {
     ],
     trainings: [
       {
-        title: "Technical Exposure",
+        title: "Professional Learning",
         subtitle: "Courses and events in AI, cybersecurity, hardware, networking, and web development",
         detail:
           "Built supplementary technical knowledge through Cisco Networking Academy, Free Code Camp, institutional seminars, and technology-focused webinars."
       }
     ],
+    internship: {
+      organization: "Northeastern College Information Systems / Electronic Data Processing",
+      period: "2025 to 2026",
+      role: "Information Systems / EDP Intern",
+      responsibilities: [
+        "Supported maintenance, troubleshooting, and IT operations.",
+        "Assisted with web development and system-related tasks.",
+        "Helped document issues, workflows, and user support needs."
+      ],
+      technologies: ["Web development", "PC troubleshooting", "Software applications", "Documentation"],
+      outcomes: [
+        "Recognized as Outstanding On-the-Job Trainee.",
+        "Gained workplace experience in support, maintenance, and systems work."
+      ]
+    },
     technical: [
       "Frontend and backend web development",
       "PC hardware and software fundamentals",

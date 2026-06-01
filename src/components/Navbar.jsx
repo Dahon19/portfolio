@@ -4,8 +4,8 @@ export function Navbar({ activeSection }) {
     ["About", "#about"],
     ["Skills", "#skills"],
     ["Projects", "#projects"],
-    ["Certificates", "#certificates"],
     ["Resume", "#resume"],
+    ["Development", "#certificates"],
     ["Contact", "#contact"]
   ];
 

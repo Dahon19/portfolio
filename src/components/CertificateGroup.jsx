@@ -3,7 +3,7 @@ import { useState } from "react";
 export function CertificateGroup({ title, certificates, icon: Icon, delay = 0 }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const limit = 9;
+  const limit = 6;
   const showToggle = certificates.length > limit;
   const visibleCertificates = isExpanded ? certificates : certificates.slice(0, limit);
 

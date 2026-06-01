@@ -1,7 +1,6 @@
 export function ProjectCard({ project, TechIcon, variant = "default", projectNumber = "01" }) {
   const techStack = [...new Set([...project.techStack.languages, ...project.techStack.tools])];
   const hasPreviewImage = Boolean(project.preview?.src);
-  const visibleFeatures = project.features.slice(0, 2);
   const cardClassName = variant === "showcase" ? "project-card project-card--showcase" : "project-card";
 
   return (
@@ -25,27 +24,11 @@ export function ProjectCard({ project, TechIcon, variant = "default", projectNum
       <div className="project-card__body">
         <div className="project-card__top project-card__top--numbered">
           <span className="project-card__number">{projectNumber}</span>
-          <span className="project-card__reference">{project.reference}</span>
+          {project.featured ? <span className="project-card__reference">Featured project</span> : null}
         </div>
 
         <h3 className="project-card__title" title={project.title}>{project.title}</h3>
         <p className="project-card__description">{project.summary ?? project.description}</p>
-
-        <div className="project-card__insights">
-          <div className="project-card__summary">
-            <h4>Contribution</h4>
-            <p>{project.contribution}</p>
-          </div>
-
-          <div className="project-card__details">
-            <h4>Key features</h4>
-            <ul>
-              {visibleFeatures.map((feature) => (
-                <li key={feature}>{feature}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
 
         <div className="project-card__meta">
           <div className="project-card__stack-group">
@@ -74,8 +57,8 @@ export function ProjectCard({ project, TechIcon, variant = "default", projectNum
               View Preview
             </a>
           ) : null}
-          <a className="project-card__action project-card__action--muted" href={`#project-${project.slug}`}>
-            View Details
+          <a className="project-card__action project-card__action--muted" href="#contact">
+            Discuss Project
           </a>
         </div>
       </div>

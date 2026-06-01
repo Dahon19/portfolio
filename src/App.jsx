@@ -74,7 +74,7 @@ const quickSnapshotCards = [
   {
     title: "Working strengths",
     description:
-      "Most effective in practical systems work that needs clean UI, structure, and user guidance.",
+      "Most effective in systems work that needs clean UI, structure, and user guidance.",
     items: ["Workflow thinking", "Readable interfaces", "Clear documentation"],
     icon: Laptop2
   },
@@ -379,10 +379,10 @@ function HomeSection({ typedRole, reducedMotion }) {
             <p className="hero__description">{portfolioData.profile.intro}</p>
 
             <div className="hero__actions">
-              <a href="#projects" className="button" aria-label="View portfolio projects">
+              <a href="#projects" className="button">
                 View Projects <ArrowRight size={18} />
               </a>
-              <a href="#contact" className="button button--ghost" aria-label="Go to contact section">
+              <a href="#contact" className="button button--ghost">
                 Contact Me
               </a>
             </div>
@@ -538,21 +538,63 @@ function SkillsSection() {
 }
 
 function QualificationSection() {
+  const internship = portfolioData.resume.internship;
+
   return (
     <section className="timeline section" id="resume">
       <div className="container">
         <SectionHeading
           eyebrow="Education & Professional Preparation"
-          title="Academic foundation, internship, and teaching readiness"
-          subtitle="Balanced proof points for entry-level IT, support, and instruction roles."
+          title="Internship, education, and teaching readiness"
+          subtitle="Workplace trust signals for entry-level IT, support, and instruction roles."
           align="left"
         />
 
         <div className="timeline__layout">
           <div className="timeline__main">
-            {qualificationItems.map((item, index) => (
-              <TimelineItem key={item.label} item={item} label={item.label} delay={index * 100} />
-            ))}
+            <article className="internship-spotlight surface" data-reveal>
+              <div className="internship-spotlight__header">
+                <span>Internship Highlight</span>
+                <h3>{internship.role}</h3>
+                <p>{internship.organization}</p>
+                <small>{internship.period}</small>
+              </div>
+
+              <div className="internship-spotlight__grid">
+                <div>
+                  <h4>Responsibilities</h4>
+                  <ul>
+                    {internship.responsibilities.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h4>Technologies</h4>
+                  <div className="internship-spotlight__tags">
+                    {internship.technologies.map((item) => (
+                      <span key={item}>{item}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4>Outcomes</h4>
+                  <ul>
+                    {internship.outcomes.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </article>
+
+            <div className="timeline__cards">
+              {qualificationItems.map((item, index) => (
+                <TimelineItem key={item.label} item={item} label={item.label} delay={index * 100} />
+              ))}
+            </div>
           </div>
 
           <aside className="timeline__aside surface" data-reveal style={{ "--delay": "180ms" }}>
@@ -583,6 +625,7 @@ function QualificationSection() {
 function ProjectsSection() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const visibleProjects = portfolioData.projects;
+  const featuredProject = visibleProjects.find((project) => project.featured) ?? visibleProjects[0];
   const normalizedProjectIndex = visibleProjects.length
     ? Math.min(activeProjectIndex, visibleProjects.length - 1)
     : 0;
@@ -612,19 +655,19 @@ function ProjectsSection() {
       <div className="container">
         <SectionHeading
           eyebrow="Technical Projects"
-          title="Project work that shows build, support, and workflow thinking"
-          subtitle="Focused case studies for systems, web tools, mobile workflow, and hardware-assisted solutions."
+          title="Proof through systems, web, mobile, and support-focused builds"
+          subtitle="Projects are the main evidence: they show how I can build, support, document, and explain technology solutions."
           align="left"
         />
 
         <article className="projects-showcase surface" data-reveal>
           <div className="projects-showcase__header">
             <div className="projects-showcase__copy">
-              <span className="projects-showcase__eyebrow">Selected work</span>
-              <h3>Project previews with the contribution, features, and stack in one scan path.</h3>
+              <span className="projects-showcase__eyebrow">Proof Through Projects</span>
+              <h3>Start with the strongest system, then scan the rest.</h3>
               <p>
-                Use the arrows or project list to compare the strongest systems work quickly.
-                Each card keeps the image first, then the project context and role.
+                Recruiters should see the strongest build first, then quickly compare the remaining
+                systems, mobile, and hardware-assisted work.
               </p>
             </div>
 
@@ -635,6 +678,26 @@ function ProjectsSection() {
               </div>
             </div>
           </div>
+
+          {featuredProject ? (
+            <div className="featured-project">
+              <div className="featured-project__content">
+                <span>Most Important Project</span>
+                <h4>{featuredProject.title}</h4>
+                <p>{featuredProject.outcome ?? featuredProject.summary}</p>
+              </div>
+
+              <div className="featured-project__proof">
+                {featuredProject.features.slice(0, 3).map((feature) => (
+                  <span key={feature}>{feature}</span>
+                ))}
+              </div>
+
+              <a className="featured-project__link" href={`#project-${featuredProject.slug}`}>
+                View in carousel
+              </a>
+            </div>
+          ) : null}
 
           {activeProject ? (
             <>
@@ -668,7 +731,7 @@ function ProjectsSection() {
                 </button>
               </div>
 
-              <div className="projects-rail" role="list" aria-label="Project quick selection">
+              <div className="projects-rail" aria-label="Project quick selection">
                 {visibleProjects.map((project, index) => {
                   const isActive = index === normalizedProjectIndex;
 
@@ -735,7 +798,7 @@ function CertificatesSection() {
         <SectionHeading
           eyebrow="Professional Development"
           title="Credentials that support the main portfolio"
-          subtitle="A compact record of certifications, events, and online learning."
+          subtitle="Certificates are secondary evidence after projects, internship, and skills."
           align="left"
         />
 
@@ -778,8 +841,8 @@ function ContactSection() {
         <div className="contact__panel" data-reveal>
           <div className="contact__glow" aria-hidden="true" />
           <div className="contact__copy">
-            <span className="contact__eyebrow">Let&apos;s Work Together</span>
-            <h2>Available for entry-level IT, support, teaching assistant, and junior developer roles.</h2>
+            <span className="contact__eyebrow">Open to Opportunities</span>
+            <h2>Open to IT Instruction, Technical Support, and Junior Developer Opportunities.</h2>
             <p>{portfolioData.contact.note}</p>
             <div className="contact__tags" aria-label="Professional fit">
               <span>Teaching readiness</span>
@@ -853,7 +916,6 @@ export default function App() {
       <Navbar activeSection={activeSection} />
       <main className="main">
         <HomeSection typedRole={typedRole} reducedMotion={reducedMotion} />
-        <SnapshotSection />
         <AboutSection />
         <SkillsSection />
         <ProjectsSection />
