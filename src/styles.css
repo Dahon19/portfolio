@@ -7983,92 +7983,6 @@ body,
   z-index: -1;
 }
 
-.featured-project {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(15rem, 0.85fr) auto;
-  gap: 1rem;
-  align-items: center;
-  margin: 1.1rem 0 1.2rem;
-  padding: 1rem;
-  border: 1px solid rgba(255, 221, 156, 0.22);
-  border-radius: 0.9rem;
-  background:
-    linear-gradient(135deg, rgba(255, 221, 156, 0.13), rgba(109, 162, 255, 0.055)),
-    rgba(255, 255, 255, 0.045);
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.08);
-}
-
-.featured-project__content {
-  display: grid;
-  gap: 0.45rem;
-}
-
-.featured-project__content span {
-  width: fit-content;
-  padding: 0.34rem 0.62rem;
-  border-radius: 999px;
-  background: rgba(255, 221, 156, 0.13);
-  color: #f4d38a;
-  font-size: 0.68rem;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.featured-project__content h4 {
-  margin: 0;
-  color: #fff7e6;
-  font-size: clamp(1.18rem, 1vw + 1rem, 1.55rem);
-  line-height: 1.1;
-}
-
-.featured-project__content p {
-  max-width: 58ch;
-  margin: 0;
-  color: #cbd8e8;
-  font-size: 0.92rem;
-  line-height: 1.58;
-}
-
-.featured-project__proof {
-  display: grid;
-  gap: 0.45rem;
-}
-
-.featured-project__proof span {
-  position: relative;
-  padding-left: 0.85rem;
-  color: #e6edf7;
-  font-size: 0.82rem;
-  line-height: 1.35;
-}
-
-.featured-project__proof span::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 0.32rem;
-  height: 0.32rem;
-  border-radius: 999px;
-  background: #f4d38a;
-}
-
-.featured-project__link {
-  min-height: 2.5rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.55rem 0.85rem;
-  border: 1px solid rgba(255, 221, 156, 0.24);
-  border-radius: 0.6rem;
-  background: rgba(255, 221, 156, 0.12);
-  color: #ffe6b0;
-  font-size: 0.78rem;
-  font-weight: 900;
-  white-space: nowrap;
-}
-
 .projects-card-carousel__viewport .project-card--showcase,
 .projects-card-carousel__viewport .project-card--showcase:first-child,
 .projects-card-carousel__viewport .project-card--showcase:nth-child(3n + 1) {
@@ -8244,13 +8158,8 @@ body,
 }
 
 @media (max-width: 900px) {
-  .featured-project,
   .internship-spotlight__grid {
     grid-template-columns: 1fr;
-  }
-
-  .featured-project__link {
-    width: 100%;
   }
 }
 
@@ -8270,7 +8179,6 @@ body,
     grid-template-columns: 1fr;
   }
 
-  .featured-project,
   .internship-spotlight {
     padding: 0.9rem;
   }

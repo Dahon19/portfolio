@@ -643,7 +643,6 @@ function QualificationSection() {
 function ProjectsSection() {
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const visibleProjects = portfolioData.projects;
-  const featuredProject = visibleProjects.find((project) => project.featured) ?? visibleProjects[0];
   const normalizedProjectIndex = visibleProjects.length
     ? Math.min(activeProjectIndex, visibleProjects.length - 1)
     : 0;
@@ -696,25 +695,6 @@ function ProjectsSection() {
               </div>
             </div>
           </div>
-
-          {featuredProject ? (
-            <div className="featured-project">
-              <div className="featured-project__content">
-                <h4>{featuredProject.title}</h4>
-                <p>{featuredProject.outcome ?? featuredProject.summary}</p>
-              </div>
-
-              <div className="featured-project__proof">
-                {featuredProject.features.slice(0, 3).map((feature) => (
-                  <span key={feature}>{feature}</span>
-                ))}
-              </div>
-
-              <a className="featured-project__link" href={`#project-${featuredProject.slug}`}>
-                View in carousel
-              </a>
-            </div>
-          ) : null}
 
           {activeProject ? (
             <>
