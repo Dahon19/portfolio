@@ -1,5 +1,5 @@
-const productionStylesheet = "/portfolio/assets/app-CB2XOHAI.css";
-const productionEntry = "/portfolio/assets/app-ChZ9RpHg.js";
+const productionStylesheet = "/portfolio/assets/app-RugBeQ9V.css";
+const productionEntry = "/portfolio/assets/app-CdtRYnUA.js";
 const portraitFallbackSources = [
   "/portfolio/assets/rod-allen-profile-web-BRP0ZP85.jpg",
   "/portfolio/rod-allen-profile-clean.jpg?v=20260527c",

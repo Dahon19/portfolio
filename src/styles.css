@@ -8265,14 +8265,14 @@ body,
   position: relative;
   display: grid;
   place-items: center;
-  min-height: clamp(32rem, 54vw, 45rem);
+  min-height: clamp(34rem, 54vw, 46rem);
   perspective: 1200px;
 }
 
 .hero__portrait-stage {
   position: relative;
-  width: min(34rem, 100%);
-  min-height: clamp(31rem, 49vw, 43rem);
+  width: min(38rem, 100%);
+  min-height: clamp(33rem, 49vw, 44rem);
   display: grid;
   place-items: center;
   transform-style: preserve-3d;
@@ -8325,11 +8325,7 @@ body,
 }
 
 .hero__portrait-light {
-  position: absolute;
-  border-radius: 999px;
-  z-index: -2;
-  pointer-events: none;
-  filter: blur(1px);
+  display: none;
 }
 
 .hero__portrait-light--gold {
@@ -8353,8 +8349,8 @@ body,
 }
 
 .hero__portrait-stage .hero-card--portrait {
-  width: min(27rem, 88%);
-  padding: 1rem !important;
+  width: min(31rem, 96%);
+  padding: 1.15rem !important;
   border-radius: 1.25rem !important;
   background:
     linear-gradient(180deg, rgba(16, 27, 43, 0.94), rgba(7, 13, 22, 0.98)) !important;
@@ -8397,12 +8393,12 @@ body,
 
 @media (max-width: 980px) {
   .hero__panel {
-    min-height: 34rem;
+    min-height: 36rem;
   }
 
   .hero__portrait-stage {
-    width: min(31rem, 100%);
-    min-height: 34rem;
+    width: min(34rem, 100%);
+    min-height: 36rem;
     --portrait-backdrop-top: 4rem;
     --portrait-backdrop-right: 2.5rem;
     --portrait-backdrop-bottom: 4rem;
@@ -8428,11 +8424,11 @@ body,
 
 @media (max-width: 640px) {
   .hero__panel {
-    min-height: 29rem;
+    min-height: 31rem;
   }
 
   .hero__portrait-stage {
-    min-height: 29rem;
+    min-height: 31rem;
     --portrait-backdrop-top: 3.25rem;
     --portrait-backdrop-right: 1.25rem;
     --portrait-backdrop-bottom: 3.25rem;
@@ -8449,7 +8445,7 @@ body,
   }
 
   .hero__portrait-stage .hero-card--portrait {
-    width: min(22rem, 92%);
+    width: min(24rem, 94%);
   }
 
   .hero__portrait-light--gold,
