@@ -58,11 +58,12 @@ import { CertificateGroup } from "./components/CertificateGroup";
 import { TimelineItem } from "./components/TimelineItem";
 import { portfolioData } from "./data/portfolioData";
 
-const rotatingRoles = [
-  "Teaching Support",
-  "Junior Developer",
-  "Technical Support",
-  "Systems Support"
+const rotatingHeroWords = [
+  "teaching",
+  "support",
+  "developer",
+  "systems",
+  "user-ready"
 ];
 
 const navSectionIds = ["home", "about", "skills", "projects", "resume", "certificates", "contact"];
@@ -239,51 +240,23 @@ function useReducedMotionPreference() {
   return reducedMotion;
 }
 
-function useTypewriter(words, reducedMotion) {
-  const [wordIndex, setWordIndex] = useState(0);
-  const [displayText, setDisplayText] = useState(words[0] ?? "");
-  const [isDeleting, setIsDeleting] = useState(false);
+function useRotatingTitle(words, reducedMotion) {
+  const [titleNumber, setTitleNumber] = useState(0);
 
   useEffect(() => {
-    if (reducedMotion) {
-      setDisplayText(words[0] ?? "");
+    if (reducedMotion || words.length <= 1) {
+      setTitleNumber(0);
       return undefined;
     }
 
-    const currentWord = words[wordIndex] ?? "";
-    const finishedTyping = displayText === currentWord;
-    const finishedDeleting = displayText.length === 0;
+    const timeoutId = window.setTimeout(() => {
+      setTitleNumber((current) => (current + 1) % words.length);
+    }, 2000);
 
-    let timeout = 110;
+    return () => window.clearTimeout(timeoutId);
+  }, [reducedMotion, titleNumber, words]);
 
-    if (!isDeleting && finishedTyping) {
-      timeout = 1400;
-    } else if (isDeleting && finishedDeleting) {
-      timeout = 260;
-    } else if (isDeleting) {
-      timeout = 55;
-    }
-
-    const timer = window.setTimeout(() => {
-      if (!isDeleting && finishedTyping) {
-        setIsDeleting(true);
-        return;
-      }
-
-      if (isDeleting && finishedDeleting) {
-        setIsDeleting(false);
-        setWordIndex((current) => (current + 1) % words.length);
-        return;
-      }
-
-      const nextLength = isDeleting ? displayText.length - 1 : displayText.length + 1;
-      setDisplayText(currentWord.slice(0, nextLength));
-    }, timeout);
-
-    return () => window.clearTimeout(timer);
-  }, [displayText, isDeleting, reducedMotion, wordIndex, words]);
-
-  return displayText;
+  return titleNumber;
 }
 
 function TechIcon({ name, className = "" }) {
@@ -459,7 +432,7 @@ function useSectionObservers() {
   return { activeSection, reducedMotion, navigateToSection };
 }
 
-function HomeSection({ typedRole, reducedMotion }) {
+function HomeSection({ activeTitleIndex, reducedMotion }) {
   return (
     <section className="hero section" id="home">
       <div className="hero__mesh" aria-hidden="true" />
@@ -468,15 +441,30 @@ function HomeSection({ typedRole, reducedMotion }) {
       <div className="hero__container container">
         <div className="hero__grid">
           <div className="hero__copy" data-reveal>
-            <span className="hero__eyebrow">Technical Projects + Teaching Readiness</span>
+            <a href="#projects" className="hero__launch-link">
+              View featured systems <ArrowRight size={16} />
+            </a>
             <p className="hero__kicker">{portfolioData.profile.name}</p>
-            <h1 className="hero__title">IT Graduate | Teaching Support | Junior Developer | Technical Support</h1>
+            <h1 className="hero__title">
+              <span>IT graduate for</span>
+              <span className="hero__animated-line" aria-hidden="true">
+                {rotatingHeroWords.map((title, index) => (
+                  <span
+                    className={`hero__animated-word${activeTitleIndex === index ? " is-active" : ""}${
+                      activeTitleIndex > index ? " is-before" : ""
+                    }`}
+                    key={title}
+                  >
+                    {title}
+                  </span>
+                ))}
+              </span>
+              <span className="sr-only">{rotatingHeroWords[activeTitleIndex]}</span>
+              <span>IT work.</span>
+            </h1>
             <p className="hero__role">
               <span className="hero__role-static">{portfolioData.profile.tagline}</span>
-              <span className="hero__typewriter" aria-live="polite">
-                {typedRole}
-                {!reducedMotion ? <span className="hero__cursor" aria-hidden="true" /> : null}
-              </span>
+              <span>Teaching support, junior development, and technical support in one practical portfolio.</span>
             </p>
             <p className="hero__description">{portfolioData.profile.intro}</p>
 
@@ -999,13 +987,13 @@ function ContactSection() {
 
 export default function App() {
   const { activeSection, reducedMotion, navigateToSection } = useSectionObservers();
-  const typedRole = useTypewriter(rotatingRoles, reducedMotion);
+  const activeTitleIndex = useRotatingTitle(rotatingHeroWords, reducedMotion);
 
   return (
     <>
       <Navbar activeSection={activeSection} onSectionNavigate={navigateToSection} />
       <main className="main">
-        <HomeSection typedRole={typedRole} reducedMotion={reducedMotion} />
+        <HomeSection activeTitleIndex={activeTitleIndex} reducedMotion={reducedMotion} />
         <AboutSection />
         <SkillsSection />
         <ProjectsSection />
