@@ -446,7 +446,8 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
             </a>
             <p className="hero__kicker">{portfolioData.profile.name}</p>
             <h1 className="hero__title">
-              <span>IT graduate for</span>
+              <span>IT graduate</span>
+              <span>for</span>
               <span className="hero__animated-line" aria-hidden="true">
                 {rotatingHeroWords.map((title, index) => (
                   <span
@@ -994,9 +995,10 @@ export default function App() {
       <Navbar activeSection={activeSection} onSectionNavigate={navigateToSection} />
       <main className="main">
         <HomeSection activeTitleIndex={activeTitleIndex} reducedMotion={reducedMotion} />
+        <SnapshotSection />
         <AboutSection />
-        <SkillsSection />
         <ProjectsSection />
+        <SkillsSection />
         <QualificationSection />
         <CertificatesSection />
         <ContactSection />
