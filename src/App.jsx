@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -64,6 +64,8 @@ const rotatingRoles = [
   "Technical Support",
   "Systems Support"
 ];
+
+const navSectionIds = ["home", "about", "skills", "projects", "resume", "certificates", "contact"];
 
 const quickSnapshotCards = [
   {
@@ -307,30 +309,73 @@ function useSectionObservers() {
   const [activeSection, setActiveSection] = useState("home");
   const reducedMotion = useReducedMotionPreference();
 
+  const navigateToSection = useCallback(
+    (sectionId) => {
+      const target = document.getElementById(sectionId);
+
+      if (!target) {
+        return;
+      }
+
+      const headerHeight = document.querySelector(".site-header")?.getBoundingClientRect().height ?? 0;
+      const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+
+      setActiveSection(sectionId);
+
+      if (window.location.hash !== `#${sectionId}`) {
+        window.history.pushState(null, "", `#${sectionId}`);
+      }
+
+      window.scrollTo({
+        top: Math.max(targetTop, 0),
+        behavior: reducedMotion ? "auto" : "smooth"
+      });
+    },
+    [reducedMotion]
+  );
+
   useEffect(() => {
-    const sections = Array.from(document.querySelectorAll("main section[id]"));
+    const sections = navSectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
     if (!sections.length) {
       return undefined;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    let animationFrame = 0;
 
-        if (visible?.target?.id) {
-          setActiveSection(visible.target.id);
-        }
-      },
-      {
-        threshold: [0.2, 0.35, 0.55],
-        rootMargin: "-18% 0px -55% 0px"
+    const updateActiveSection = () => {
+      const headerHeight = document.querySelector(".site-header")?.getBoundingClientRect().height ?? 0;
+      const activationLine = window.scrollY + headerHeight + window.innerHeight * 0.18;
+      const pageBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+
+      if (pageBottom) {
+        setActiveSection(sections[sections.length - 1].id);
+        return;
       }
-    );
 
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+      const active = sections.reduce((current, section) => {
+        return section.offsetTop <= activationLine ? section : current;
+      }, sections[0]);
+
+      setActiveSection(active.id);
+    };
+
+    const requestUpdate = () => {
+      window.cancelAnimationFrame(animationFrame);
+      animationFrame = window.requestAnimationFrame(updateActiveSection);
+    };
+
+    updateActiveSection();
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+      window.removeEventListener("scroll", requestUpdate);
+      window.removeEventListener("resize", requestUpdate);
+    };
   }, []);
 
   useEffect(() => {
@@ -363,7 +408,7 @@ function useSectionObservers() {
     return () => observer.disconnect();
   }, [reducedMotion]);
 
-  return { activeSection, reducedMotion };
+  return { activeSection, reducedMotion, navigateToSection };
 }
 
 function HomeSection({ typedRole, reducedMotion }) {
@@ -905,12 +950,12 @@ function ContactSection() {
 }
 
 export default function App() {
-  const { activeSection, reducedMotion } = useSectionObservers();
+  const { activeSection, reducedMotion, navigateToSection } = useSectionObservers();
   const typedRole = useTypewriter(rotatingRoles, reducedMotion);
 
   return (
     <>
-      <Navbar activeSection={activeSection} />
+      <Navbar activeSection={activeSection} onSectionNavigate={navigateToSection} />
       <main className="main">
         <HomeSection typedRole={typedRole} reducedMotion={reducedMotion} />
         <AboutSection />
