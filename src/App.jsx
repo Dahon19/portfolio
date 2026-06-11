@@ -61,8 +61,8 @@ const rotatingHeroWords = [
   "web apps",
   "dashboards",
   "support tools",
-  "learning tech",
-  "workflow systems"
+  "learning tools",
+  "workflows"
 ];
 
 const navSectionIds = ["home", "about", "projects", "skills", "resume", "certificates", "contact"];
@@ -226,7 +226,7 @@ function useRotatingTitle(words, reducedMotion) {
 
     const timeoutId = window.setTimeout(() => {
       setTitleNumber((current) => (current + 1) % words.length);
-    }, 2000);
+    }, 2400);
 
     return () => window.clearTimeout(timeoutId);
   }, [reducedMotion, titleNumber, words]);
@@ -417,11 +417,16 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
         <div className="hero__grid">
           <div className="hero__copy" data-reveal>
             <a href="#projects" className="hero__launch-link">
-              See production-style builds <ArrowRight size={16} />
+              Review highlighted systems <ArrowRight size={16} />
             </a>
+            <div className="hero__signal" aria-label="Portfolio positioning">
+              <span>Developer portfolio</span>
+              <span>Support-ready delivery</span>
+              <span>2026</span>
+            </div>
             <p className="hero__kicker">{portfolioData.profile.name}</p>
             <h1 className="hero__title">
-              <span>Building</span>
+              <span className="hero__title-lead">I build</span>
               <span className="hero__animated-line" aria-hidden="true">
                 {rotatingHeroWords.map((title, index) => (
                   <span
@@ -435,13 +440,16 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                 ))}
               </span>
               <span className="sr-only">{rotatingHeroWords[activeTitleIndex]}</span>
-              <span>that work.</span>
+              <span className="hero__title-tail">with clean delivery.</span>
             </h1>
             <p className="hero__role">
-              <span className="hero__role-static">{portfolioData.profile.tagline}</span>
-              <span>Projects, support skills, and documentation shaped into one focused developer portfolio.</span>
+              <span className="hero__role-static">Web solutions, clear documentation, and reliable IT service.</span>
+              <span>Useful systems, readable interfaces, and support-minded handoff in one focused portfolio.</span>
             </p>
-            <p className="hero__description">{portfolioData.profile.intro}</p>
+            <p className="hero__description">
+              I turn real workflow problems into polished web and mobile tools with practical implementation,
+              clean UI decisions, and user guidance that makes the system easier to run.
+            </p>
 
             <div className="hero__actions">
               <a href="#projects" className="button">
