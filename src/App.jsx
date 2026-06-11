@@ -416,15 +416,11 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
       <div className="hero__container container">
         <div className="hero__grid">
           <div className="hero__copy" data-reveal>
-            <a href="#projects" className="hero__launch-link">
-              Review highlighted systems <ArrowRight size={16} />
-            </a>
             <div className="hero__signal" aria-label="Portfolio positioning">
               <span>Developer portfolio</span>
               <span>Support-ready delivery</span>
               <span>2026</span>
             </div>
-            <p className="hero__kicker">{portfolioData.profile.name}</p>
             <h1 className="hero__title">
               <span className="hero__title-lead">I build</span>
               <span className="hero__animated-line" aria-hidden="true">
@@ -493,6 +489,7 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                     className="hero-card__photo"
                   />
                 </div>
+                <p className="hero-card__name">{portfolioData.profile.name}</p>
               </div>
             </div>
           </aside>
