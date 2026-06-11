@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -308,6 +308,7 @@ function BadgeFallbackIcon(props) {
 function useSectionObservers() {
   const [activeSection, setActiveSection] = useState("home");
   const reducedMotion = useReducedMotionPreference();
+  const pendingSectionRef = useRef(null);
 
   const navigateToSection = useCallback(
     (sectionId) => {
@@ -320,6 +321,7 @@ function useSectionObservers() {
       const headerHeight = document.querySelector(".site-header")?.getBoundingClientRect().height ?? 0;
       const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
 
+      pendingSectionRef.current = sectionId;
       setActiveSection(sectionId);
 
       if (window.location.hash !== `#${sectionId}`) {
@@ -333,6 +335,36 @@ function useSectionObservers() {
     },
     [reducedMotion]
   );
+
+  useEffect(() => {
+    const handleDocumentClick = (event) => {
+      const link = event.target.closest?.('a[href^="#"]');
+
+      if (
+        !link ||
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.shiftKey
+      ) {
+        return;
+      }
+
+      const sectionId = link.hash.slice(1);
+
+      if (!navSectionIds.includes(sectionId)) {
+        return;
+      }
+
+      event.preventDefault();
+      navigateToSection(sectionId);
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+    return () => document.removeEventListener("click", handleDocumentClick);
+  }, [navigateToSection]);
 
   useEffect(() => {
     const sections = navSectionIds
@@ -349,6 +381,22 @@ function useSectionObservers() {
       const headerHeight = document.querySelector(".site-header")?.getBoundingClientRect().height ?? 0;
       const activationLine = window.scrollY + headerHeight + window.innerHeight * 0.18;
       const pageBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4;
+      const pendingSectionId = pendingSectionRef.current;
+
+      if (pendingSectionId) {
+        const pendingSection = document.getElementById(pendingSectionId);
+        const targetOffset = headerHeight + 12;
+        const distanceFromTarget = pendingSection
+          ? Math.abs(pendingSection.getBoundingClientRect().top - targetOffset)
+          : 0;
+
+        if (pendingSection && distanceFromTarget > 24 && !pageBottom) {
+          setActiveSection(pendingSectionId);
+          return;
+        }
+
+        pendingSectionRef.current = null;
+      }
 
       if (pageBottom) {
         setActiveSection(sections[sections.length - 1].id);
