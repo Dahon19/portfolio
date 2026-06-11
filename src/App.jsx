@@ -8,7 +8,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Database,
-  BriefcaseBusiness,
   GraduationCap,
   Laptop2,
   Mail,
@@ -59,38 +58,14 @@ import { TimelineItem } from "./components/TimelineItem";
 import { portfolioData } from "./data/portfolioData";
 
 const rotatingHeroWords = [
-  "teaching",
-  "support",
-  "developer",
-  "systems",
-  "user-ready"
+  "web apps",
+  "dashboards",
+  "support tools",
+  "learning tech",
+  "workflow systems"
 ];
 
-const navSectionIds = ["home", "about", "skills", "projects", "resume", "certificates", "contact"];
-
-const quickSnapshotCards = [
-  {
-    title: "Best-fit roles",
-    description:
-      "Ready for entry-level roles where teaching, support, and software work overlap.",
-    items: ["Teaching support", "Helpdesk support", "Junior development"],
-    icon: BriefcaseBusiness
-  },
-  {
-    title: "Working strengths",
-    description:
-      "Most effective in systems work that needs clean UI, structure, and user guidance.",
-    items: ["Workflow thinking", "Readable interfaces", "Clear documentation"],
-    icon: Laptop2
-  },
-  {
-    title: "Proof points",
-    description:
-      "Formal training, project work, and continuing technical study back up the portfolio.",
-    items: ["BSIT graduate", "TESDA NCII", "Internship experience"],
-    icon: GraduationCap
-  }
-];
+const navSectionIds = ["home", "about", "projects", "skills", "resume", "certificates", "contact"];
 
 const qualificationItems = [
   {
@@ -442,12 +417,11 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
         <div className="hero__grid">
           <div className="hero__copy" data-reveal>
             <a href="#projects" className="hero__launch-link">
-              View featured systems <ArrowRight size={16} />
+              See production-style builds <ArrowRight size={16} />
             </a>
             <p className="hero__kicker">{portfolioData.profile.name}</p>
             <h1 className="hero__title">
-              <span>IT graduate</span>
-              <span>for</span>
+              <span>Building</span>
               <span className="hero__animated-line" aria-hidden="true">
                 {rotatingHeroWords.map((title, index) => (
                   <span
@@ -461,11 +435,11 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                 ))}
               </span>
               <span className="sr-only">{rotatingHeroWords[activeTitleIndex]}</span>
-              <span>IT work.</span>
+              <span>that work.</span>
             </h1>
             <p className="hero__role">
               <span className="hero__role-static">{portfolioData.profile.tagline}</span>
-              <span>Teaching support, junior development, and technical support in one practical portfolio.</span>
+              <span>Projects, support skills, and documentation shaped into one focused developer portfolio.</span>
             </p>
             <p className="hero__description">{portfolioData.profile.intro}</p>
 
@@ -520,61 +494,14 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
   );
 }
 
-function SnapshotSection() {
-  return (
-    <section className="snapshot section" id="snapshot">
-      <div className="container">
-        <div className="snapshot__panel surface" data-reveal>
-          <div className="snapshot__intro">
-            <span className="snapshot__eyebrow">Professional Snapshot</span>
-            <h2>What a recruiter should understand in under a minute.</h2>
-            <p>
-              This portfolio is strongest for structured roles that combine software building,
-              technical support, and clear user-facing communication.
-            </p>
-          </div>
-
-          <div className="snapshot__grid">
-            {quickSnapshotCards.map((card, index) => {
-              const Icon = card.icon;
-
-              return (
-                <article
-                  className="snapshot-card"
-                  key={card.title}
-                  data-reveal
-                  style={{ "--delay": `${index * 90}ms` }}
-                >
-                  <div className="snapshot-card__content">
-                    <div className="snapshot-card__icon" aria-hidden="true">
-                      <Icon size={20} />
-                    </div>
-                    <h3>{card.title}</h3>
-                    <p>{card.description}</p>
-                  </div>
-                  <div className="snapshot-card__list">
-                    {card.items.map((item) => (
-                      <span key={item}>{item}</span>
-                    ))}
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function AboutSection() {
   return (
     <section className="about section" id="about">
       <div className="container">
         <SectionHeading
           eyebrow="About"
-          title="Clear technical work with process thinking"
-          subtitle="Academic projects, internship exposure, troubleshooting, and useful software."
+          title="Practical software with support instincts"
+          subtitle="Web systems, troubleshooting, documentation, and user guidance in one technical lane."
           align="left"
         />
 
@@ -615,8 +542,8 @@ function SkillsSection() {
       <div className="container">
         <SectionHeading
           eyebrow="Skills"
-          title="Focused capability areas for entry-level IT work"
-          subtitle="Technologies are separated from competencies so each skill group is easier to scan."
+          title="Dev stack and support toolkit"
+          subtitle="The tools I use, the workflows I understand, and the communication skills behind the builds."
         />
 
         <div className="skills__grid">
@@ -645,8 +572,8 @@ function QualificationSection() {
       <div className="container">
         <SectionHeading
           eyebrow="Education & Professional Preparation"
-          title="Internship, education, and teaching readiness"
-          subtitle="Workplace trust signals for entry-level IT, support, and instruction roles."
+          title="Experience, education, and readiness"
+          subtitle="Internship work, formal education, technical strengths, and communication habits."
           align="left"
         />
 
@@ -754,8 +681,8 @@ function ProjectsSection() {
       <div className="container">
         <SectionHeading
           eyebrow="Technical Projects"
-          title="Proof through systems, web, mobile, and support-focused builds"
-          subtitle="Projects are the main evidence: they show how I can build, support, document, and explain technology solutions."
+          title="Systems that do the talking"
+          subtitle="A focused project set across web, mobile, admin workflows, and hardware-assisted builds."
           align="left"
         />
 
@@ -763,10 +690,9 @@ function ProjectsSection() {
           <div className="projects-showcase__header">
             <div className="projects-showcase__copy">
               <span className="projects-showcase__eyebrow">Proof Through Projects</span>
-              <h3>Start with the strongest system, then scan the rest.</h3>
+              <h3>Start with the strongest build, then compare the rest.</h3>
               <p>
-                Recruiters should see the strongest build first, then quickly compare the remaining
-                systems, mobile, and hardware-assisted work.
+                Each project highlights a real workflow, the stack used, and the kind of problem it solves.
               </p>
             </div>
 
@@ -876,8 +802,8 @@ function CertificatesSection() {
       <div className="container">
         <SectionHeading
           eyebrow="Professional Development"
-          title="Credentials that support the main portfolio"
-          subtitle="Certificates are secondary evidence after projects, internship, and skills."
+          title="Credentials without the clutter"
+          subtitle="Grouped learning records that support the project work without overwhelming the page."
           align="left"
         />
 
@@ -921,7 +847,7 @@ function ContactSection() {
           <div className="contact__glow" aria-hidden="true" />
           <div className="contact__copy">
             <span className="contact__eyebrow">Open to Opportunities</span>
-            <h2>Open to IT Instruction, Technical Support, and Junior Developer Opportunities.</h2>
+            <h2>Available for junior dev, support, and IT instruction work.</h2>
             <p>{portfolioData.contact.note}</p>
             <div className="contact__tags" aria-label="Professional fit">
               <span>Teaching readiness</span>
@@ -995,7 +921,6 @@ export default function App() {
       <Navbar activeSection={activeSection} onSectionNavigate={navigateToSection} />
       <main className="main">
         <HomeSection activeTitleIndex={activeTitleIndex} reducedMotion={reducedMotion} />
-        <SnapshotSection />
         <AboutSection />
         <ProjectsSection />
         <SkillsSection />

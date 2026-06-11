@@ -3,10 +3,10 @@ export function Navbar({ activeSection, onSectionNavigate }) {
   const links = [
     ["Home", "#home"],
     ["About", "#about"],
-    ["Skills", "#skills"],
     ["Projects", "#projects"],
+    ["Skills", "#skills"],
     ["Resume", "#resume"],
-    ["Development", "#certificates"],
+    ["Certs", "#certificates"],
     ["Contact", "#contact"]
   ];
   const handleNavClick = (event, href) => {
