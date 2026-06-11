@@ -9335,6 +9335,24 @@ body::before {
   text-align: center;
 }
 
+/* Keep the portrait identity visible in the first hero viewport. */
+@media (min-width: 981px) {
+  .hero__portrait-stage .hero-card--portrait {
+    width: min(28rem, 100%) !important;
+    padding: 1rem !important;
+  }
+
+  .hero__portrait-stage .hero-card__photo-frame {
+    height: clamp(18rem, 42vh, 22.5rem) !important;
+    aspect-ratio: auto !important;
+    margin-top: 0.78rem;
+  }
+
+  .hero-card__name {
+    margin-top: 0.72rem;
+  }
+}
+
 @keyframes hero-word-scan {
   0% {
     transform: translateX(-120%);
