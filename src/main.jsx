@@ -1,5 +1,5 @@
 const productionStylesheet = "/portfolio/assets/app-22hNlOmb.css";
-const productionEntry = "/portfolio/assets/app-DmvyEafJ.js";
+const productionEntry = "/portfolio/assets/app-DrDx23iv.js";
 const devHosts = new Set(["localhost", "127.0.0.1"]);
 const devPorts = new Set(["4173", "5173", "5174", "5175"]);
 

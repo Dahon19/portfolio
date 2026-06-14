@@ -945,25 +945,6 @@ function ContactSection() {
             </article>
           </div>
 
-          <div className="contact__cta">
-            <a href={`mailto:${portfolioData.contact.email}`} className="button" aria-label="Send email to Rod Allen Agregado">
-              Contact Me
-            </a>
-            <a
-              href="#resume"
-              className="button button--secondary"
-              aria-label="View resume section"
-            >
-              View Resume
-            </a>
-            <a
-              href="#projects"
-              className="button button--ghost"
-              aria-label="View project section"
-            >
-              View Projects
-            </a>
-          </div>
         </div>
       </div>
     </section>
