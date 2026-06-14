@@ -550,7 +550,13 @@ function AboutSection() {
 
         <div className="about__grid">
           <div className="about__story surface" data-reveal>
+            <span className="about__story-label">Working profile</span>
             <p>{portfolioData.profile.about}</p>
+            <div className="about__story-points" aria-label="About summary">
+              <span>Systems</span>
+              <span>Support</span>
+              <span>Instruction</span>
+            </div>
             <div className="about__signature-line" />
           </div>
 
