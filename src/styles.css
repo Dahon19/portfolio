@@ -9410,3 +9410,206 @@ body::before {
     transition: none !important;
   }
 }
+
+/* Portfolio enhancement pass: keep the profile fully visible and sharpen proof surfaces. */
+.hero__proof-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.62rem;
+  align-items: center;
+  max-width: 46rem;
+  margin-top: 0.16rem;
+}
+
+.hero__proof-strip span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.44rem;
+  min-height: 2.32rem;
+  padding: 0.46rem 0.72rem;
+  border: 1px solid rgba(182, 255, 138, 0.18);
+  border-radius: 0.68rem;
+  background:
+    linear-gradient(135deg, rgba(182, 255, 138, 0.1), rgba(118, 236, 255, 0.055)),
+    rgba(255, 255, 255, 0.035);
+  color: #e5f7ff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.hero__proof-strip svg {
+  flex: 0 0 auto;
+  color: #b6ff8a;
+}
+
+.hero__portrait-stage .hero-card--portrait {
+  border-radius: 1.15rem !important;
+  background:
+    radial-gradient(circle at 50% 8%, rgba(118, 236, 255, 0.16), transparent 33%),
+    linear-gradient(180deg, rgba(10, 20, 35, 0.94), rgba(4, 9, 18, 0.98)) !important;
+}
+
+.hero__portrait-stage .hero-card__photo-frame {
+  display: flex !important;
+  align-items: end;
+  justify-content: center;
+  aspect-ratio: 2 / 3 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: min(68vh, 39rem);
+  border-radius: 0.86rem !important;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(118, 236, 255, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(8, 18, 32, 0.98), rgba(4, 9, 18, 0.92)) !important;
+  overflow: hidden !important;
+}
+
+.hero__portrait-stage .hero-card__photo {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  object-position: center bottom !important;
+  transform: none !important;
+  filter: saturate(1.06) contrast(1.02);
+}
+
+.hero__portrait-stage:hover .hero-card__photo {
+  transform: none !important;
+  filter: saturate(1.12) contrast(1.04);
+}
+
+.hero-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+  margin-top: 0.74rem;
+}
+
+.hero-card__meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.8rem;
+  padding: 0.32rem 0.56rem;
+  border: 1px solid rgba(118, 236, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(118, 236, 255, 0.065);
+  color: #c9d9eb;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.about__value-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.95rem, 1.8vw, 1.25rem);
+  margin-top: clamp(1rem, 2vw, 1.45rem);
+}
+
+.value-card {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.2rem, 2vw, 1.55rem);
+}
+
+.value-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  content: "";
+  background: linear-gradient(90deg, #76ecff, #b6ff8a, transparent);
+}
+
+.value-card span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.75rem;
+  padding: 0.28rem 0.58rem;
+  border: 1px solid rgba(118, 236, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(118, 236, 255, 0.08);
+  color: #8ff3ff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.value-card h3 {
+  margin-top: 0.8rem;
+  color: #f7fbff;
+  font-size: clamp(1.18rem, 1.6vw, 1.52rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.value-card p {
+  margin-top: 0.6rem;
+  color: #b8c6da;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 981px) {
+  .hero__grid {
+    grid-template-columns: minmax(0, 1.02fr) minmax(20rem, 0.68fr) !important;
+  }
+
+  .hero__portrait-stage {
+    width: min(26rem, 100%) !important;
+    min-height: 0 !important;
+    align-self: center;
+  }
+
+  .hero__portrait-stage .hero-card--portrait {
+    width: min(24.5rem, 100%) !important;
+    padding: 0.95rem !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .hero__proof-strip {
+    justify-content: center;
+    margin-inline: auto;
+  }
+
+  .about__value-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero__panel {
+    order: -1;
+    width: 100%;
+    justify-items: center;
+  }
+
+  .hero__proof-strip {
+    width: min(100%, 22rem);
+  }
+
+  .hero__proof-strip span {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero__portrait-stage .hero-card__photo-frame {
+    width: min(100%, 14.5rem);
+    max-height: none;
+    margin-inline: auto;
+  }
+
+  .hero__portrait-stage .hero-card--portrait {
+    max-width: 17rem;
+    margin-inline: auto;
+    padding: 0.72rem !important;
+  }
+
+  .hero-card__meta span {
+    font-size: 0.68rem;
+  }
+}

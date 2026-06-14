@@ -89,6 +89,30 @@ const qualificationItems = [
   }
 ];
 
+const heroProofItems = [
+  "Laravel and React systems",
+  "Support-ready documentation",
+  "Teaching and user guidance"
+];
+
+const workValueItems = [
+  {
+    label: "Build",
+    title: "Workflow-first systems",
+    detail: "Admin tools, CMS workflows, and mobile utilities built around real user tasks."
+  },
+  {
+    label: "Support",
+    title: "Operational handoff",
+    detail: "Troubleshooting habits, documentation, and clearer guidance after the interface ships."
+  },
+  {
+    label: "Teach",
+    title: "Readable technical communication",
+    detail: "Explains tools, processes, and fixes in language that learners and users can follow."
+  }
+];
+
 const skillIconMap = {
   "Frontend Development": Laptop2,
   "Backend / Database": Database,
@@ -456,6 +480,15 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
               </a>
             </div>
 
+            <div className="hero__proof-strip" aria-label="Portfolio strengths">
+              {heroProofItems.map((item) => (
+                <span key={item}>
+                  <BadgeCheck size={15} />
+                  {item}
+                </span>
+              ))}
+            </div>
+
             <div className="hero__stats">
               {portfolioData.stats.map((item, index) => (
                 <div
@@ -490,6 +523,11 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                   />
                 </div>
                 <p className="hero-card__name">{portfolioData.profile.name}</p>
+                <div className="hero-card__meta" aria-label="Profile highlights">
+                  <span>BSIT graduate</span>
+                  <span>Outstanding OJT</span>
+                  <span>Cum Laude</span>
+                </div>
               </div>
             </div>
           </aside>
@@ -535,6 +573,21 @@ function AboutSection() {
               </div>
             </article>
           </div>
+        </div>
+
+        <div className="about__value-grid" aria-label="Portfolio value summary">
+          {workValueItems.map((item, index) => (
+            <article
+              className="value-card surface"
+              key={item.label}
+              data-reveal
+              style={{ "--delay": `${180 + index * 80}ms` }}
+            >
+              <span>{item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.detail}</p>
+            </article>
+          ))}
         </div>
       </div>
     </section>
