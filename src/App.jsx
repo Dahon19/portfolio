@@ -475,9 +475,6 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
               <a href="#projects" className="button">
                 View Projects <ArrowRight size={18} />
               </a>
-              <a href="#contact" className="button button--ghost">
-                Contact Me
-              </a>
             </div>
 
             <div className="hero__proof-strip" aria-label="Portfolio strengths">

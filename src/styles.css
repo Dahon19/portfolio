@@ -9848,7 +9848,7 @@ body::before {
   }
 }
 
-/* Hero headline alignment: keep the rotating word as one stable text line. */
+/* Hero headline alignment: keep the rotating word stable without overpowering the copy. */
 .sr-only {
   position: absolute !important;
   width: 1px !important;
@@ -9865,26 +9865,35 @@ body::before {
 .hero__title {
   display: grid !important;
   justify-items: start;
-  gap: clamp(0.18rem, 0.45vw, 0.34rem) !important;
-  max-width: min(100%, 20ch) !important;
-  line-height: 1.02 !important;
+  gap: clamp(0.06rem, 0.25vw, 0.18rem) !important;
+  max-width: min(100%, 15.4ch) !important;
+  line-height: 0.98 !important;
 }
 
 .hero__title-lead,
 .hero__title-tail {
   display: block !important;
   max-width: none !important;
-  line-height: 1.02;
+  line-height: 0.98;
   white-space: nowrap;
+}
+
+.hero__title-lead {
+  font-size: 0.92em !important;
+}
+
+.hero__title-tail {
+  font-size: 0.82em !important;
+  margin-top: clamp(0.12rem, 0.35vw, 0.28rem);
 }
 
 .hero__animated-line {
   position: relative !important;
   display: block !important;
-  width: min(100%, 12.9ch) !important;
-  height: 1.16em !important;
-  min-height: 1.16em !important;
-  padding: 0.02em 0.1em 0.08em !important;
+  width: min(100%, 10.9ch) !important;
+  height: 1.08em !important;
+  min-height: 1.08em !important;
+  padding: 0.01em 0.12em 0.08em !important;
   line-height: 1.04 !important;
   overflow: hidden !important;
 }
@@ -9925,22 +9934,29 @@ body::before {
   .hero__title {
     justify-items: center;
     margin-inline: auto;
-    max-width: min(18rem, calc(100vw - 2rem)) !important;
+    max-width: min(20rem, calc(100vw - 2rem)) !important;
     min-width: 0 !important;
     text-align: center;
-    width: min(18rem, calc(100vw - 2rem)) !important;
+    width: min(20rem, calc(100vw - 2rem)) !important;
   }
 
   .hero .hero__title .hero__title-tail {
     display: block !important;
     justify-self: center !important;
-    max-width: 11.8ch !important;
+    max-width: 100% !important;
     min-width: 0 !important;
     overflow-wrap: normal !important;
-    white-space: normal !important;
+    white-space: nowrap !important;
   }
 
   .hero__animated-line {
-    width: min(100%, 12.4ch) !important;
+    width: min(100%, 10.9ch) !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero .hero__title .hero__title-tail {
+    max-width: 11.8ch !important;
+    white-space: normal !important;
   }
 }
