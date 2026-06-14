@@ -9847,3 +9847,100 @@ body::before {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
+
+/* Hero headline alignment: keep the rotating word as one stable text line. */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.hero__title {
+  display: grid !important;
+  justify-items: start;
+  gap: clamp(0.18rem, 0.45vw, 0.34rem) !important;
+  max-width: min(100%, 20ch) !important;
+  line-height: 1.02 !important;
+}
+
+.hero__title-lead,
+.hero__title-tail {
+  display: block !important;
+  max-width: none !important;
+  line-height: 1.02;
+  white-space: nowrap;
+}
+
+.hero__animated-line {
+  position: relative !important;
+  display: block !important;
+  width: min(100%, 12.9ch) !important;
+  height: 1.16em !important;
+  min-height: 1.16em !important;
+  padding: 0.02em 0.1em 0.08em !important;
+  line-height: 1.04 !important;
+  overflow: hidden !important;
+}
+
+.hero__animated-word {
+  position: absolute !important;
+  inset: 0.02em 0.1em 0.08em !important;
+  display: none !important;
+  align-items: center;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  line-height: 1 !important;
+  transform: translate3d(0, 62%, 0) !important;
+  transition:
+    opacity 180ms var(--ease-out),
+    transform 240ms var(--ease-out),
+    visibility 0ms linear 240ms !important;
+}
+
+.hero__animated-word.is-active {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translate3d(0, 0, 0) !important;
+  transition:
+    opacity 180ms var(--ease-out),
+    transform 240ms var(--ease-out),
+    visibility 0ms linear 0ms !important;
+}
+
+.hero__animated-word.is-before:not(.is-active) {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  transform: translate3d(0, -62%, 0) !important;
+}
+
+@media (max-width: 980px) {
+  .hero__title {
+    justify-items: center;
+    margin-inline: auto;
+    max-width: min(18rem, calc(100vw - 2rem)) !important;
+    min-width: 0 !important;
+    text-align: center;
+    width: min(18rem, calc(100vw - 2rem)) !important;
+  }
+
+  .hero .hero__title .hero__title-tail {
+    display: block !important;
+    justify-self: center !important;
+    max-width: 11.8ch !important;
+    min-width: 0 !important;
+    overflow-wrap: normal !important;
+    white-space: normal !important;
+  }
+
+  .hero__animated-line {
+    width: min(100%, 12.4ch) !important;
+  }
+}
