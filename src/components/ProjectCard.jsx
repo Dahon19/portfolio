@@ -55,22 +55,6 @@ export function ProjectCard({ project, TechIcon, variant = "default", projectNum
             </div>
           </div>
         </div>
-
-        <div className="project-card__actions">
-          {hasPreviewImage ? (
-            <a
-              className="project-card__action"
-              href={project.preview.src}
-              target="_blank"
-              rel="noreferrer"
-            >
-              View Preview
-            </a>
-          ) : null}
-          <a className="project-card__action project-card__action--muted" href="#contact">
-            Discuss Project
-          </a>
-        </div>
       </div>
     </article>
   );
