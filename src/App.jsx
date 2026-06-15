@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
-  BadgeCheck,
   BookOpenText,
   Code2,
   Cpu,
@@ -87,12 +86,6 @@ const qualificationItems = [
     detail:
       "Combines documentation, presentation readiness, and technical communication for entry-level teaching assistant or IT instruction support."
   }
-];
-
-const heroProofItems = [
-  "Laravel and React systems",
-  "Support-ready documentation",
-  "Teaching and user guidance"
 ];
 
 const workValueItems = [
@@ -443,7 +436,6 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
             <div className="hero__signal" aria-label="Portfolio positioning">
               <span>Developer portfolio</span>
               <span>Support-ready delivery</span>
-              <span>2026</span>
             </div>
             <h1 className="hero__title">
               <span className="hero__title-lead">I build</span>
@@ -463,27 +455,17 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
               <span className="hero__title-tail">with clean delivery.</span>
             </h1>
             <p className="hero__role">
-              <span className="hero__role-static">Web solutions, clear documentation, and reliable IT service.</span>
-              <span>Useful systems, readable interfaces, and support-minded handoff in one focused portfolio.</span>
+              <span className="hero__role-static">Readable web systems with practical support handoff.</span>
             </p>
             <p className="hero__description">
-              I turn real workflow problems into polished web and mobile tools with practical implementation,
-              clean UI decisions, and user guidance that makes the system easier to run.
+              I turn real workflow problems into polished web and mobile tools with clear implementation,
+              clean UI decisions, and documentation that makes the system easier to run.
             </p>
 
             <div className="hero__actions">
               <a href="#projects" className="button">
                 View Projects <ArrowRight size={18} />
               </a>
-            </div>
-
-            <div className="hero__proof-strip" aria-label="Portfolio strengths">
-              {heroProofItems.map((item) => (
-                <span key={item}>
-                  <BadgeCheck size={15} />
-                  {item}
-                </span>
-              ))}
             </div>
 
             <div className="hero__stats">
