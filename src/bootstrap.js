@@ -1,8 +1,8 @@
-const productionStylesheet = "/assets/app-6NYv7NXc.css";
-const productionEntry = "/assets/app-Cpzfi3Ob.js";
+const productionStylesheet = "/portfolio/assets/app-CHeKU7un.css";
+const productionEntry = "/portfolio/assets/app-DAFDwzb9.js";
 const portraitFallbackSources = [
-  "/assets/rod-allen-profile-web-BRP0ZP85.jpg",
-  "/rod-allen-profile-clean.jpg?v=20260527c"
+  "/portfolio/assets/rod-allen-profile-web-BRP0ZP85.jpg",
+  "/portfolio/rod-allen-profile-clean.jpg?v=20260527c"
 ];
 
 if (!document.querySelector(`link[href^="${productionStylesheet.split("?")[0]}"]`)) {
