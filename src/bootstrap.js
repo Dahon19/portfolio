@@ -1,8 +1,8 @@
-const productionStylesheet = "/portfolio/assets/app-CHeKU7un.css";
-const productionEntry = "/portfolio/assets/app-DAFDwzb9.js";
+const productionStylesheet = "/assets/app-6NYv7NXc.css";
+const productionEntry = "/assets/app-Cpzfi3Ob.js";
 const portraitFallbackSources = [
-  "/portfolio/assets/rod-allen-profile-web-BRP0ZP85.jpg",
-  "/portfolio/rod-allen-profile-clean.jpg?v=20260527c",
+  "/assets/rod-allen-profile-web-BRP0ZP85.jpg",
+  "/rod-allen-profile-clean.jpg?v=20260527c",
   "https://raw.githubusercontent.com/Dahon19/dahon19.github.io/master/portfolio/rod-allen-profile-clean.jpg"
 ];
 
