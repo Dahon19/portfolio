@@ -2,8 +2,7 @@ const productionStylesheet = "/assets/app-6NYv7NXc.css";
 const productionEntry = "/assets/app-Cpzfi3Ob.js";
 const portraitFallbackSources = [
   "/assets/rod-allen-profile-web-BRP0ZP85.jpg",
-  "/rod-allen-profile-clean.jpg?v=20260527c",
-  "https://raw.githubusercontent.com/Dahon19/dahon19.github.io/master/portfolio/rod-allen-profile-clean.jpg"
+  "/rod-allen-profile-clean.jpg?v=20260527c"
 ];
 
 if (!document.querySelector(`link[href^="${productionStylesheet.split("?")[0]}"]`)) {
