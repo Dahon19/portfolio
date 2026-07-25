@@ -434,8 +434,8 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
         <div className="hero__grid">
           <div className="hero__copy" data-reveal>
             <div className="hero__signal" aria-label="Portfolio positioning">
-              <span>Developer portfolio</span>
-              <span>Support-ready delivery</span>
+              <span className="hero__availability"><i aria-hidden="true" /> Open to opportunities</span>
+              <span>Developer · Support · IT Instruction</span>
             </div>
             <h1 className="hero__title">
               <span className="hero__title-lead">I build</span>
@@ -465,6 +465,9 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
             <div className="hero__actions">
               <a href="#projects" className="button">
                 View Projects <ArrowRight size={18} />
+              </a>
+              <a href="#contact" className="button button--secondary">
+                Let&apos;s connect
               </a>
             </div>
 

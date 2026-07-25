@@ -1,4 +1,6 @@
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="site-footer">
       <div className="site-footer__inner">
@@ -6,7 +8,7 @@ export function Footer() {
           <p>Rod Allen B. Agregado</p>
           <small>Software, service, and instruction.</small>
         </div>
-        <small>Available for instructor, helpdesk, and junior developer roles.</small>
+        <small>© {currentYear} · Built with React · Available for meaningful IT work.</small>
       </div>
     </footer>
   );

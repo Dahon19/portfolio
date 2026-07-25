@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+
 export function Navbar({ activeSection, onSectionNavigate }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const logoSrc = `${import.meta.env.BASE_URL}favicon.svg`;
   const links = [
     ["Home", "#home"],
@@ -24,8 +28,13 @@ export function Navbar({ activeSection, onSectionNavigate }) {
     }
 
     event.preventDefault();
+    setIsMenuOpen(false);
     onSectionNavigate(href.slice(1));
   };
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [activeSection]);
 
   return (
     <header className="site-header">
@@ -39,7 +48,21 @@ export function Navbar({ activeSection, onSectionNavigate }) {
             <small>IT Instructor / Developer</small>
           </span>
         </a>
-        <nav className="site-nav" aria-label="Primary">
+        <button
+          type="button"
+          className="nav-toggle"
+          aria-label={isMenuOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={isMenuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setIsMenuOpen((current) => !current)}
+        >
+          {isMenuOpen ? <X size={21} /> : <Menu size={21} />}
+        </button>
+        <nav
+          id="primary-navigation"
+          className={`site-nav${isMenuOpen ? " is-open" : ""}`}
+          aria-label="Primary"
+        >
           {links.map(([label, href]) => (
             <a
               key={href}
