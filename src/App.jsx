@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   BookOpenText,
+  Camera,
   Code2,
   Cpu,
   ChevronLeft,
@@ -15,7 +16,9 @@ import {
   MonitorSmartphone,
   Network,
   Phone,
+  RefreshCw,
   ShieldCheck,
+  Sparkles,
   Wrench
 } from "lucide-react";
 import {
@@ -47,6 +50,7 @@ import {
   SiVite
 } from "react-icons/si";
 import profileImageSrc from "./assets/rod-allen-profile-web.jpg";
+import avatarImageSrc from "./assets/rod-allen-avatar.jpg";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { SectionHeading } from "./components/SectionHeading";
@@ -424,6 +428,8 @@ function useSectionObservers() {
 }
 
 function HomeSection({ activeTitleIndex, reducedMotion }) {
+  const [isAvatarView, setIsAvatarView] = useState(false);
+
   return (
     <section className="hero section" id="home">
       <div className="hero__mesh" aria-hidden="true" />
@@ -487,21 +493,82 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
           <aside className="hero__panel">
             <div className="hero__portrait-stage" data-reveal style={{ "--delay": "120ms" }}>
               <div className="hero__portrait-backdrop" aria-hidden="true">
-                <img src={profileImageSrc} alt="" />
+                <img src={isAvatarView ? avatarImageSrc : profileImageSrc} alt="" />
               </div>
               <div className="hero__portrait-light hero__portrait-light--gold" aria-hidden="true" />
               <div className="hero__portrait-light hero__portrait-light--blue" aria-hidden="true" />
               <div className="hero__portrait-lines" aria-hidden="true" />
 
               <div className="hero-card hero-card--portrait">
-                <div className="hero-card__badge">DevDahon</div>
-                <div className="hero-card__photo-frame">
-                  <img
-                    src={profileImageSrc}
-                    alt="Rod Allen B. Agregado portrait"
-                    className="hero-card__photo"
-                  />
+                <div className="hero-card__header-row">
+                  <div className="hero-card__badge">DevDahon</div>
+                  <button
+                    type="button"
+                    className="hero-card__toggle-btn"
+                    onClick={() => setIsAvatarView((prev) => !prev)}
+                    title="Click to flip photo / avatar"
+                    aria-label="Switch between photo and avatar illustration"
+                  >
+                    {isAvatarView ? (
+                      <>
+                        <Sparkles size={13} aria-hidden="true" />
+                        <span>Avatar</span>
+                      </>
+                    ) : (
+                      <>
+                        <Camera size={13} aria-hidden="true" />
+                        <span>Photo</span>
+                      </>
+                    )}
+                  </button>
                 </div>
+
+                <div
+                  className={`hero-card__photo-stage${isAvatarView ? " is-flipped" : ""}`}
+                  onClick={() => setIsAvatarView((prev) => !prev)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setIsAvatarView((prev) => !prev);
+                    }
+                  }}
+                  title="Click to flip image"
+                >
+                  <div className="hero-card__flipper-inner">
+                    <div className="hero-card__photo-side hero-card__photo-side--front">
+                      <img
+                        src={profileImageSrc}
+                        alt="Rod Allen B. Agregado real portrait photo"
+                        className="hero-card__photo"
+                      />
+                      <span className="hero-card__photo-tag">Real Photo</span>
+                    </div>
+                    <div className="hero-card__photo-side hero-card__photo-side--back">
+                      <img
+                        src={avatarImageSrc}
+                        alt="DevDahon Barong Tagalog avatar illustration"
+                        className="hero-card__photo hero-card__photo--avatar"
+                        onError={(e) => {
+                          e.currentTarget.src = profileImageSrc;
+                        }}
+                      />
+                      <span className="hero-card__photo-tag hero-card__photo-tag--gold">DevDahon Avatar</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  className="hero-card__flip-hint"
+                  onClick={() => setIsAvatarView((prev) => !prev)}
+                  role="button"
+                  tabIndex={0}
+                >
+                  <RefreshCw size={12} aria-hidden="true" />
+                  <span>Click image or button to flip</span>
+                </div>
+
                 <p className="hero-card__name">{portfolioData.profile.displayName}</p>
                 <div className="hero-card__meta" aria-label="Profile highlights">
                   <span>BSIT Graduate</span>
