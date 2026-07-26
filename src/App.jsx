@@ -429,9 +429,10 @@ function useSectionObservers() {
 
 function HomeSection({ activeTitleIndex, reducedMotion }) {
   const [isAvatarView, setIsAvatarView] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    if (reducedMotion) {
+    if (reducedMotion || isPaused) {
       return undefined;
     }
 
@@ -440,7 +441,7 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
     }, 5000);
 
     return () => window.clearInterval(intervalId);
-  }, [reducedMotion]);
+  }, [reducedMotion, isPaused]);
 
   return (
     <section className="hero section" id="home">
@@ -518,6 +519,8 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                     type="button"
                     className="hero-card__toggle-btn"
                     onClick={() => setIsAvatarView((prev) => !prev)}
+                    onMouseEnter={() => setIsPaused(true)}
+                    onMouseLeave={() => setIsPaused(false)}
                     title="Click to switch photo / avatar view"
                     aria-label="Switch between photo and avatar illustration"
                   >
@@ -536,8 +539,10 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                 </div>
 
                 <div
-                  className="hero-card__photo-stage"
+                  className={`hero-card__photo-stage${isAvatarView ? " is-avatar" : " is-photo"}`}
                   onClick={() => setIsAvatarView((prev) => !prev)}
+                  onMouseEnter={() => setIsPaused(true)}
+                  onMouseLeave={() => setIsPaused(false)}
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) => {
@@ -546,17 +551,25 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                       setIsAvatarView((prev) => !prev);
                     }
                   }}
-                  title="Click to switch image view"
+                  title="Click to switch image view (hover to pause timer)"
                 >
                   <div className="hero-card__crossfade-wrap">
-                    <div className={`hero-card__photo-layer${!isAvatarView ? " is-active" : ""}`}>
+                    <div
+                      className={`hero-card__photo-layer hero-card__photo-layer--real${
+                        !isAvatarView ? " is-active" : ""
+                      }`}
+                    >
                       <img
                         src={profileImageSrc}
                         alt="Rod Allen B. Agregado real portrait photo"
-                        className="hero-card__photo"
+                        className="hero-card__photo hero-card__photo--real"
                       />
                     </div>
-                    <div className={`hero-card__photo-layer${isAvatarView ? " is-active" : ""}`}>
+                    <div
+                      className={`hero-card__photo-layer hero-card__photo-layer--avatar${
+                        isAvatarView ? " is-active" : ""
+                      }`}
+                    >
                       <img
                         src={avatarImageSrc}
                         alt="DevDahon Barong Tagalog avatar illustration"
@@ -566,12 +579,22 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                         }}
                       />
                     </div>
+                    <div className="hero-card__light-sweep" aria-hidden="true" />
+                  </div>
+
+                  <div className="hero-card__progress-track" aria-hidden="true">
+                    <div
+                      key={isAvatarView ? "avatar-timer" : "photo-timer"}
+                      className={`hero-card__progress-bar${isPaused ? " is-paused" : ""}`}
+                    />
                   </div>
                 </div>
 
                 <div
                   className="hero-card__flip-hint"
                   onClick={() => setIsAvatarView((prev) => !prev)}
+                  onMouseEnter={() => setIsPaused(true)}
+                  onMouseLeave={() => setIsPaused(false)}
                   role="button"
                   tabIndex={0}
                 >
