@@ -482,11 +482,15 @@ img {
 
 .hero__animated-line {
   position: relative;
-  width: 10ch;
-  height: 1.1em;
-  display: block;
+  width: 100%;
+  max-width: max-content;
+  min-width: 15ch;
+  height: 1.25em;
+  display: inline-block;
   overflow: hidden;
   color: var(--lime);
+  padding-right: 0.2rem;
+  vertical-align: bottom;
 }
 
 .hero__animated-word {

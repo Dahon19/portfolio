@@ -798,6 +798,64 @@ function ProjectsSection() {
                       <span className="projects-rail__body">
                         <strong>{project.title}</strong>
                         <span>{project.reference}</span>
+            </div>
+
+            <div className="projects-showcase__meta">
+              <div className="projects-showcase__counter" aria-live="polite">
+                <strong>{activePositionLabel}</strong>
+                <span>/ {String(visibleProjects.length).padStart(2, "0")}</span>
+              </div>
+            </div>
+          </div>
+
+          {activeProject ? (
+            <>
+              <div className="projects-card-carousel">
+                <button
+                  type="button"
+                  className="projects-card-carousel__nav"
+                  onClick={() => handleCarouselStep(-1)}
+                  aria-label="Show previous project"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+
+                <div className="projects-card-carousel__viewport">
+                  <ProjectCard
+                    key={activeProject.slug}
+                    project={activeProject}
+                    TechIcon={TechIcon}
+                    variant="showcase"
+                    projectNumber={activePositionLabel}
+                  />
+                </div>
+
+                <button
+                  type="button"
+                  className="projects-card-carousel__nav"
+                  onClick={() => handleCarouselStep(1)}
+                  aria-label="Show next project"
+                >
+                  <ChevronRight size={18} />
+                </button>
+              </div>
+
+              <div className="projects-rail" aria-label="Project quick selection">
+                {visibleProjects.map((project, index) => {
+                  const isActive = index === normalizedProjectIndex;
+
+                  return (
+                    <button
+                      type="button"
+                      key={project.slug}
+                      className={`projects-rail__item${isActive ? " is-active" : ""}`}
+                      onClick={() => setActiveProjectIndex(index)}
+                      aria-pressed={isActive}
+                    >
+                      <span className="projects-rail__index">{String(index + 1).padStart(2, "0")}</span>
+                      <span className="projects-rail__body">
+                        <strong>{project.title}</strong>
+                        <span>{project.reference}</span>
                       </span>
                     </button>
                   );
@@ -816,7 +874,7 @@ function ProjectsSection() {
 }
 
 function CertificatesSection() {
-  const [activeGroup, setActiveGroup] = useState(certificateGroupOrder[0]);
+  const [activeGroup, setActiveGroup] = useState("All Records");
   const groupedCertificates = useMemo(
     () => {
       const groups = portfolioData.certificates.reduce((accumulator, item) => {
@@ -840,26 +898,47 @@ function CertificatesSection() {
     },
     []
   );
-  const activeCertificateGroup =
-    groupedCertificates.find(([group]) => group === activeGroup) ?? groupedCertificates[0];
+
+  const totalCount = useMemo(
+    () => portfolioData.certificates.length,
+    []
+  );
+
+  const displayedGroups = useMemo(() => {
+    if (activeGroup === "All Records") {
+      return groupedCertificates;
+    }
+    return groupedCertificates.filter(([group]) => group === activeGroup);
+  }, [activeGroup, groupedCertificates]);
 
   return (
     <section className="certificates section" id="certificates">
       <div className="container">
         <SectionHeading
           eyebrow="Professional Development"
-          title="Credentials without the clutter"
-          subtitle="Grouped learning records that support the project work without overwhelming the page."
+          title="Credentials & Certifications"
+          subtitle="Complete record of verified certifications, seminars, webinars, and technical online courses."
           align="left"
         />
 
         <div className="certificates-tabs" role="tablist" aria-label="Professional development categories">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeGroup === "All Records"}
+            className={`certificates-tabs__button${activeGroup === "All Records" ? " is-active" : ""}`}
+            onClick={() => setActiveGroup("All Records")}
+          >
+            <span>All Records</span>
+            <small>{totalCount}</small>
+          </button>
+
           {groupedCertificates.map(([group, certificates]) => (
             <button
               type="button"
               role="tab"
-              aria-selected={group === activeCertificateGroup?.[0]}
-              className={`certificates-tabs__button${group === activeCertificateGroup?.[0] ? " is-active" : ""}`}
+              aria-selected={activeGroup === group}
+              className={`certificates-tabs__button${activeGroup === group ? " is-active" : ""}`}
               key={group}
               onClick={() => setActiveGroup(group)}
             >
@@ -869,16 +948,17 @@ function CertificatesSection() {
           ))}
         </div>
 
-        <div className="certificates__grid">
-          {activeCertificateGroup ? (
+        <div className="certificates__list" style={{ display: "grid", gap: "2rem" }}>
+          {displayedGroups.map(([groupTitle, certificates], index) => (
             <CertificateGroup
-              key={activeCertificateGroup[0]}
-              title={activeCertificateGroup[0]}
-              certificates={activeCertificateGroup[1]}
-              icon={certificateIcons[activeCertificateGroup[0]]}
-              delay={80}
+              key={groupTitle}
+              title={groupTitle}
+              certificates={certificates}
+              icon={certificateIcons[groupTitle]}
+              delay={index * 80}
+              initialLimit={activeGroup === "All Records" ? 6 : 12}
             />
-          ) : null}
+          ))}
         </div>
       </div>
     </section>
@@ -932,7 +1012,6 @@ function ContactSection() {
               </div>
             </article>
           </div>
-
         </div>
       </div>
     </section>

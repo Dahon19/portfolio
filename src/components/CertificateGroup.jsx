@@ -1,9 +1,15 @@
 import { useState } from "react";
 
-export function CertificateGroup({ title, certificates, icon: Icon, delay = 0 }) {
+export function CertificateGroup({
+  title,
+  certificates,
+  icon: Icon,
+  delay = 0,
+  initialLimit = 9
+}) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const limit = 6;
+  const limit = initialLimit;
   const showToggle = certificates.length > limit;
   const visibleCertificates = isExpanded ? certificates : certificates.slice(0, limit);
 
@@ -29,13 +35,13 @@ export function CertificateGroup({ title, certificates, icon: Icon, delay = 0 })
         {visibleCertificates.map((certificate, index) => (
           <div
             className="certificate-card"
-            key={`${certificate.title}-${certificate.date}`}
-            style={{ "--delay": `${index * 35}ms` }}
+            key={`${certificate.title}-${certificate.date}-${index}`}
+            style={{ "--delay": `${(index % 6) * 35}ms` }}
           >
             {certificate.preview ? (
               <img
                 src={certificate.preview}
-                alt={`${certificate.title} sanitized certificate preview`}
+                alt={`${certificate.title} preview`}
                 className="certificate-card__preview"
                 loading="lazy"
               />
@@ -54,13 +60,15 @@ export function CertificateGroup({ title, certificates, icon: Icon, delay = 0 })
       </div>
 
       {showToggle && (
-        <div className="certificate-group__footer" style={{ marginTop: "1rem" }}>
+        <div className="certificate-group__footer" style={{ marginTop: "1.2rem" }}>
           <button
             type="button"
             className="certificate-toggle-btn"
             onClick={() => setIsExpanded(!isExpanded)}
           >
-            {isExpanded ? "Show Less" : `Show ${certificates.length - limit} More`}
+            {isExpanded
+              ? "Show Less"
+              : `Show All ${certificates.length} Records (+${certificates.length - limit} More)`}
           </button>
         </div>
       )}
