@@ -44,8 +44,8 @@ export function Navbar({ activeSection, onSectionNavigate }) {
             <img className="brand-logo" src={logoSrc} alt="" />
           </span>
           <span className="brand-copy">
-            <strong>Rod Allen B. Agregado</strong>
-            <small>Developer · Support · Instruction</small>
+            <strong>Rod Allen (DevDahon)</strong>
+            <small>Developer · Tech Support · Instruction</small>
           </span>
         </a>
         <button

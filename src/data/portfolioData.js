@@ -17,23 +17,23 @@ const projectPreview = (fileName) =>
 export const portfolioData = {
   profile: {
     name: "Rod Allen B. Agregado",
-    title: "Information Technology Graduate",
-    shortTitle: "IT Graduate | Systems Developer | Support Specialist",
-    tagline:
-      "Web solutions, clear documentation, and reliable IT service.",
+    devName: "DevDahon",
+    displayName: "Rod Allen B. Agregado (DevDahon)",
+    title: "IT Graduate & Developer",
+    shortTitle: "Developer · Tech Support · IT Instruction",
+    tagline: "Clean web apps, tech support, and simple user guidance.",
     intro:
-      "BSIT graduate with a foundation in web development, hardware troubleshooting, software applications, and user assistance. I build focused tools for real workflow problems.",
+      "BSIT graduate building practical web tools, fixing tech issues, and helping users with clear guidance.",
     about:
-      "My work combines maintenance, hardware diagnostics, troubleshooting, and web-based development. My background includes programming, digital tools, academic projects, internship exposure, competitions, seminars, and online courses. I focus on useful software, organized workflows, and clear guidance for users.",
+      "I am an IT graduate passionate about web development, technical support, and teaching. I build practical web tools and help users solve hardware and software problems with simple, clear instructions.",
     focusAreas: [
-      "Web-based systems",
-      "Helpdesk support",
-      "Frontend workflows",
-      "Hardware diagnostics",
-      "Inventory and HR workflows",
-      "Digital skills training",
-      "User-focused interfaces",
-      "Instructional guidance"
+      "Web Applications",
+      "Tech Support",
+      "Frontend UI",
+      "Hardware Diagnostics",
+      "System Workflows",
+      "User Assistance",
+      "Technical Documentation"
     ]
   },
   stats: [

@@ -81,33 +81,32 @@ const qualificationItems = [
   },
   {
     label: "Teaching Readiness",
-    title: "Instruction and learner support",
-    subtitle: "Prepared for IT fundamentals, user guidance, and classroom support",
+    title: "IT Instruction & User Support",
+    subtitle: "Prepared for IT fundamentals, tech training, and user support",
     detail:
-      "Combines documentation, presentation readiness, and technical communication for entry-level teaching assistant or IT instruction support."
+      "Combines technical skills and clear communication for IT teaching assistance and user training."
   }
 ];
 
 const workValueItems = [
   {
     label: "Build",
-    title: "Workflow-first systems",
-    detail: "Admin tools, CMS workflows, and mobile utilities built around real user tasks."
+    title: "Simple & Clean Web Apps",
+    detail: "Web applications, CMS platforms, and mobile tools built for everyday tasks."
   },
   {
     label: "Support",
-    title: "Operational handoff",
-    detail: "Troubleshooting habits, documentation, and clearer guidance after the interface ships."
+    title: "Reliable Tech Support",
+    detail: "Hardware diagnostics, software troubleshooting, and clear user documentation."
   },
   {
     label: "Teach",
-    title: "Readable technical communication",
-    detail: "Explains tools, processes, and fixes in language that learners and users can follow."
+    title: "Simple & Clear Guidance",
+    detail: "Explains technical tools and solutions in clear language that anyone can understand."
   }
 ];
 
 const skillIconMap = {
-  "Frontend Development": Laptop2,
   "Backend / Database": Database,
   "Technical Support": ShieldCheck,
   "Teaching & Communication": MessageSquareMore,
@@ -455,11 +454,10 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
               <span className="hero__title-tail">with clean delivery.</span>
             </h1>
             <p className="hero__role">
-              <span className="hero__role-static">Readable web systems with practical support handoff.</span>
+              <span className="hero__role-static">Web Developer & Technical Support Specialist</span>
             </p>
             <p className="hero__description">
-              I turn real workflow problems into polished web and mobile tools with clear implementation,
-              clean UI decisions, and documentation that makes the system easier to run.
+              I build clean web applications, fix technical problems, and write simple guides that make tools easy to use.
             </p>
 
             <div className="hero__actions">
@@ -496,7 +494,7 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
               <div className="hero__portrait-lines" aria-hidden="true" />
 
               <div className="hero-card hero-card--portrait">
-                <div className="hero-card__badge">Profile</div>
+                <div className="hero-card__badge">DevDahon</div>
                 <div className="hero-card__photo-frame">
                   <img
                     src={profileImageSrc}
@@ -504,10 +502,10 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                     className="hero-card__photo"
                   />
                 </div>
-                <p className="hero-card__name">{portfolioData.profile.name}</p>
+                <p className="hero-card__name">{portfolioData.profile.displayName}</p>
                 <div className="hero-card__meta" aria-label="Profile highlights">
-                  <span>BSIT graduate</span>
-                  <span>Outstanding OJT</span>
+                  <span>BSIT Graduate</span>
+                  <span>Outstanding Trainee</span>
                   <span>Cum Laude</span>
                 </div>
               </div>
@@ -524,19 +522,19 @@ function AboutSection() {
     <section className="about section" id="about">
       <div className="container">
         <SectionHeading
-          eyebrow="About"
-          title="Practical software with support instincts"
-          subtitle="Web systems, troubleshooting, documentation, and user guidance in one technical lane."
+          eyebrow="About Me"
+          title="Practical web tools & reliable tech support"
+          subtitle="Building web applications, fixing technical issues, and helping users."
           align="left"
         />
 
         <div className="about__grid">
           <div className="about__story surface" data-reveal>
-            <span className="about__story-label">Working profile</span>
+            <span className="about__story-label">Developer Profile</span>
             <p>{portfolioData.profile.about}</p>
             <div className="about__story-points" aria-label="About summary">
-              <span>Systems</span>
-              <span>Support</span>
+              <span>Web Dev</span>
+              <span>Tech Support</span>
               <span>Instruction</span>
             </div>
             <div className="about__signature-line" />
@@ -544,11 +542,10 @@ function AboutSection() {
 
           <div className="about__highlights">
             <article className="highlight-card surface" data-reveal style={{ "--delay": "120ms" }}>
-              <span className="highlight-card__label">Current direction</span>
-              <h3>Building useful tools and communicating technology clearly</h3>
+              <span className="highlight-card__label">My Goal</span>
+              <h3>Building useful web apps and making technology easy to use</h3>
               <p>
-                My strongest fit is structured IT work where development,
-                user guidance, and process improvement intersect.
+                I focus on web development, troubleshooting technical issues, and helping users with clear guidance.
               </p>
             </article>
 
@@ -588,8 +585,8 @@ function SkillsSection() {
       <div className="container">
         <SectionHeading
           eyebrow="Skills"
-          title="Dev stack and support toolkit"
-          subtitle="The tools I use, the workflows I understand, and the communication skills behind the builds."
+          title="Dev Stack & Support Tools"
+          subtitle="The programming languages, frameworks, and support tools I work with."
         />
 
         <div className="skills__grid">
@@ -617,9 +614,9 @@ function QualificationSection() {
     <section className="timeline section" id="resume">
       <div className="container">
         <SectionHeading
-          eyebrow="Education & Professional Preparation"
-          title="Experience, education, and readiness"
-          subtitle="Internship work, formal education, technical strengths, and communication habits."
+          eyebrow="Experience & Education"
+          title="My Qualifications & Internship"
+          subtitle="Education, internship experience, and key technical capabilities."
           align="left"
         />
 
@@ -727,18 +724,18 @@ function ProjectsSection() {
       <div className="container">
         <SectionHeading
           eyebrow="Technical Projects"
-          title="Systems that do the talking"
-          subtitle="A focused project set across web, mobile, admin workflows, and hardware-assisted builds."
+          title="Featured Projects"
+          subtitle="Projects in web development, mobile apps, and IoT hardware."
           align="left"
         />
 
         <article className="projects-showcase surface" data-reveal>
           <div className="projects-showcase__header">
             <div className="projects-showcase__copy">
-              <span className="projects-showcase__eyebrow">Proof Through Projects</span>
-              <h3>Start with the strongest build, then compare the rest.</h3>
+              <span className="projects-showcase__eyebrow">Projects Showcase</span>
+              <h3>Explore my web, mobile, and hardware projects.</h3>
               <p>
-                Each project highlights a real workflow, the stack used, and the kind of problem it solves.
+                Each project highlights the tech stack used and the problem it solves.
               </p>
             </div>
 
