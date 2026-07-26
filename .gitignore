@@ -1,0 +1,17 @@
+node_modules
+dist
+.env
+.env.*
+*.local
+*.log
+coverage
+vendor
+storage
+bootstrap/cache
+database/*.sql
+database/*.sqlite
+*.dump
+*.bak
+*.tmp
+public/raw-certificates
+public/private
