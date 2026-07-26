@@ -430,6 +430,18 @@ function useSectionObservers() {
 function HomeSection({ activeTitleIndex, reducedMotion }) {
   const [isAvatarView, setIsAvatarView] = useState(false);
 
+  useEffect(() => {
+    if (reducedMotion) {
+      return undefined;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setIsAvatarView((prev) => !prev);
+    }, 5000);
+
+    return () => window.clearInterval(intervalId);
+  }, [reducedMotion]);
+
   return (
     <section className="hero section" id="home">
       <div className="hero__mesh" aria-hidden="true" />
@@ -543,7 +555,6 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                         alt="Rod Allen B. Agregado real portrait photo"
                         className="hero-card__photo"
                       />
-                      <span className="hero-card__photo-tag">Real Photo</span>
                     </div>
                     <div className="hero-card__photo-side hero-card__photo-side--back">
                       <img
@@ -554,7 +565,6 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                           e.currentTarget.src = profileImageSrc;
                         }}
                       />
-                      <span className="hero-card__photo-tag hero-card__photo-tag--gold">DevDahon Avatar</span>
                     </div>
                   </div>
                 </div>
