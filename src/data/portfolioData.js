@@ -616,7 +616,7 @@ export const portfolioData = {
     ]
   },
   contact: {
-    email: "rodagregado19@gmail.com",
+    email: "rodallenagregado19@gmail.com",
     phone: "09770317480",
     note:
       "For instructor, helpdesk, or junior developer opportunities, contact me through the details provided here."
