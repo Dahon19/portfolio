@@ -798,64 +798,6 @@ function ProjectsSection() {
                       <span className="projects-rail__body">
                         <strong>{project.title}</strong>
                         <span>{project.reference}</span>
-            </div>
-
-            <div className="projects-showcase__meta">
-              <div className="projects-showcase__counter" aria-live="polite">
-                <strong>{activePositionLabel}</strong>
-                <span>/ {String(visibleProjects.length).padStart(2, "0")}</span>
-              </div>
-            </div>
-          </div>
-
-          {activeProject ? (
-            <>
-              <div className="projects-card-carousel">
-                <button
-                  type="button"
-                  className="projects-card-carousel__nav"
-                  onClick={() => handleCarouselStep(-1)}
-                  aria-label="Show previous project"
-                >
-                  <ChevronLeft size={18} />
-                </button>
-
-                <div className="projects-card-carousel__viewport">
-                  <ProjectCard
-                    key={activeProject.slug}
-                    project={activeProject}
-                    TechIcon={TechIcon}
-                    variant="showcase"
-                    projectNumber={activePositionLabel}
-                  />
-                </div>
-
-                <button
-                  type="button"
-                  className="projects-card-carousel__nav"
-                  onClick={() => handleCarouselStep(1)}
-                  aria-label="Show next project"
-                >
-                  <ChevronRight size={18} />
-                </button>
-              </div>
-
-              <div className="projects-rail" aria-label="Project quick selection">
-                {visibleProjects.map((project, index) => {
-                  const isActive = index === normalizedProjectIndex;
-
-                  return (
-                    <button
-                      type="button"
-                      key={project.slug}
-                      className={`projects-rail__item${isActive ? " is-active" : ""}`}
-                      onClick={() => setActiveProjectIndex(index)}
-                      aria-pressed={isActive}
-                    >
-                      <span className="projects-rail__index">{String(index + 1).padStart(2, "0")}</span>
-                      <span className="projects-rail__body">
-                        <strong>{project.title}</strong>
-                        <span>{project.reference}</span>
                       </span>
                     </button>
                   );
