@@ -737,24 +737,24 @@ img {
   transition: transform 600ms var(--ease), filter 600ms ease;
 }
 
-/* REAL PHOTO ALIGNMENT & ZOOM OUT */
+/* REAL PHOTO ALIGNMENT & SYNCED ZOOM */
 .hero-card__photo--real {
-  object-position: center 8%;
-  transform: scale(0.90);
+  object-position: center 10%;
+  transform: scale(1.0);
   filter: contrast(1.03) brightness(1.02);
 }
 
 .hero-card__photo-layer--real.is-active .hero-card__photo--real {
-  transform: scale(0.89);
+  transform: scale(1.0);
 }
 
 .hero-card__photo-stage:hover .hero-card__photo--real {
-  transform: scale(0.92);
+  transform: scale(1.03);
 }
 
-/* AVATAR ILLUSTRATION ALIGNMENT */
+/* AVATAR ILLUSTRATION ALIGNMENT & SYNCED ZOOM */
 .hero-card__photo--avatar {
-  object-position: center 14%;
+  object-position: center 12%;
   transform: scale(1.0);
   filter: contrast(1.04);
 }
