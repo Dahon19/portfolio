@@ -485,30 +485,35 @@ img {
   width: 100%;
   max-width: max-content;
   min-width: 15ch;
-  height: 1.25em;
-  display: inline-block;
+  height: 1.45em;
+  display: inline-flex;
+  align-items: center;
   overflow: hidden;
   color: var(--lime);
-  padding-right: 0.2rem;
-  vertical-align: bottom;
+  padding-right: 0.3rem;
+  padding-block: 0.1em;
+  vertical-align: middle;
+  margin-block: 0.05em;
 }
 
 .hero__animated-word {
   position: absolute;
-  inset: 0 auto auto 0;
+  top: 50%;
+  left: 0;
   opacity: 0;
   white-space: nowrap;
-  transform: translateY(80%);
-  transition: opacity 280ms ease, transform 380ms var(--ease);
+  line-height: 1.25;
+  transform: translateY(40%);
+  transition: opacity 300ms ease, transform 400ms var(--ease);
 }
 
 .hero__animated-word.is-active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(-50%);
 }
 
 .hero__animated-word.is-before {
-  transform: translateY(-80%);
+  transform: translateY(-140%);
 }
 
 .hero__role {

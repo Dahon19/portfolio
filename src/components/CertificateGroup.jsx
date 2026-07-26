@@ -15,8 +15,7 @@ export function CertificateGroup({
 
   return (
     <article
-      className="certificate-group"
-      data-reveal
+      className="certificate-group is-visible"
       style={{ "--delay": `${delay}ms` }}
     >
       <div className="certificate-group__header">
@@ -34,7 +33,7 @@ export function CertificateGroup({
       <div className="certificate-group__grid">
         {visibleCertificates.map((certificate, index) => (
           <div
-            className="certificate-card"
+            className="certificate-card is-visible"
             key={`${certificate.title}-${certificate.date}-${index}`}
             style={{ "--delay": `${(index % 6) * 35}ms` }}
           >
