@@ -24,8 +24,8 @@ export function ProjectCard({ project, TechIcon, variant = "default", projectNum
             <div className="project-card__placeholder-node project-card__placeholder-node--one" aria-hidden="true" />
             <div className="project-card__placeholder-node project-card__placeholder-node--two" aria-hidden="true" />
             <div className="project-card__placeholder-content">
-              <strong>No Image Available Yet</strong>
-              <span>{project.reference}</span>
+              <strong>{project.title}</strong>
+              <span>{project.category ?? project.reference}</span>
             </div>
           </div>
         )}
