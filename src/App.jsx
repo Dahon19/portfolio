@@ -518,7 +518,7 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                     type="button"
                     className="hero-card__toggle-btn"
                     onClick={() => setIsAvatarView((prev) => !prev)}
-                    title="Click to flip photo / avatar"
+                    title="Click to switch photo / avatar view"
                     aria-label="Switch between photo and avatar illustration"
                   >
                     {isAvatarView ? (
@@ -536,7 +536,7 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                 </div>
 
                 <div
-                  className={`hero-card__photo-stage${isAvatarView ? " is-flipped" : ""}`}
+                  className="hero-card__photo-stage"
                   onClick={() => setIsAvatarView((prev) => !prev)}
                   role="button"
                   tabIndex={0}
@@ -546,17 +546,17 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                       setIsAvatarView((prev) => !prev);
                     }
                   }}
-                  title="Click to flip image"
+                  title="Click to switch image view"
                 >
-                  <div className="hero-card__flipper-inner">
-                    <div className="hero-card__photo-side hero-card__photo-side--front">
+                  <div className="hero-card__crossfade-wrap">
+                    <div className={`hero-card__photo-layer${!isAvatarView ? " is-active" : ""}`}>
                       <img
                         src={profileImageSrc}
                         alt="Rod Allen B. Agregado real portrait photo"
                         className="hero-card__photo"
                       />
                     </div>
-                    <div className="hero-card__photo-side hero-card__photo-side--back">
+                    <div className={`hero-card__photo-layer${isAvatarView ? " is-active" : ""}`}>
                       <img
                         src={avatarImageSrc}
                         alt="DevDahon Barong Tagalog avatar illustration"
@@ -576,7 +576,7 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
                   tabIndex={0}
                 >
                   <RefreshCw size={12} aria-hidden="true" />
-                  <span>Click image or button to flip</span>
+                  <span>Click image or button to switch view</span>
                 </div>
 
                 <p className="hero-card__name">{portfolioData.profile.displayName}</p>
