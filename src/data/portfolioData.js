@@ -620,6 +620,32 @@ export const portfolioData = {
       "User guidance"
     ]
   },
+  socials: [
+    {
+      name: "GitHub",
+      url: "https://github.com/DevDahon",
+      handle: "@DevDahon",
+      type: "github"
+    },
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/rod-allen-agregado-73b2b4398/",
+      handle: "Rod Allen Agregado",
+      type: "linkedin"
+    },
+    {
+      name: "Credly",
+      url: "https://www.credly.com/users/rod-allen-agregado/badges/credly",
+      handle: "Rod Allen Agregado",
+      type: "credly"
+    },
+    {
+      name: "Facebook",
+      url: "https://www.facebook.com/raagregado19",
+      handle: "Rod Allen Agregado",
+      type: "facebook"
+    }
+  ],
   contact: {
     email: "rodallenagregado19@gmail.com",
     phone: "09770317480",

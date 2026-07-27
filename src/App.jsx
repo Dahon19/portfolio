@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Database,
+  ExternalLink,
   GraduationCap,
   Laptop2,
   Mail,
@@ -22,11 +23,13 @@ import {
   FaBootstrap,
   FaCss3Alt,
   FaDatabase,
+  FaFacebook,
   FaGitAlt,
   FaGithub,
   FaHtml5,
   FaJs,
   FaLaravel,
+  FaLinkedin,
   FaNetworkWired,
   FaNodeJs,
   FaPhp,
@@ -34,6 +37,7 @@ import {
 } from "react-icons/fa";
 import {
   SiArduino,
+  SiCredly,
   SiDart,
   SiExpo,
   SiFirebase,
@@ -484,6 +488,20 @@ function HomeSection() {
               <a href="#contact" className="button button--secondary">
                 Let&apos;s connect
               </a>
+              <div className="hero__socials" aria-label="Social media profiles">
+                <a href="https://github.com/DevDahon" target="_blank" rel="noopener noreferrer" className="hero__social-link" title="GitHub Profile (@DevDahon)">
+                  <FaGithub size={18} />
+                </a>
+                <a href="https://www.linkedin.com/in/rod-allen-agregado-73b2b4398/" target="_blank" rel="noopener noreferrer" className="hero__social-link" title="LinkedIn Profile">
+                  <FaLinkedin size={18} />
+                </a>
+                <a href="https://www.credly.com/users/rod-allen-agregado/badges/credly" target="_blank" rel="noopener noreferrer" className="hero__social-link" title="Credly Badges">
+                  <SiCredly size={18} />
+                </a>
+                <a href="https://www.facebook.com/raagregado19" target="_blank" rel="noopener noreferrer" className="hero__social-link" title="Facebook Profile">
+                  <FaFacebook size={18} />
+                </a>
+              </div>
             </div>
 
             <div className="hero__stats">
@@ -974,6 +992,34 @@ function ContactSection() {
               <div>
                 <h3>Phone</h3>
                 <a href={`tel:${portfolioData.contact.phone}`}>{portfolioData.contact.phone}</a>
+              </div>
+            </article>
+            <article className="contact-card" data-reveal style={{ "--delay": "360ms" }}>
+              <FaGithub size={20} />
+              <div>
+                <h3>GitHub</h3>
+                <a href="https://github.com/DevDahon" target="_blank" rel="noopener noreferrer">@DevDahon <ExternalLink size={12} style={{ display: "inline", marginLeft: "4px" }} /></a>
+              </div>
+            </article>
+            <article className="contact-card" data-reveal style={{ "--delay": "420ms" }}>
+              <FaLinkedin size={20} />
+              <div>
+                <h3>LinkedIn</h3>
+                <a href="https://www.linkedin.com/in/rod-allen-agregado-73b2b4398/" target="_blank" rel="noopener noreferrer">Rod Allen Agregado <ExternalLink size={12} style={{ display: "inline", marginLeft: "4px" }} /></a>
+              </div>
+            </article>
+            <article className="contact-card" data-reveal style={{ "--delay": "480ms" }}>
+              <SiCredly size={20} />
+              <div>
+                <h3>Credly Badges</h3>
+                <a href="https://www.credly.com/users/rod-allen-agregado/badges/credly" target="_blank" rel="noopener noreferrer">Verify Profile <ExternalLink size={12} style={{ display: "inline", marginLeft: "4px" }} /></a>
+              </div>
+            </article>
+            <article className="contact-card" data-reveal style={{ "--delay": "540ms" }}>
+              <FaFacebook size={20} />
+              <div>
+                <h3>Facebook</h3>
+                <a href="https://www.facebook.com/raagregado19" target="_blank" rel="noopener noreferrer">@raagregado19 <ExternalLink size={12} style={{ display: "inline", marginLeft: "4px" }} /></a>
               </div>
             </article>
           </div>
