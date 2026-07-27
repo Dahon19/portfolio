@@ -467,40 +467,36 @@ img {
 }
 
 /* Hero Animated Line - Zero Vertical & Horizontal Clipping */
-.hero__animated-line {
+.hero__typewriter-wrap {
   position: relative;
-  width: 100%;
-  max-width: max-content;
-  min-width: 15ch;
-  height: 1.45em;
   display: inline-flex;
   align-items: center;
-  overflow: hidden;
   color: var(--gold-bright);
-  padding-right: 0.3rem;
-  padding-block: 0.1em;
+  padding-right: 0.15em;
   vertical-align: middle;
-  margin-block: 0.05em;
+  min-height: 1.25em;
 }
 
-.hero__animated-word {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  opacity: 0;
+.hero__typewriter-text {
   white-space: nowrap;
-  line-height: 1.25;
-  transform: translateY(40%);
-  transition: opacity 300ms ease, transform 400ms var(--ease);
+  color: var(--gold-bright);
 }
 
-.hero__animated-word.is-active {
-  opacity: 1;
-  transform: translateY(-50%);
+.hero__typewriter-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: var(--gold-bright);
+  font-weight: 300;
+  animation: typewriter-cursor-blink 800ms infinite;
 }
 
-.hero__animated-word.is-before {
-  transform: translateY(-140%);
+@keyframes typewriter-cursor-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 .hero__role {

@@ -231,22 +231,43 @@ function useReducedMotionPreference() {
   return reducedMotion;
 }
 
-function useRotatingTitle(words) {
-  const [titleNumber, setTitleNumber] = useState(0);
+function useTypewriterEffect(words, typeSpeed = 85, deleteSpeed = 45, delayAfterWord = 1800) {
+  const [displayText, setDisplayText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (!words || words.length <= 1) {
-      return undefined;
+    if (!words || words.length === 0) return undefined;
+
+    const currentWord = words[wordIndex % words.length];
+    let timer;
+
+    if (isDeleting) {
+      if (displayText.length > 0) {
+        timer = window.setTimeout(() => {
+          setDisplayText(currentWord.substring(0, displayText.length - 1));
+        }, deleteSpeed);
+      } else {
+        setIsDeleting(false);
+        setWordIndex((prev) => (prev + 1) % words.length);
+        timer = window.setTimeout(() => {}, 220);
+      }
+    } else {
+      if (displayText.length < currentWord.length) {
+        timer = window.setTimeout(() => {
+          setDisplayText(currentWord.substring(0, displayText.length + 1));
+        }, typeSpeed);
+      } else {
+        timer = window.setTimeout(() => {
+          setIsDeleting(true);
+        }, delayAfterWord);
+      }
     }
 
-    const intervalId = window.setInterval(() => {
-      setTitleNumber((current) => (current + 1) % words.length);
-    }, 2200);
+    return () => window.clearTimeout(timer);
+  }, [displayText, isDeleting, wordIndex, words, typeSpeed, deleteSpeed, delayAfterWord]);
 
-    return () => window.clearInterval(intervalId);
-  }, [words]);
-
-  return titleNumber;
+  return displayText;
 }
 
 function TechIcon({ name, className = "" }) {
@@ -422,7 +443,9 @@ function useSectionObservers() {
   return { activeSection, reducedMotion, navigateToSection };
 }
 
-function HomeSection({ activeTitleIndex }) {
+function HomeSection() {
+  const typedText = useTypewriterEffect(rotatingHeroWords);
+
   return (
     <section className="hero section" id="home">
       <div className="hero__mesh" aria-hidden="true" />
@@ -438,19 +461,11 @@ function HomeSection({ activeTitleIndex }) {
             </div>
             <h1 className="hero__title">
               <span className="hero__title-lead">I build</span>
-              <span className="hero__animated-line" aria-hidden="true">
-                {rotatingHeroWords.map((title, index) => (
-                  <span
-                    className={`hero__animated-word${activeTitleIndex === index ? " is-active" : ""}${
-                      activeTitleIndex > index ? " is-before" : ""
-                    }`}
-                    key={title}
-                  >
-                    {title}
-                  </span>
-                ))}
+              <span className="hero__typewriter-wrap">
+                <span className="hero__typewriter-text">{typedText}</span>
+                <span className="hero__typewriter-cursor" aria-hidden="true">|</span>
               </span>
-              <span className="sr-only">{rotatingHeroWords[activeTitleIndex]}</span>
+              <span className="sr-only">{typedText}</span>
               <span className="hero__title-tail">with clean delivery.</span>
             </h1>
             <p className="hero__role">
@@ -967,14 +982,13 @@ function ContactSection() {
 }
 
 export default function App() {
-  const { activeSection, reducedMotion, navigateToSection } = useSectionObservers();
-  const activeTitleIndex = useRotatingTitle(rotatingHeroWords);
+  const { activeSection, navigateToSection } = useSectionObservers();
 
   return (
     <>
       <Navbar activeSection={activeSection} onSectionNavigate={navigateToSection} />
       <main className="main">
-        <HomeSection activeTitleIndex={activeTitleIndex} reducedMotion={reducedMotion} />
+        <HomeSection />
         <AboutSection />
         <ProjectsSection />
         <SkillsSection />
