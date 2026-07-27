@@ -21,34 +21,35 @@ export function GitHubActivitySection({ devUsername = "DevDahon" }) {
       }
     }
 
-    // 2. Fetch / Increment Visitor Counter (Option A via CountAPI / Hits)
+    // 2. Accurate Real-Time Visitor Counter API via CounterAPI.dev
     async function trackVisitor() {
-      const baseVisits = 1248;
-      try {
-        const key = "devdahon_portfolio_visits";
-        const hasVisited = sessionStorage.getItem("portfolio_visited");
-        const endpoint = hasVisited
-          ? `https://api.countapi.xyz/get/devdahon-portfolio-views/${key}`
-          : `https://api.countapi.xyz/hit/devdahon-portfolio-views/${key}`;
+      const namespace = "devdahon-portfolio-v1";
+      const key = "visits";
+      const hasVisited = sessionStorage.getItem("portfolio_session_tracked");
 
+      // Use /up endpoint to increment for new visitors, or / endpoint to read live count for existing session
+      const endpoint = hasVisited
+        ? `https://api.counterapi.dev/v1/${namespace}/${key}/`
+        : `https://api.counterapi.dev/v1/${namespace}/${key}/up`;
+
+      try {
         const res = await fetch(endpoint);
         if (res.ok) {
           const data = await res.json();
-          if (data && typeof data.value === "number") {
-            setVisitorCount(data.value + baseVisits);
-            sessionStorage.setItem("portfolio_visited", "true");
+          if (data && typeof data.count === "number") {
+            setVisitorCount(data.count);
+            sessionStorage.setItem("portfolio_session_tracked", "true");
+            localStorage.setItem("portfolio_last_known_count", String(data.count));
             return;
           }
         }
-      } catch {
-        // Fallback visitor counter if API endpoint is unreachable
+      } catch (err) {
+        console.warn("CounterAPI fetch issue, using local counter fallback:", err);
       }
 
-      const stored = parseInt(localStorage.getItem("portfolio_total_visits") || "0", 10);
-      const newTotal = baseVisits + stored + (sessionStorage.getItem("portfolio_visited") ? 0 : 1);
-      localStorage.setItem("portfolio_total_visits", String(newTotal - baseVisits));
-      sessionStorage.setItem("portfolio_visited", "true");
-      setVisitorCount(newTotal);
+      // Fallback for offline or network interruption
+      const savedCount = parseInt(localStorage.getItem("portfolio_last_known_count") || "1", 10);
+      setVisitorCount(savedCount);
     }
 
     fetchGitHubData();
@@ -125,7 +126,7 @@ export function GitHubActivitySection({ devUsername = "DevDahon" }) {
               </div>
 
               <p className="visitor-card__footer-note">
-                Tracked via privacy-friendly visitor analytics. Thank you for visiting!
+                Tracked in real time via CounterAPI analytics. Thank you for visiting!
               </p>
             </div>
           </aside>

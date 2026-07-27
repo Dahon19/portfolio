@@ -33,7 +33,8 @@ import {
   FaNetworkWired,
   FaNodeJs,
   FaPhp,
-  FaReact
+  FaReact,
+  FaWhatsapp
 } from "react-icons/fa";
 import {
   SiArduino,
@@ -1000,6 +1001,17 @@ function ContactSection() {
               >
                 <FaFacebook size={22} />
                 <span className="contact-icon-button__tooltip">Facebook</span>
+              </a>
+
+              <a
+                href="https://wa.me/639770317480"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-icon-button"
+                aria-label="WhatsApp (09770317480)"
+              >
+                <FaWhatsapp size={22} />
+                <span className="contact-icon-button__tooltip">WhatsApp</span>
               </a>
             </div>
           </div>
