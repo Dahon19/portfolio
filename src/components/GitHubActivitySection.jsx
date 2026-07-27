@@ -1,36 +1,23 @@
 import { useEffect, useState } from "react";
-import { FaGithub, FaCodeBranch, FaEye, FaHistory } from "react-icons/fa";
-import { ExternalLink, RefreshCw } from "lucide-react";
+import { FaGithub, FaEye, FaHistory } from "react-icons/fa";
+import { ExternalLink } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 
 export function GitHubActivitySection({ devUsername = "DevDahon" }) {
-  const [events, setEvents] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
   const [visitorCount, setVisitorCount] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 1. Fetch GitHub user profile & recent events
+    // 1. Fetch GitHub user profile info
     async function fetchGitHubData() {
       try {
-        const [userRes, eventsRes] = await Promise.all([
-          fetch(`https://api.github.com/users/${devUsername}`),
-          fetch(`https://api.github.com/users/${devUsername}/events/public?per_page=6`)
-        ]);
-
-        if (userRes.ok) {
-          const userData = await userRes.json();
+        const res = await fetch(`https://api.github.com/users/${devUsername}`);
+        if (res.ok) {
+          const userData = await res.json();
           setUserInfo(userData);
         }
-
-        if (eventsRes.ok) {
-          const eventsData = await eventsRes.json();
-          setEvents(eventsData.slice(0, 5));
-        }
       } catch (err) {
-        console.error("Failed to fetch GitHub activity:", err);
-      } finally {
-        setLoading(false);
+        console.error("Failed to fetch GitHub profile info:", err);
       }
     }
 
@@ -54,7 +41,7 @@ export function GitHubActivitySection({ devUsername = "DevDahon" }) {
           }
         }
       } catch {
-        // Fallback visitor counter fallback if API endpoint is rate-limited
+        // Fallback visitor counter if API endpoint is unreachable
       }
 
       const stored = parseInt(localStorage.getItem("portfolio_total_visits") || "0", 10);
@@ -68,51 +55,18 @@ export function GitHubActivitySection({ devUsername = "DevDahon" }) {
     trackVisitor();
   }, [devUsername]);
 
-  const formatTimeAgo = (dateString) => {
-    const date = new Date(dateString);
-    const now = new Date();
-    const seconds = Math.floor((now - date) / 1000);
-
-    if (seconds < 3600) return `${Math.max(1, Math.floor(seconds / 60))}m ago`;
-    if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
-    if (seconds < 2592000) return `${Math.floor(seconds / 86400)}d ago`;
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
-  };
-
-  const getEventTitle = (event) => {
-    switch (event.type) {
-      case "PushEvent": {
-        const commitCount = event.payload?.commits?.length || 1;
-        const msg = event.payload?.commits?.[0]?.message || "Updated repository";
-        return `Pushed ${commitCount} commit${commitCount > 1 ? "s" : ""}: "${msg.split("\n")[0]}"`;
-      }
-      case "CreateEvent":
-        return `Created ${event.payload?.ref_type || "repository"} ${event.payload?.ref ? `"${event.payload.ref}"` : ""}`;
-      case "WatchEvent":
-        return `Starred repository`;
-      case "ForkEvent":
-        return `Forked repository`;
-      case "PullRequestEvent":
-        return `${event.payload?.action || "Updated"} pull request`;
-      case "IssuesEvent":
-        return `${event.payload?.action || "Updated"} issue`;
-      default:
-        return "Updated repository code";
-    }
-  };
-
   return (
     <section className="github-activity section" id="activity">
       <div className="container">
         <SectionHeading
-          eyebrow="Live Metrics & Open Source"
-          title="GitHub Activity & Visitor Analytics"
-          subtitle="Real-time contribution events from GitHub and live portfolio visitor metrics."
+          eyebrow="Open Source & Live Metrics"
+          title="GitHub Contribution & Portfolio Analytics"
+          subtitle="Live GitHub contribution calendar graph and real-time visitor engagement."
           align="left"
         />
 
         <div className="github-activity__grid">
-          {/* Main GitHub Activity Card */}
+          {/* Main GitHub Contribution Calendar Card */}
           <div className="github-activity__main surface" data-reveal>
             <div className="github-activity__header">
               <div className="github-activity__user">
@@ -123,7 +77,7 @@ export function GitHubActivitySection({ devUsername = "DevDahon" }) {
                       @{devUsername} <ExternalLink size={14} style={{ display: "inline", marginLeft: "4px" }} />
                     </a>
                   </h3>
-                  <small>Recent Public GitHub Activity</small>
+                  <small>Open Source Contributions</small>
                 </div>
               </div>
 
@@ -135,48 +89,13 @@ export function GitHubActivitySection({ devUsername = "DevDahon" }) {
               )}
             </div>
 
-            {/* Events List */}
-            <div className="github-activity__events">
-              {loading ? (
-                <div className="github-activity__loading">
-                  <RefreshCw size={18} className="spin" />
-                  <span>Loading live GitHub events...</span>
-                </div>
-              ) : events.length > 0 ? (
-                events.map((event) => (
-                  <div key={event.id} className="github-event-item">
-                    <div className="github-event-item__icon">
-                      <FaCodeBranch size={14} />
-                    </div>
-                    <div className="github-event-item__details">
-                      <span className="github-event-item__repo">
-                        <a
-                          href={`https://github.com/${event.repo?.name}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {event.repo?.name}
-                        </a>
-                      </span>
-                      <p className="github-event-item__title">{getEventTitle(event)}</p>
-                    </div>
-                    <span className="github-event-item__time">{formatTimeAgo(event.created_at)}</span>
-                  </div>
-                ))
-              ) : (
-                <div className="github-activity__loading">
-                  <p>Explore all repositories directly on <a href={`https://github.com/${devUsername}`} target="_blank" rel="noopener noreferrer">GitHub @DevDahon</a>.</p>
-                </div>
-              )}
-            </div>
-
             {/* Contribution Calendar Graph */}
             <div className="github-activity__heatmap">
               <span className="github-activity__heatmap-title"><FaHistory size={14} /> Contribution Calendar</span>
               <div className="github-activity__heatmap-img-wrap">
                 <img
                   src={`https://ghchart.rshah.org/D4AF37/${devUsername}`}
-                  alt={`GitHub Contribution Heatmap for ${devUsername}`}
+                  alt={`GitHub Contribution Calendar for ${devUsername}`}
                   loading="lazy"
                 />
               </div>

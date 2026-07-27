@@ -69,7 +69,7 @@ const rotatingHeroWords = [
   "workflows"
 ];
 
-const navSectionIds = ["home", "about", "projects", "skills", "resume", "certificates", "contact"];
+const navSectionIds = ["home", "about", "projects", "skills", "resume", "certificates", "activity", "contact"];
 
 const qualificationItems = [
   {
