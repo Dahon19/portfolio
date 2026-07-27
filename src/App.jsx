@@ -231,21 +231,20 @@ function useReducedMotionPreference() {
   return reducedMotion;
 }
 
-function useRotatingTitle(words, reducedMotion) {
+function useRotatingTitle(words) {
   const [titleNumber, setTitleNumber] = useState(0);
 
   useEffect(() => {
-    if (reducedMotion || words.length <= 1) {
-      setTitleNumber(0);
+    if (!words || words.length <= 1) {
       return undefined;
     }
 
-    const timeoutId = window.setTimeout(() => {
+    const intervalId = window.setInterval(() => {
       setTitleNumber((current) => (current + 1) % words.length);
-    }, 2400);
+    }, 2200);
 
-    return () => window.clearTimeout(timeoutId);
-  }, [reducedMotion, titleNumber, words]);
+    return () => window.clearInterval(intervalId);
+  }, [words]);
 
   return titleNumber;
 }
@@ -969,7 +968,7 @@ function ContactSection() {
 
 export default function App() {
   const { activeSection, reducedMotion, navigateToSection } = useSectionObservers();
-  const activeTitleIndex = useRotatingTitle(rotatingHeroWords, reducedMotion);
+  const activeTitleIndex = useRotatingTitle(rotatingHeroWords);
 
   return (
     <>
