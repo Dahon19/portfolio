@@ -17,8 +17,8 @@ const projectPreview = (fileName) =>
 export const portfolioData = {
   profile: {
     name: "Rod Allen B. Agregado",
-    devName: "DevDahon",
-    displayName: "Rod Allen B. Agregado (DevDahon)",
+    devName: "",
+    displayName: "Rod Allen B. Agregado",
     title: "IT Graduate & Developer",
     shortTitle: "Developer · Tech Support · IT Instruction",
     tagline: "Clean web apps, tech support, and simple user guidance.",

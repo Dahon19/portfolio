@@ -450,11 +450,19 @@ img {
 }
 
 .hero__title {
-  display: block;
+  display: flex;
+  flex-direction: column;
   color: var(--white-pure);
   font-size: clamp(2.2rem, 4.2vw, 3.6rem);
   letter-spacing: -0.04em;
-  line-height: 1.2;
+  line-height: 1.25;
+  gap: 0.15rem;
+}
+
+.hero__title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .hero__title-lead {
@@ -463,8 +471,8 @@ img {
 }
 
 .hero__title-tail {
-  display: inline;
-  margin-left: 0.3em;
+  display: block;
+  margin-left: 0;
   color: #a1a1aa;
 }
 

@@ -460,12 +460,14 @@ function HomeSection() {
               <span>Developer · Support · IT Instruction</span>
             </div>
             <h1 className="hero__title">
-              <span className="hero__title-lead">I build</span>
-              <span className="hero__typewriter-wrap">
-                <span className="hero__typewriter-text">{typedText}</span>
-                <span className="hero__typewriter-cursor" aria-hidden="true">|</span>
+              <span className="hero__title-row">
+                <span className="hero__title-lead">I build</span>
+                <span className="hero__typewriter-wrap">
+                  <span className="hero__typewriter-text">{typedText}</span>
+                  <span className="hero__typewriter-cursor" aria-hidden="true">|</span>
+                </span>
+                <span className="sr-only">{typedText}</span>
               </span>
-              <span className="sr-only">{typedText}</span>
               <span className="hero__title-tail">with clean delivery.</span>
             </h1>
             <p className="hero__role">
