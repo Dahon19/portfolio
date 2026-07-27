@@ -489,20 +489,6 @@ function HomeSection() {
               <a href="#contact" className="button button--secondary">
                 Let&apos;s connect
               </a>
-              <div className="hero__socials" aria-label="Social media profiles">
-                <a href="https://github.com/DevDahon" target="_blank" rel="noopener noreferrer" className="hero__social-link" title="GitHub Profile (@DevDahon)">
-                  <FaGithub size={18} />
-                </a>
-                <a href="https://www.linkedin.com/in/rod-allen-agregado-73b2b4398/" target="_blank" rel="noopener noreferrer" className="hero__social-link" title="LinkedIn Profile">
-                  <FaLinkedin size={18} />
-                </a>
-                <a href="https://www.credly.com/users/rod-allen-agregado/badges/credly" target="_blank" rel="noopener noreferrer" className="hero__social-link" title="Credly Badges">
-                  <SiCredly size={18} />
-                </a>
-                <a href="https://www.facebook.com/raagregado19" target="_blank" rel="noopener noreferrer" className="hero__social-link" title="Facebook Profile">
-                  <FaFacebook size={18} />
-                </a>
-              </div>
             </div>
 
             <div className="hero__stats">
