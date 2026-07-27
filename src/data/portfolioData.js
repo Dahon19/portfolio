@@ -71,7 +71,7 @@ export const portfolioData = {
   projects: [
     {
       slug: "hrms",
-      title: "HRSync: Human Resource Management System",
+      title: "HRSync",
       featured: true,
       category: "Administrative Information System",
       description:
@@ -99,7 +99,7 @@ export const portfolioData = {
     },
     {
       slug: "edu-web",
-      title: "Genesis English Language Academy CMS",
+      title: "GELA",
       category: "Education Website and CMS",
       description:
         "A school CMS for public information, announcements, learning resources, gallery content, and role-based administration.",
@@ -153,7 +153,7 @@ export const portfolioData = {
     },
     {
       slug: "bacmatic",
-      title: "SACMATIC: IoT-Based Water Monitoring System for SACDECO Tilapia Hatchery",
+      title: "SACMATIC",
       category: "Capstone Project",
       description:
         "An IoT water-monitoring build for tilapia hatchery operations using hardware sensors and microcontroller data handling.",
@@ -179,7 +179,7 @@ export const portfolioData = {
     },
     {
       slug: "u-turn",
-      title: "U-Turn Accident Prevention System",
+      title: "U-Turn",
       category: "Client Project",
       description:
         "A client project for accident-risk reduction using Arduino control, sensor input, and detection components.",
