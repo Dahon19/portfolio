@@ -17,11 +17,8 @@ function requireSingleAsset(assetNames, pattern, description) {
 async function rewriteProductionReferences(assetNames) {
   const appStylesheet = requireSingleAsset(assetNames, /^app-.*\.css$/, "app stylesheet");
   const appEntry = requireSingleAsset(assetNames, /^app-.*\.js$/, "app entry script");
-  const portraitAsset = requireSingleAsset(
-    assetNames,
-    /^rod-allen-profile-web-.*\.jpg$/,
-    "portrait asset",
-  );
+  const avatarMatches = assetNames.filter((name) => /^rod-allen-avatar-.*\.jpg$/.test(name) || /^rod-allen-profile-web-.*\.jpg$/.test(name));
+  const portraitAsset = avatarMatches[0] ?? "rod-allen-avatar.jpg";
 
   const replacements = [
     {
@@ -33,7 +30,7 @@ async function rewriteProductionReferences(assetNames) {
       value: `/portfolio/assets/${appEntry}`,
     },
     {
-      pattern: /(?:\/portfolio)?\/assets\/rod-allen-profile-web-[^"\s+;]+\.jpg(?:\?[^"]*)?/g,
+      pattern: /(?:\/portfolio)?\/assets\/rod-allen-(?:profile-web|avatar)-[^"\s+;]+\.jpg(?:\?[^"]*)?/g,
       value: `/portfolio/assets/${portraitAsset}`,
     },
   ];

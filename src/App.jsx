@@ -2,7 +2,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   BookOpenText,
-  Camera,
   Code2,
   Cpu,
   ChevronLeft,
@@ -16,9 +15,7 @@ import {
   MonitorSmartphone,
   Network,
   Phone,
-  RefreshCw,
   ShieldCheck,
-  Sparkles,
   Wrench
 } from "lucide-react";
 import {
@@ -49,7 +46,6 @@ import {
   SiTypescript,
   SiVite
 } from "react-icons/si";
-import profileImageSrc from "./assets/rod-allen-profile-web.jpg";
 import avatarImageSrc from "./assets/rod-allen-avatar.jpg";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
@@ -427,27 +423,13 @@ function useSectionObservers() {
   return { activeSection, reducedMotion, navigateToSection };
 }
 
-function HomeSection({ activeTitleIndex, reducedMotion }) {
-  const [isAvatarView, setIsAvatarView] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-
-  useEffect(() => {
-    if (reducedMotion || isPaused) {
-      return undefined;
-    }
-
-    const intervalId = window.setInterval(() => {
-      setIsAvatarView((prev) => !prev);
-    }, 5000);
-
-    return () => window.clearInterval(intervalId);
-  }, [reducedMotion, isPaused]);
-
+function HomeSection({ activeTitleIndex }) {
   return (
     <section className="hero section" id="home">
       <div className="hero__mesh" aria-hidden="true" />
       <div className="hero__ambient hero__ambient--one" aria-hidden="true" />
       <div className="hero__ambient hero__ambient--two" aria-hidden="true" />
+
       <div className="hero__container container">
         <div className="hero__grid">
           <div className="hero__copy" data-reveal>
@@ -506,7 +488,7 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
           <aside className="hero__panel">
             <div className="hero__portrait-stage" data-reveal style={{ "--delay": "120ms" }}>
               <div className="hero__portrait-backdrop" aria-hidden="true">
-                <img src={isAvatarView ? avatarImageSrc : profileImageSrc} alt="" />
+                <img src={avatarImageSrc} alt="" />
               </div>
               <div className="hero__portrait-light hero__portrait-light--gold" aria-hidden="true" />
               <div className="hero__portrait-light hero__portrait-light--blue" aria-hidden="true" />
@@ -515,91 +497,19 @@ function HomeSection({ activeTitleIndex, reducedMotion }) {
               <div className="hero-card hero-card--portrait">
                 <div className="hero-card__header-row">
                   <div className="hero-card__badge">DevDahon</div>
-                  <button
-                    type="button"
-                    className="hero-card__toggle-btn"
-                    onClick={() => setIsAvatarView((prev) => !prev)}
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
-                    title="Click to switch photo / avatar view"
-                    aria-label="Switch between photo and avatar illustration"
-                  >
-                    {isAvatarView ? (
-                      <>
-                        <Sparkles size={13} aria-hidden="true" />
-                        <span>Avatar</span>
-                      </>
-                    ) : (
-                      <>
-                        <Camera size={13} aria-hidden="true" />
-                        <span>Photo</span>
-                      </>
-                    )}
-                  </button>
                 </div>
 
-                <div
-                  className={`hero-card__photo-stage${isAvatarView ? " is-avatar" : " is-photo"}`}
-                  onClick={() => setIsAvatarView((prev) => !prev)}
-                  onMouseEnter={() => setIsPaused(true)}
-                  onMouseLeave={() => setIsPaused(false)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
-                      e.preventDefault();
-                      setIsAvatarView((prev) => !prev);
-                    }
-                  }}
-                  title="Click to switch image view (hover to pause timer)"
-                >
+                <div className="hero-card__photo-stage is-avatar">
                   <div className="hero-card__crossfade-wrap">
-                    <div
-                      className={`hero-card__photo-layer hero-card__photo-layer--real${
-                        !isAvatarView ? " is-active" : ""
-                      }`}
-                    >
-                      <img
-                        src={profileImageSrc}
-                        alt="Rod Allen B. Agregado real portrait photo"
-                        className="hero-card__photo hero-card__photo--real"
-                      />
-                    </div>
-                    <div
-                      className={`hero-card__photo-layer hero-card__photo-layer--avatar${
-                        isAvatarView ? " is-active" : ""
-                      }`}
-                    >
+                    <div className="hero-card__photo-layer hero-card__photo-layer--avatar is-active">
                       <img
                         src={avatarImageSrc}
                         alt="DevDahon Barong Tagalog avatar illustration"
                         className="hero-card__photo hero-card__photo--avatar"
-                        onError={(e) => {
-                          e.currentTarget.src = profileImageSrc;
-                        }}
                       />
                     </div>
                     <div className="hero-card__light-sweep" aria-hidden="true" />
                   </div>
-
-                  <div className="hero-card__progress-track" aria-hidden="true">
-                    <div
-                      key={isAvatarView ? "avatar-timer" : "photo-timer"}
-                      className={`hero-card__progress-bar${isPaused ? " is-paused" : ""}`}
-                    />
-                  </div>
-                </div>
-
-                <div
-                  className="hero-card__flip-hint"
-                  onClick={() => setIsAvatarView((prev) => !prev)}
-                  onMouseEnter={() => setIsPaused(true)}
-                  onMouseLeave={() => setIsPaused(false)}
-                  role="button"
-                  tabIndex={0}
-                >
-                  <RefreshCw size={12} aria-hidden="true" />
-                  <span>Click image or button to switch view</span>
                 </div>
 
                 <p className="hero-card__name">{portfolioData.profile.displayName}</p>
