@@ -476,7 +476,7 @@ img {
   color: #a1a1aa;
 }
 
-/* Hero Animated Line - Zero Vertical & Horizontal Clipping */
+/* Hero Animated Line - Stable Reserved Container Width to prevent Layout Shift */
 .hero__typewriter-wrap {
   position: relative;
   display: inline-flex;
@@ -484,7 +484,8 @@ img {
   color: var(--gold-bright);
   padding-right: 0.1em;
   vertical-align: baseline;
-  min-height: 1.2em;
+  min-width: 13.5ch;
+  text-align: left;
 }
 
 .hero__typewriter-text {
@@ -2362,7 +2363,13 @@ img {
   }
 
   .hero__title {
-    font-size: clamp(2.4rem, 11vw, 3.8rem);
+    font-size: clamp(2.2rem, 9vw, 3.6rem);
+    line-height: 1.28;
+  }
+
+  .hero__typewriter-wrap {
+    min-width: 14ch;
+    justify-content: center;
   }
 
   .hero__actions {
