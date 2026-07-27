@@ -61,7 +61,7 @@ export function GitHubActivitySection({ devUsername = "DevDahon" }) {
       <div className="container">
         <SectionHeading
           eyebrow="Open Source & Live Metrics"
-          title="GitHub Contribution & Portfolio Analytics"
+          title="GitHub & Portfolio Analytics"
           subtitle="Live GitHub contribution calendar graph and real-time visitor engagement."
           align="left"
         />
