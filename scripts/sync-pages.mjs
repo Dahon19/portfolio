@@ -25,33 +25,40 @@ async function rewriteProductionReferences(assetNames) {
 
   const replacements = [
     {
-      pattern: /(?:\/portfolio)?\/assets\/app-[^"]+\.css(?:\?[^"]*)?/g,
+      pattern: /(?:\/portfolio)?\/assets\/app-[^"\s+;]+\.css(?:(?:"\s*\+\s*Date\.now\(\))|\?[^"]*)?/g,
       value: `/portfolio/assets/${appStylesheet}`,
     },
     {
-      pattern: /(?:\/portfolio)?\/assets\/app-[^"]+\.js(?:\?[^"]*)?/g,
+      pattern: /(?:\/portfolio)?\/assets\/app-[^"\s+;]+\.js(?:(?:"\s*\+\s*Date\.now\(\))|\?[^"]*)?/g,
       value: `/portfolio/assets/${appEntry}`,
     },
     {
-      pattern: /(?:\/portfolio)?\/assets\/rod-allen-profile-web-[^"]+\.jpg(?:\?[^"]*)?/g,
+      pattern: /(?:\/portfolio)?\/assets\/rod-allen-profile-web-[^"\s+;]+\.jpg(?:\?[^"]*)?/g,
       value: `/portfolio/assets/${portraitAsset}`,
     },
   ];
 
   const filesToRewrite = [
     path.join(rootDir, "index.html"),
+    path.join(rootDir, "dist", "index.html"),
     path.join(rootDir, "src", "main.jsx"),
     path.join(rootDir, "src", "bootstrap.js"),
   ];
 
   for (const filePath of filesToRewrite) {
-    let fileContent = await fs.readFile(filePath, "utf8");
+    try {
+      let fileContent = await fs.readFile(filePath, "utf8");
 
-    for (const replacement of replacements) {
-      fileContent = fileContent.replace(replacement.pattern, replacement.value);
+      fileContent = fileContent.replace(/"\s*\+\s*Date\.now\(\)/g, '"');
+
+      for (const replacement of replacements) {
+        fileContent = fileContent.replace(replacement.pattern, replacement.value);
+      }
+
+      await fs.writeFile(filePath, fileContent);
+    } catch (e) {
+      // Ignore if dist/index.html doesn't exist yet
     }
-
-    await fs.writeFile(filePath, fileContent);
   }
 }
 
