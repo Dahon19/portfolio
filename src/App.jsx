@@ -956,72 +956,102 @@ function ContactSection() {
           <div className="contact__glow" aria-hidden="true" />
           <div className="contact__copy">
             <span className="contact__eyebrow">Open to Opportunities</span>
-            <h2>Available for junior dev, support, and IT instruction work.</h2>
+            <h2>Let&apos;s build or work together.</h2>
             <p>{portfolioData.contact.note}</p>
-            <div className="contact__tags" aria-label="Professional fit">
-              <span>Teaching readiness</span>
-              <span>Systems support</span>
-              <span>Software development</span>
+            <div className="contact__direct-actions">
+              <a href={`mailto:${portfolioData.contact.email}`} className="button">
+                <Mail size={18} /> Email Me
+              </a>
+              <a href={`tel:${portfolioData.contact.phone}`} className="button button--secondary">
+                <Phone size={18} /> Call {portfolioData.contact.phone}
+              </a>
             </div>
           </div>
 
-          <div className="contact__cards">
-            <article className="contact-card" data-reveal style={{ "--delay": "120ms" }}>
-              <GraduationCap size={20} />
-              <div>
-                <h3>Open roles</h3>
-                <p>IT instructor, helpdesk support, systems development, and junior software roles.</p>
-              </div>
-            </article>
-            <article className="contact-card" data-reveal style={{ "--delay": "180ms" }}>
-              <ArrowRight size={20} />
-              <div>
-                <h3>Working style</h3>
-                <p>Structured, user-focused, and organized with clear documentation.</p>
-              </div>
-            </article>
-            <article className="contact-card" data-reveal style={{ "--delay": "240ms" }}>
-              <Mail size={20} />
-              <div>
-                <h3>Email</h3>
-                <a href={`mailto:${portfolioData.contact.email}`}>{portfolioData.contact.email}</a>
-              </div>
-            </article>
-            <article className="contact-card" data-reveal style={{ "--delay": "300ms" }}>
-              <Phone size={20} />
-              <div>
-                <h3>Phone</h3>
-                <a href={`tel:${portfolioData.contact.phone}`}>{portfolioData.contact.phone}</a>
-              </div>
-            </article>
-            <article className="contact-card" data-reveal style={{ "--delay": "360ms" }}>
-              <FaGithub size={20} />
-              <div>
-                <h3>GitHub</h3>
-                <a href="https://github.com/DevDahon" target="_blank" rel="noopener noreferrer">@DevDahon <ExternalLink size={12} style={{ display: "inline", marginLeft: "4px" }} /></a>
-              </div>
-            </article>
-            <article className="contact-card" data-reveal style={{ "--delay": "420ms" }}>
-              <FaLinkedin size={20} />
-              <div>
-                <h3>LinkedIn</h3>
-                <a href="https://www.linkedin.com/in/rod-allen-agregado-73b2b4398/" target="_blank" rel="noopener noreferrer">Rod Allen Agregado <ExternalLink size={12} style={{ display: "inline", marginLeft: "4px" }} /></a>
-              </div>
-            </article>
-            <article className="contact-card" data-reveal style={{ "--delay": "480ms" }}>
-              <SiCredly size={20} />
-              <div>
-                <h3>Credly Badges</h3>
-                <a href="https://www.credly.com/users/rod-allen-agregado/badges/credly" target="_blank" rel="noopener noreferrer">Verify Profile <ExternalLink size={12} style={{ display: "inline", marginLeft: "4px" }} /></a>
-              </div>
-            </article>
-            <article className="contact-card" data-reveal style={{ "--delay": "540ms" }}>
-              <FaFacebook size={20} />
-              <div>
-                <h3>Facebook</h3>
-                <a href="https://www.facebook.com/raagregado19" target="_blank" rel="noopener noreferrer">@raagregado19 <ExternalLink size={12} style={{ display: "inline", marginLeft: "4px" }} /></a>
-              </div>
-            </article>
+          <div className="contact__links-grid">
+            <a
+              href={`mailto:${portfolioData.contact.email}`}
+              className="contact-button"
+              title="Send an email"
+            >
+              <span className="contact-button__icon"><Mail size={18} /></span>
+              <span className="contact-button__info">
+                <small>Email</small>
+                <strong>{portfolioData.contact.email}</strong>
+              </span>
+            </a>
+
+            <a
+              href={`tel:${portfolioData.contact.phone}`}
+              className="contact-button"
+              title="Call or send SMS"
+            >
+              <span className="contact-button__icon"><Phone size={18} /></span>
+              <span className="contact-button__info">
+                <small>Phone</small>
+                <strong>{portfolioData.contact.phone}</strong>
+              </span>
+            </a>
+
+            <a
+              href="https://github.com/DevDahon"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-button"
+              title="View GitHub profile"
+            >
+              <span className="contact-button__icon"><FaGithub size={18} /></span>
+              <span className="contact-button__info">
+                <small>GitHub</small>
+                <strong>@DevDahon</strong>
+              </span>
+              <ExternalLink size={14} className="contact-button__arrow" />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/rod-allen-agregado-73b2b4398/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-button"
+              title="Connect on LinkedIn"
+            >
+              <span className="contact-button__icon"><FaLinkedin size={18} /></span>
+              <span className="contact-button__info">
+                <small>LinkedIn</small>
+                <strong>Rod Allen Agregado</strong>
+              </span>
+              <ExternalLink size={14} className="contact-button__arrow" />
+            </a>
+
+            <a
+              href="https://www.credly.com/users/rod-allen-agregado/badges/credly"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-button"
+              title="Verify Credly Badges"
+            >
+              <span className="contact-button__icon"><SiCredly size={18} /></span>
+              <span className="contact-button__info">
+                <small>Credly Badges</small>
+                <strong>Verify Profile</strong>
+              </span>
+              <ExternalLink size={14} className="contact-button__arrow" />
+            </a>
+
+            <a
+              href="https://www.facebook.com/raagregado19"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-button"
+              title="Connect on Facebook"
+            >
+              <span className="contact-button__icon"><FaFacebook size={18} /></span>
+              <span className="contact-button__info">
+                <small>Facebook</small>
+                <strong>@raagregado19</strong>
+              </span>
+              <ExternalLink size={14} className="contact-button__arrow" />
+            </a>
           </div>
         </div>
       </div>
