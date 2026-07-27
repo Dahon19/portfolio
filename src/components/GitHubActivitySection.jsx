@@ -124,10 +124,6 @@ export function GitHubActivitySection({ devUsername = "DevDahon" }) {
                   <span>Total Portfolio Views</span>
                 </div>
               </div>
-
-              <p className="visitor-card__footer-note">
-                Tracked in real time via CounterAPI analytics. Thank you for visiting!
-              </p>
             </div>
           </aside>
         </div>
