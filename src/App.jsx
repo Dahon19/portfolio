@@ -58,6 +58,7 @@ import { SkillCategoryCard } from "./components/SkillCategoryCard";
 import { ProjectCard } from "./components/ProjectCard";
 import { CertificateGroup } from "./components/CertificateGroup";
 import { TimelineItem } from "./components/TimelineItem";
+import { GitHubActivitySection } from "./components/GitHubActivitySection";
 import { portfolioData } from "./data/portfolioData";
 
 const rotatingHeroWords = [
@@ -968,90 +969,53 @@ function ContactSection() {
             </div>
           </div>
 
-          <div className="contact__links-grid">
-            <a
-              href={`mailto:${portfolioData.contact.email}`}
-              className="contact-button"
-              title="Send an email"
-            >
-              <span className="contact-button__icon"><Mail size={18} /></span>
-              <span className="contact-button__info">
-                <small>Email</small>
-                <strong>{portfolioData.contact.email}</strong>
-              </span>
-            </a>
+          <div className="contact__social-panel">
+            <span className="contact__social-label">Social & Professional Profiles</span>
+            <div className="contact__icon-buttons" aria-label="Social and professional profiles">
+              <a
+                href="https://github.com/DevDahon"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-icon-button"
+                aria-label="GitHub (@DevDahon)"
+              >
+                <FaGithub size={22} />
+                <span className="contact-icon-button__tooltip">GitHub</span>
+              </a>
 
-            <a
-              href={`tel:${portfolioData.contact.phone}`}
-              className="contact-button"
-              title="Call or send SMS"
-            >
-              <span className="contact-button__icon"><Phone size={18} /></span>
-              <span className="contact-button__info">
-                <small>Phone</small>
-                <strong>{portfolioData.contact.phone}</strong>
-              </span>
-            </a>
+              <a
+                href="https://www.linkedin.com/in/rod-allen-agregado-73b2b4398/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-icon-button"
+                aria-label="LinkedIn Profile"
+              >
+                <FaLinkedin size={22} />
+                <span className="contact-icon-button__tooltip">LinkedIn</span>
+              </a>
 
-            <a
-              href="https://github.com/DevDahon"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-button"
-              title="View GitHub profile"
-            >
-              <span className="contact-button__icon"><FaGithub size={18} /></span>
-              <span className="contact-button__info">
-                <small>GitHub</small>
-                <strong>@DevDahon</strong>
-              </span>
-              <ExternalLink size={14} className="contact-button__arrow" />
-            </a>
+              <a
+                href="https://www.credly.com/users/rod-allen-agregado/badges/credly"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-icon-button"
+                aria-label="Credly Badges"
+              >
+                <SiCredly size={22} />
+                <span className="contact-icon-button__tooltip">Credly</span>
+              </a>
 
-            <a
-              href="https://www.linkedin.com/in/rod-allen-agregado-73b2b4398/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-button"
-              title="Connect on LinkedIn"
-            >
-              <span className="contact-button__icon"><FaLinkedin size={18} /></span>
-              <span className="contact-button__info">
-                <small>LinkedIn</small>
-                <strong>Rod Allen Agregado</strong>
-              </span>
-              <ExternalLink size={14} className="contact-button__arrow" />
-            </a>
-
-            <a
-              href="https://www.credly.com/users/rod-allen-agregado/badges/credly"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-button"
-              title="Verify Credly Badges"
-            >
-              <span className="contact-button__icon"><SiCredly size={18} /></span>
-              <span className="contact-button__info">
-                <small>Credly Badges</small>
-                <strong>Verify Profile</strong>
-              </span>
-              <ExternalLink size={14} className="contact-button__arrow" />
-            </a>
-
-            <a
-              href="https://www.facebook.com/raagregado19"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-button"
-              title="Connect on Facebook"
-            >
-              <span className="contact-button__icon"><FaFacebook size={18} /></span>
-              <span className="contact-button__info">
-                <small>Facebook</small>
-                <strong>@raagregado19</strong>
-              </span>
-              <ExternalLink size={14} className="contact-button__arrow" />
-            </a>
+              <a
+                href="https://www.facebook.com/raagregado19"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-icon-button"
+                aria-label="Facebook Profile"
+              >
+                <FaFacebook size={22} />
+                <span className="contact-icon-button__tooltip">Facebook</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -1072,6 +1036,7 @@ export default function App() {
         <SkillsSection />
         <QualificationSection />
         <CertificatesSection />
+        <GitHubActivitySection />
         <ContactSection />
       </main>
       <Footer />

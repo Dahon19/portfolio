@@ -11,6 +11,7 @@ export function Navbar({ activeSection, onSectionNavigate }) {
     ["Skills", "#skills"],
     ["Resume", "#resume"],
     ["Certs", "#certificates"],
+    ["Activity", "#activity"],
     ["Contact", "#contact"]
   ];
   const handleNavClick = (event, href) => {
