@@ -72,6 +72,7 @@ export const portfolioData = {
     {
       slug: "hrms",
       title: "HRSync: Human Resource Management System",
+      shortTitle: "HRSync",
       featured: true,
       category: "Administrative Information System",
       description:
@@ -100,6 +101,7 @@ export const portfolioData = {
     {
       slug: "edu-web",
       title: "Genesis English Language Academy CMS",
+      shortTitle: "GELA",
       category: "Education Website and CMS",
       description:
         "A school CMS for public information, announcements, learning resources, gallery content, and role-based administration.",
@@ -127,6 +129,7 @@ export const portfolioData = {
     {
       slug: "interna",
       title: "Interna",
+      shortTitle: "Interna",
       category: "Mobile Productivity App",
       description:
         "A mobile productivity app for OJT time management that helps users log activity, monitor hours, and organize internship-related records.",
@@ -154,6 +157,7 @@ export const portfolioData = {
     {
       slug: "bacmatic",
       title: "SACMATIC: IoT-Based Water Monitoring System for SACDECO Tilapia Hatchery",
+      shortTitle: "SACMATIC",
       category: "Capstone Project",
       description:
         "An IoT water-monitoring build for tilapia hatchery operations using hardware sensors and microcontroller data handling.",
@@ -180,6 +184,7 @@ export const portfolioData = {
     {
       slug: "u-turn",
       title: "U-Turn Accident Prevention System",
+      shortTitle: "U-Turn",
       category: "Client Project",
       description:
         "A client project for accident-risk reduction using Arduino control, sensor input, and detection components.",

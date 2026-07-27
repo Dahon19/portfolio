@@ -819,7 +819,7 @@ function ProjectsSection() {
                     >
                       <span className="projects-rail__index">{String(index + 1).padStart(2, "0")}</span>
                       <span className="projects-rail__body">
-                        <strong>{project.title}</strong>
+                        <strong title={project.title}>{project.shortTitle ?? project.title}</strong>
                         <span>{project.reference}</span>
                       </span>
                     </button>
