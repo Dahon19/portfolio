@@ -453,21 +453,23 @@ img {
   display: flex;
   flex-direction: column;
   color: var(--white-pure);
-  font-size: clamp(2.2rem, 4.2vw, 3.6rem);
+  font-size: clamp(1.75rem, 3.8vw, 3.25rem);
   letter-spacing: -0.04em;
   line-height: 1.25;
   gap: 0.15rem;
 }
 
 .hero__title-row {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  gap: 0.35em;
+  white-space: nowrap;
 }
 
 .hero__title-lead {
   display: inline;
-  margin-right: 0.3em;
+  white-space: nowrap;
 }
 
 .hero__title-tail {
@@ -476,16 +478,14 @@ img {
   color: #a1a1aa;
 }
 
-/* Hero Animated Line - Stable Reserved Container Width to prevent Layout Shift */
+/* Hero Animated Line - Typewriter aligned directly right of 'I build' */
 .hero__typewriter-wrap {
   position: relative;
   display: inline-flex;
   align-items: center;
   color: var(--gold-bright);
-  padding-right: 0.1em;
   vertical-align: baseline;
-  min-width: 13.5ch;
-  text-align: left;
+  white-space: nowrap;
 }
 
 .hero__typewriter-text {
