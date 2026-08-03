@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import { FaGithub, FaEye, FaHistory } from "react-icons/fa";
+import { FaGithub, FaHistory } from "react-icons/fa";
 import { ExternalLink } from "lucide-react";
 import { SectionHeading } from "./SectionHeading";
 
 export function GitHubActivitySection({ devUsername = "DevDahon" }) {
   const [userInfo, setUserInfo] = useState(null);
-  const [visitorCount, setVisitorCount] = useState(null);
 
   useEffect(() => {
-    // 1. Fetch GitHub user profile info
     async function fetchGitHubData() {
       try {
         const res = await fetch(`https://api.github.com/users/${devUsername}`);
@@ -21,48 +19,16 @@ export function GitHubActivitySection({ devUsername = "DevDahon" }) {
       }
     }
 
-    // 2. Accurate Real-Time Visitor Counter API via CounterAPI.dev
-    async function trackVisitor() {
-      const namespace = "devdahon-portfolio-v1";
-      const key = "visits";
-      const hasVisited = sessionStorage.getItem("portfolio_session_tracked");
-
-      // Use /up endpoint to increment for new visitors, or / endpoint to read live count for existing session
-      const endpoint = hasVisited
-        ? `https://api.counterapi.dev/v1/${namespace}/${key}/`
-        : `https://api.counterapi.dev/v1/${namespace}/${key}/up`;
-
-      try {
-        const res = await fetch(endpoint);
-        if (res.ok) {
-          const data = await res.json();
-          if (data && typeof data.count === "number") {
-            setVisitorCount(data.count);
-            sessionStorage.setItem("portfolio_session_tracked", "true");
-            localStorage.setItem("portfolio_last_known_count", String(data.count));
-            return;
-          }
-        }
-      } catch (err) {
-        console.warn("CounterAPI fetch issue, using local counter fallback:", err);
-      }
-
-      // Fallback for offline or network interruption
-      const savedCount = parseInt(localStorage.getItem("portfolio_last_known_count") || "1", 10);
-      setVisitorCount(savedCount);
-    }
-
     fetchGitHubData();
-    trackVisitor();
   }, [devUsername]);
 
   return (
     <section className="github-activity section" id="activity">
       <div className="container">
         <SectionHeading
-          eyebrow="Open Source & Live Metrics"
-          title="GitHub & Portfolio Analytics"
-          subtitle="Live GitHub contribution calendar graph and real-time visitor engagement."
+          eyebrow="Open Source"
+          title="GitHub Activity"
+          subtitle="Recent work and open-source contributions from my GitHub profile."
           align="left"
         />
 
@@ -103,29 +69,6 @@ export function GitHubActivitySection({ devUsername = "DevDahon" }) {
             </div>
           </div>
 
-          {/* Visitor Metric Card */}
-          <aside className="github-activity__side surface" data-reveal style={{ "--delay": "140ms" }}>
-            <div className="visitor-card">
-              <div className="visitor-card__header">
-                <div className="visitor-card__badge">
-                  <span className="visitor-card__pulse" aria-hidden="true" />
-                  Live Visitor Counter
-                </div>
-              </div>
-
-              <div className="visitor-card__content">
-                <div className="visitor-card__icon-wrap">
-                  <FaEye size={28} />
-                </div>
-                <div className="visitor-card__metric">
-                  <strong className="visitor-card__number">
-                    {visitorCount !== null ? visitorCount.toLocaleString() : "..."}
-                  </strong>
-                  <span>Total Portfolio Views</span>
-                </div>
-              </div>
-            </div>
-          </aside>
         </div>
       </div>
     </section>

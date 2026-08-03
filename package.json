@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:pages": "npm run build && node scripts/sync-pages.mjs",
-    "deploy:root": "npm run build && node scripts/deploy-root-pages.mjs",
+    "deploy:root": "npm run build:pages && npm run build:pages && node scripts/deploy-root-pages.mjs",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"

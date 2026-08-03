@@ -1948,7 +1948,7 @@ img {
   margin-top: 1.5rem;
 }
 
-/* GitHub Activity & Visitor Counter Section */
+/* GitHub Activity Section */
 .github-activity {
   padding: clamp(2rem, 3.5vw, 3.2rem) 0;
   background: var(--black-900);
@@ -1975,8 +1975,7 @@ img {
 
 .github-activity__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
-  gap: 1.8rem;
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .github-activity__main {
@@ -2074,108 +2073,6 @@ img {
   min-width: 600px;
   height: auto;
   display: block;
-}
-
-/* Visitor Card Side Panel */
-.github-activity__side {
-  display: flex;
-  flex-direction: column;
-}
-
-.visitor-card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.2rem;
-  padding: clamp(1.2rem, 2.5vw, 1.8rem);
-  border: 1px solid var(--gold-border);
-  border-radius: 1.5rem;
-  background: var(--black-950);
-  box-shadow: var(--shadow-gold);
-}
-
-.visitor-card__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.visitor-card__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.8rem;
-  border: 1px solid var(--gold-border);
-  border-radius: var(--radius-pill);
-  background: rgba(212, 175, 55, 0.1);
-  color: var(--gold-bright);
-  font-family: "DM Mono", monospace;
-  font-size: 0.7rem;
-}
-
-.visitor-card__pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #22c55e;
-  box-shadow: 0 0 8px #22c55e;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
-}
-
-.visitor-card__content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1.2rem;
-  padding: 2rem 1rem;
-}
-
-.visitor-card__icon-wrap {
-  width: 64px;
-  height: 64px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--gold-border);
-  border-radius: 50%;
-  background: rgba(212, 175, 55, 0.1);
-  color: var(--gold-bright);
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-}
-
-.visitor-card__metric {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.visitor-card__number {
-  color: var(--white-pure);
-  font-family: "DM Mono", monospace;
-  font-size: clamp(2.5rem, 5vw, 3.4rem);
-  font-weight: 800;
-  line-height: 1;
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.visitor-card__metric span {
-  color: #a1a1aa;
-  font-size: 0.85rem;
-}
-
-.visitor-card__footer-note {
-  color: #71717a;
-  font-size: 0.74rem;
-  text-align: center;
-  line-height: 1.4;
 }
 
 /* Deep Obsidian Footer */
@@ -2510,19 +2407,6 @@ img {
     min-width: 440px;
   }
 
-  .visitor-card__content {
-    padding: 0.8rem 0;
-    gap: 0.6rem;
-  }
-
-  .visitor-card__icon-wrap {
-    width: 50px;
-    height: 50px;
-  }
-
-  .visitor-card__number {
-    font-size: clamp(2.2rem, 8vw, 3rem);
-  }
 }
 
 @media (max-width: 420px) {
