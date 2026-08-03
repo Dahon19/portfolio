@@ -19,7 +19,7 @@ try {
 }
 
 export default defineConfig({
-  base: "/portfolio/",
+  base: "/",
   plugins: [react()],
   build: {
     rollupOptions: {

@@ -22,11 +22,11 @@ async function rewriteProductionReferences(assetNames) {
   const replacements = [
     {
       pattern: /(?:\/portfolio)?\/assets\/app-[^"]+\.css(?:\?[^"]*)?/g,
-      value: `/portfolio/assets/${appStylesheet}`,
+      value: `/assets/${appStylesheet}`,
     },
     {
       pattern: /(?:\/portfolio)?\/assets\/app-[^"]+\.js(?:\?[^"]*)?/g,
-      value: `/portfolio/assets/${appEntry}`,
+      value: `/assets/${appEntry}`,
     },
   ];
 

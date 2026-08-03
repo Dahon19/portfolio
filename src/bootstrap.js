@@ -1,7 +1,7 @@
-const productionStylesheet = "/portfolio/assets/app-DqqQqKDJ.css";
-const productionEntry = "/portfolio/assets/app-CpWo_zWZ.js";
+const productionStylesheet = "/assets/app-DqqQqKDJ.css";
+const productionEntry = "/assets/app-CL-5mTCp.js";
 const portraitFallbackSources = [
-  "/portfolio/assets/rod-allen-avatar.jpg"
+  "/assets/rod-allen-avatar.jpg"
 ];
 
 if (!document.querySelector(`link[href^="${productionStylesheet.split("?")[0]}"]`)) {

@@ -23,15 +23,15 @@ async function rewriteProductionReferences(assetNames) {
   const replacements = [
     {
       pattern: /(?:\/portfolio)?\/assets\/app-[^"\s+;]+\.css(?:(?:"\s*\+\s*Date\.now\(\))|\?[^"]*)?/g,
-      value: `/portfolio/assets/${appStylesheet}`,
+      value: `/assets/${appStylesheet}`,
     },
     {
       pattern: /(?:\/portfolio)?\/assets\/app-[^"\s+;]+\.js(?:(?:"\s*\+\s*Date\.now\(\))|\?[^"]*)?/g,
-      value: `/portfolio/assets/${appEntry}`,
+      value: `/assets/${appEntry}`,
     },
     {
       pattern: /(?:\/portfolio)?\/assets\/rod-allen-(?:profile-web|avatar)-[^"\s+;]+\.jpg(?:\?[^"]*)?/g,
-      value: `/portfolio/assets/${portraitAsset}`,
+      value: `/assets/${portraitAsset}`,
     },
   ];
 
