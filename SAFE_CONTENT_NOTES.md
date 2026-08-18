@@ -9,7 +9,7 @@ This portfolio was prepared as a public-safe build based on local `SysProjects` 
 - Sanitized certificate summaries grouped by relevance
 - Sanitized certificate preview thumbnails generated from all relevant certificate files in the Drive certificate folders
 - A contact section layout without private personal contact details
-- Public contact details explicitly approved for the portfolio: `rodallenagregado19@gmail.com` and `09770317480`
+- Public contact details explicitly approved for the portfolio: `devdahon@northeasterncollege.edu.ph` and `09770317480`
 
 ## What was excluded for privacy
 

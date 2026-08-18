@@ -1,15 +1,21 @@
-const certificatePreviewModules = import.meta.glob("../assets/certificate-previews/*.{webp,svg}", {
+const certificatePreviewModules = import.meta.glob("../assets/certificate-previews/**/*.{webp,png,jpg,jpeg,svg}", {
   eager: true,
   import: "default"
 });
 
-const projectPreviewModules = import.meta.glob("../assets/project-previews/*.{png,svg}", {
+const projectPreviewModules = import.meta.glob("../assets/project-previews/*.{jpg,jpeg,png,svg,webp}", {
   eager: true,
   import: "default"
 });
 
-const certificatePreview = (fileName) =>
-  certificatePreviewModules[`../assets/certificate-previews/${fileName}`];
+const certificatePreview = (fileName) => {
+  for (const [key, module] of Object.entries(certificatePreviewModules)) {
+    if (key.endsWith("/" + fileName)) {
+      return module;
+    }
+  }
+  return null;
+};
 
 const projectPreview = (fileName) =>
   projectPreviewModules[`../assets/project-previews/${fileName}`];
@@ -19,27 +25,26 @@ export const portfolioData = {
     name: "Rod Allen B. Agregado",
     devName: "",
     displayName: "Rod Allen B. Agregado",
-    title: "IT Graduate & Developer",
-    shortTitle: "Developer · Tech Support · IT Instruction",
-    tagline: "Clean web apps, tech support, and simple user guidance.",
+    title: "IT Instructor & Web Developer",
+    shortTitle: "IT Instructor · Web Developer · Systems Technician",
     intro:
-      "BSIT graduate building practical web tools, fixing tech issues, and helping users with clear guidance.",
+      "IT Instructor at Northeastern College and Web Developer who loves making tech simple, reliable, and hands-on.",
     about:
-      "I am an IT graduate passionate about web development, technical support, and teaching. I build practical web tools and help users solve hardware and software problems with simple, clear instructions.",
+      "I teach IT at Northeastern College and build web applications. Whether I'm guiding students through hardware diagnostics and network setups or coding practical web tools, I enjoy making technology approachable, reliable, and easy to use.",
     focusAreas: [
-      "Web Applications",
-      "Tech Support",
+      "IT Instruction",
+      "Web Development",
+      "Computer Hardware",
+      "Local Networks",
       "Frontend UI",
-      "Hardware Diagnostics",
-      "System Workflows",
-      "User Assistance",
-      "Technical Documentation"
+      "Database Systems",
+      "Technical Mentoring"
     ]
   },
   stats: [
-    { label: "Technical Projects", value: "5" },
-    { label: "Internship Experience", value: "1" },
-    { label: "Certificates", value: "50+" }
+    { label: "TESDA Certified", value: "NCII" },
+    { label: "Verified Credentials", value: "50 Records" },
+    { label: "Technical Projects", value: "5" }
   ],
   skills: [
     {
@@ -84,7 +89,7 @@ export const portfolioData = {
         tools: ["Laravel", "CoreUI", "Bootstrap", "MySQL", "Vite"]
       },
       preview: {
-        src: projectPreview("hrsync-human-resource-management-system.png"),
+        src: projectPreview("hrsync-human-resource-management-system.jpg") ?? projectPreview("hrsync-human-resource-management-system.png"),
         alt: "Preview of the HRSync human resource management system dashboard.",
         source: "Project asset from Google Drive"
       },
@@ -99,55 +104,55 @@ export const portfolioData = {
       reference: "HR workflow overview"
     },
     {
-      slug: "edu-web",
-      title: "Genesis English Language Academy CMS",
-      shortTitle: "GELA",
-      category: "Education Website and CMS",
+      slug: "content-management-system",
+      title: "Municipal Health Information System (MHIS)",
+      shortTitle: "MHIS",
+      category: "Healthcare Information System",
       description:
-        "A school CMS for public information, announcements, learning resources, gallery content, and role-based administration.",
+        "A clinic operations system for patient registration, consultation records, and daily medical logs.",
       summary:
-        "Education CMS for public content, learning resources, announcements, and admin updates.",
+        "Healthcare platform for patient records, consultations, medicine tracking, and logs.",
       techStack: {
-        languages: ["PHP", "CSS", "SQL", "JavaScript"],
-        tools: ["Laravel", "MySQL", "Vite"]
+        languages: ["PHP", "JavaScript", "SQL"],
+        tools: ["Laravel", "Bootstrap", "MySQL", "Vite"]
       },
       preview: {
-        src: projectPreview("content-management-system.png"),
-        alt: "Preview of the Genesis English Language Academy content management system.",
+        src: projectPreview("content-management-system.jpg") ?? projectPreview("content-management-system.png"),
+        alt: "Preview of the Municipal Health Information System dashboard.",
         source: "Project asset from Google Drive"
       },
       features: [
-        "Public website for programs, books, events, and contact content",
-        "Role-based CMS for content updates",
-        "Fixed homepage editor with reusable content sections",
-        "Gallery, news, events, and inquiry management"
+        "Patient registration and demographic history",
+        "Consultation notes and medicine dispensing logs",
+        "Role-based access for clinic staff",
+        "Daily activity and service summary reports"
       ],
       contribution:
-        "Built the CMS structure, public page rendering, and admin content workflows.",
-      reference: "CMS overview"
+        "Built responsive interface layouts and integrated health records workflows for clinic staff.",
+      reference: "Clinic workflow overview"
     },
     {
       slug: "interna",
-      title: "Interna",
+      title: "Interna: OJT Management Companion",
       shortTitle: "Interna",
-      category: "Mobile Productivity App",
+      category: "Academic Support Tool",
       description:
-        "A mobile productivity app for OJT time management that helps users log activity, monitor hours, and organize internship-related records.",
+        "A mobile-first companion for trainees to log daily tasks, monitor hours, and organize internship documents.",
       summary:
-        "Mobile OJT companion for time logs, activity records, and internship tracking.",
+        "Mobile companion app for daily task logs, attendance hours, and internship records.",
       techStack: {
-        languages: ["JavaScript", "TypeScript"],
-        tools: ["Expo", "React Native", "Expo Router", "Supabase"]
+        languages: ["JavaScript", "HTML", "CSS"],
+        tools: ["Expo", "React Native", "Firebase", "Supabase"]
       },
       preview: {
-        src: projectPreview("interna-ojt-management-companion.png"),
-        alt: "Preview of the Interna OJT management companion mobile app.",
+        src: projectPreview("interna-ojt-management-companion.jpg") ?? projectPreview("interna-ojt-management-companion.png"),
+        alt: "Preview of Interna mobile app screens.",
         source: "Project asset from Google Drive"
       },
       features: [
-        "Time logging and history tracking",
-        "Report-focused workflow for OJT activity records",
-        "Profile, settings, and tab-based navigation",
+        "Daily task logging and attendance hour tracking",
+        "Document and requirement checklist management",
+        "Supervisor verification and evaluation export",
         "Mobile-first architecture with cloud-backed services"
       ],
       contribution:
@@ -195,7 +200,7 @@ export const portfolioData = {
         tools: ["Arduino", "Arduino IDE", "Sensors"]
       },
       preview: {
-        src: projectPreview("u-turn-accident-prevention-system.png"),
+        src: projectPreview("u-turn-accident-prevention-system.jpg") ?? projectPreview("u-turn-accident-prevention-system.png"),
         alt: "Preview of the U-Turn accident prevention system project.",
         source: "Project asset from Google Drive"
       },
@@ -212,379 +217,361 @@ export const portfolioData = {
   ],
   certificates: [
     {
-      title: "Computer Systems Servicing",
-      certificateLevel: "NCII",
-      date: "July 3, 2024",
-      type: "Certifications / Trainings",
-      location: "International School of Skills and Excellence"
+      title: "5G and AI: How 5G Accelerates AI-Powered Technology and Edge Computing",
+      date: "November 22, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "Gordon College · College of Computer Studies & Syntax Squad",
+      preview: certificatePreview("5g-and-ai-how-5g-accelerates-ai-powered-technology-and-edge-computing.jpg")
     },
     {
-      title: "Oplan Paskong Sigurado",
-      date: "May 29, 2026",
+      title: "AI x Design: Boost Your Creativity, Speed & Style",
+      date: "November 28, 2025",
       type: "Webinars / Seminars Attended",
-      location: "Google Drive",
-      preview: certificatePreview("oplan-paskong-sigurado.webp")
+      location: "DICT Region V · Department of Information and Communications Technology",
+      featured: true
+    },
+    {
+      title: "Introduction to RAN, 5G, and Open RAN",
+      date: "November 23, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "USAID BEACON Project · International Development / Online",
+      featured: true
+    },
+    {
+      title: "Batch 2 of Hour of Code: Learn AI & Coding the Fun Way!",
+      date: "November 22, 2025",
+      type: "Webinars / Seminars Attended",
+      location: "DICT MIMAROPA · Department of Information and Communications Technology",
+      featured: true
+    },
+    {
+      title: "Building a Personal Brand in IT",
+      date: "November 20, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "DICT / Online",
+      preview: certificatePreview("building-a-personal-brand-in-it.jpg")
+    },
+    {
+      title: "Capstone Project Software Quality and Usability",
+      date: "December 7, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "Northeastern College · College of Information and Technology",
+      preview: certificatePreview("capstone-project-software-quality-and-usability.jpg")
+    },
+    {
+      title: "Cloud and DevOps Basics",
+      date: "January 8, 2026",
+      type: "Webinars / Seminars Attended",
+      location: "DICT / Online",
+      preview: certificatePreview("cloud-and-devops-basics.jpg")
+    },
+    {
+      title: "Cutting-Edge Strategies and Innovation in Software Technologies",
+      date: "November 8, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "Online",
+      preview: certificatePreview("cutting-edge-strategies-and-innovation-in-software-technologies.jpg")
     },
     {
       title: "Data Analytics and Visualization Essentials",
       date: "January 19, 2026",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("data-analytics-visualization-essentials.webp")
-    },
-    {
-      title: "Cloud and DevOps Basics",
-      date: "January 8, 2026",
-      type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("cloud-devops-basics.webp")
-    },
-    {
-      title: "AI-Alam: Enhancing Academic Excellence Through Proper AI Tool Usage",
-      date: "November 21, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "Microsoft Teams",
-      preview: certificatePreview("ai-alam-proper-ai-tool-usage.webp")
-    },
-    {
-      title: "Step-by-Step Roadmap to Land Data Analyst Role",
-      date: "December 27, 2025",
-      type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("data-analyst-roadmap.webp")
-    },
-    {
-      title: "Smart Moves: How AI Can Power Your Studies, Work, and Future",
-      date: "December 17, 2025",
-      type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("smart-moves-ai-studies-work-future.webp")
-    },
-    {
-      title: "Design Thinking and Mobile App Wireframing",
-      date: "November 27, 2025",
-      type: "Webinars / Seminars Attended",
-      location: "DICT Region V / Zoom",
-      preview: certificatePreview("design-thinking-mobile-wireframing.webp")
-    },
-    {
-      title: "The Human Side of AI: Ethics, Integrity, and Impact",
-      date: "November 29, 2025",
-      type: "Webinars / Seminars Attended",
-      location: "DICT Region V / Zoom and Facebook Live",
-      preview: certificatePreview("human-side-ai-ethics-integrity-impact.webp")
-    },
-    {
-      title: "AI x Design: Boost Your Creativity, Speed & Style",
-      date: "November 28, 2025",
-      type: "Webinars / Seminars Attended",
-      location: "DICT Region V / Zoom and Facebook Live",
-      preview: certificatePreview("ai-design-creativity-speed-style.webp")
-    },
-    {
-      title: "Batch 2 of Hour of Code: Learn AI & Coding the Fun Way!",
-      date: "November 22, 2025",
-      type: "Webinars / Seminars Attended",
-      location: "DICT MIMAROPA",
-      preview: certificatePreview("batch-2-hour-of-code.svg")
-    },
-    {
-      title: "Hour of Code Session under the AI SmartCT",
-      date: "November 27, 2025",
-      type: "Webinars / Seminars Attended",
-      location: "AI SmartCT",
-      preview: certificatePreview("hour-of-code-ai-smartct.webp")
-    },
-    {
-      title: "FreshMedia Fusion: Multimedia Innovation for Future Creative Software Developers",
-      date: "November 17, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("freshmedia-fusion.webp")
-    },
-    {
-      title: "The New Era of Marketing: Decoding AI Marketing Automation",
-      date: "November 5, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("ai-marketing-automation.webp")
-    },
-    {
-      title: "Decipher the Code: Challenges and Opportunities of AI Adoption Through the Lens of Multigenerational Workforce",
-      date: "November 30, 2025",
-      type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("decipher-ai-workforce.webp")
-    },
-    {
-      title: "i-ACT4SmartCity: Industry-Academe Congress on Technologies for Smart City",
-      date: "October 16, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "Cauayan City, Isabela",
-      preview: certificatePreview("iact4smartcity.webp")
-    },
-    {
-      title: "How to 3D Model: Fundamentals of 3D Design and Modeling",
-      date: "November 29, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("fundamentals-3d-design-modeling.webp")
-    },
-    {
-      title: "Simplifying Artificial Intelligence for the Next Generation",
-      date: "November 18, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("simplifying-ai-next-generation.webp")
-    },
-    {
-      title: "Linux Fundamentals",
-      date: "November 30, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "USAID / Online",
-      preview: certificatePreview("linux-fundamentals.webp")
-    },
-    {
-      title: "Introduction to RAN, 5G, and Open RAN",
-      date: "November 23, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "USAID / Online",
-      preview: certificatePreview("ran-5g-open-ran.webp")
-    },
-    {
-      title: "Embracing Cyber Security for Tomorrow: Advanced Networking and Defense",
-      date: "November 22, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("advanced-networking-defense.webp")
-    },
-    {
-      title: "Building a Personal Brand in IT",
-      date: "November 20, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("personal-brand-it.webp")
+      preview: certificatePreview("data-analytics-and-visualization-essentials.jpg")
     },
     {
       title: "Data Privacy and Protection in the Digital Age",
       date: "November 7, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("data-privacy-protection-digital-age.webp")
+      preview: certificatePreview("data-privacy-and-protection-in-the-digital-age.jpg")
     },
     {
-      title: "Cutting-edge Strategies and Innovation in Software Technologies",
-      date: "November 8, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("software-technologies-innovation.webp")
-    },
-    {
-      title: "Casting a Safe Line: Women Navigating Phishing Waters",
-      date: "October 18, 2024",
-      type: "Webinars / Seminars Attended",
-      location: "Google Meet",
-      preview: certificatePreview("phishing-waters.webp")
-    },
-    {
-      title: "The People-Pleaser Career: A Practical Roadmap for UI/UX Design Field",
+      title: "Decipher the Code: Challenges and Opportunities of AI Adoption Through the Lens of Multigenerational Workforce",
       date: "November 30, 2025",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("uiux-design-roadmap.webp")
+      preview: certificatePreview("decipher-the-code-challenges-and-opportunities-of-ai-adoption-through-the-lens-of-multigenerational-workforce.jpg")
     },
     {
-      title: "5G and AI: How 5G Accelerates AI-Powered Technology and Edge Computing",
-      date: "November 30, 2025",
+      title: "Design Thinking and Mobile App Wireframing",
+      date: "November 27, 2025",
       type: "Webinars / Seminars Attended",
-      location: "Online",
-      preview: certificatePreview("5g-ai-edge-computing.webp")
+      location: "DICT Region V / Zoom",
+      preview: certificatePreview("design-thinking-and-mobile-app-wireframing.jpg")
     },
     {
-      title: "Network Security",
-      date: "December 7, 2024",
+      title: "Embracing Cyber Security for Tomorrow: Advanced Networking & Defense",
+      date: "November 22, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("network-security.webp")
+      preview: certificatePreview("embracing-cyber-security-for-tomorrow-advanced-netwroking-defense.jpg")
+    },
+    {
+      title: "FreshMedia Fusion: Multimedia Innovation for Future Creative Software Developers",
+      date: "November 17, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "Online",
+      preview: certificatePreview("freshmedia-fusion-a-webinar-on-multimedia-innovation-for-future-creative-software-developers.jpg")
+    },
+    {
+      title: "Hour of Code Session under the AI SmartCT",
+      date: "November 27, 2025",
+      type: "Webinars / Seminars Attended",
+      location: "AI SmartCT",
+      preview: certificatePreview("hour-of-code-session-under-the-ai-smartct.jpg")
+    },
+    {
+      title: "How to 3D Model: Fundamentals of 3D Design and Modeling",
+      date: "November 29, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "Online",
+      preview: certificatePreview("how-to-3d-model-fundamentals-of-3d-design-and-modeling.jpg")
+    },
+    {
+      title: "Introduction to RAN, 5G, and Open RAN",
+      date: "November 23, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "USAID / Online",
+      preview: certificatePreview("introduction-to-ran-5g-and-open-ran.jpg")
     },
     {
       title: "Leadership Training",
       date: "December 7, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("leadership-training.webp")
+      preview: certificatePreview("leadership-training.jpg")
     },
     {
-      title: "Capstone Project Software Quality and Usability",
+      title: "Linux Fundamentals",
+      date: "November 30, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "USAID / Online",
+      preview: certificatePreview("linux-fundamentals.jpg")
+    },
+    {
+      title: "Network Security",
       date: "December 7, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("capstone-software-quality-usability.webp")
+      preview: certificatePreview("network-security.jpg")
     },
     {
-      title: "Artificial Intelligence Applications in IoT and Its Impact",
-      date: "December 7, 2024",
+      title: "Oplan Paskong Sigurado",
+      date: "May 29, 2026",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("ai-applications-iot-impact.webp")
+      preview: certificatePreview("oplan-paskong-sigurado.jpg")
     },
+    {
+      title: "Simplifying Artificial Intelligence for the Next Generation",
+      date: "November 18, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "Online",
+      preview: certificatePreview("simplifying-artificial-intelligence-for-the-next-generation.jpg")
+    },
+    {
+      title: "Smart Moves: How AI Can Power Your Studies, Work, and Future",
+      date: "December 17, 2025",
+      type: "Webinars / Seminars Attended",
+      location: "Online",
+      preview: certificatePreview("smart-moves-how-ai-can-power-your-studies-work-and-future-png.jpg")
+    },
+    {
+      title: "Step-by-Step Roadmap to Land Data Analyst Role",
+      date: "December 27, 2025",
+      type: "Webinars / Seminars Attended",
+      location: "Online",
+      preview: certificatePreview("step-by-step-roadmap-to-land-data-analyst-role.jpg")
+    },
+    {
+      title: "The Human Side of AI: Ethics, Integrity, and Impact",
+      date: "November 29, 2025",
+      type: "Webinars / Seminars Attended",
+      location: "DICT Region V / Zoom and Facebook Live",
+      preview: certificatePreview("the-human-side-of-ai-ethics-integrity-and-impact.jpg")
+    },
+    {
+      title: "The New Era of Marketing: Decoding AI Marketing Automation",
+      date: "November 5, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "Online",
+      preview: certificatePreview("the-new-era-of-marketing-decoding-ai-marketing-automation.jpg")
+    },
+    {
+      title: "The People-Pleaser Career: A Practical Roadmap for UI/UX Design Field",
+      date: "November 30, 2025",
+      type: "Webinars / Seminars Attended",
+      location: "Online",
+      preview: certificatePreview("the-people-pleaser-career-a-practical-roadmap-for-ui-ux-design-field.jpg")
+    },
+    {
+      title: "Casting a Safe Line: Women Navigating Phishing Waters",
+      date: "October 18, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "Google Meet",
+      preview: certificatePreview("webinar-on-casting-a-safe-line-women-navigating-phishing-waters.jpg")
+    },
+    {
+      title: "i-ACT4SmartCity: Industry-Academe Congress on Technologies for Smart City",
+      date: "October 16, 2024",
+      type: "Webinars / Seminars Attended",
+      location: "Cauayan City, Isabela"
+    },
+    // --- Online Courses ---
     {
       title: "Master ChatGPT",
       date: "December 20, 2025",
       type: "Online Courses Taken",
-      location: "UniAthena",
-      preview: certificatePreview("uniathena-master-chatgpt.webp")
+      location: "UniAthena"
     },
     {
       title: "Hardware and Upgrade Support",
       date: "December 17, 2025",
       type: "Online Courses Taken",
-      location: "Cisco Networking Academy",
-      preview: certificatePreview("hardware-upgrade-support.webp")
+      location: "Cisco Networking Academy"
     },
     {
-      title: "Artificial Intelligence for Social Impact",
+      title: "Artificial Intelligence (AI) for Social Impact",
       date: "December 12, 2025",
       type: "Online Courses Taken",
-      location: "ADBI E-Learning",
-      preview: certificatePreview("ai-social-impact.webp")
+      location: "ADBI E-Learning"
     },
     {
       title: "Computer Hardware Basics",
       date: "December 9, 2025",
       type: "Online Courses Taken",
-      location: "Cisco Networking Academy",
-      preview: certificatePreview("computer-hardware-basics.webp")
+      location: "Cisco Networking Academy"
     },
     {
       title: "Introduction to Modern AI",
       date: "December 8, 2025",
       type: "Online Courses Taken",
-      location: "Cisco Networking Academy",
-      preview: certificatePreview("introduction-modern-ai.webp")
+      location: "Cisco Networking Academy"
     },
     {
       title: "Basics of SQL Statements and Indexes",
       date: "December 7, 2025",
       type: "Online Courses Taken",
-      location: "Online",
-      preview: certificatePreview("sql-statements-indexes.webp")
+      location: "Great Learning / Online"
     },
     {
       title: "Basics of Artificial Intelligence",
       date: "December 7, 2025",
       type: "Online Courses Taken",
-      location: "Online",
-      preview: certificatePreview("basics-artificial-intelligence.webp")
+      location: "Great Learning / Online"
     },
     {
       title: "Basics of Artificial Intelligence: Learning Models",
       date: "December 4, 2025",
       type: "Online Courses Taken",
-      location: "Online",
-      preview: certificatePreview("ai-learning-models.webp")
-    },
-    {
-      title: "AI for Oceans",
-      date: "November 30, 2025",
-      type: "Online Courses Taken",
-      location: "Code.org",
-      preview: certificatePreview("ai-for-oceans.webp")
+      location: "Great Learning / Online"
     },
     {
       title: "Basics of Machine Learning Algorithms",
       date: "December 4, 2025",
       type: "Online Courses Taken",
-      location: "Online",
-      preview: certificatePreview("machine-learning-algorithms.webp")
+      location: "Great Learning / Online"
     },
     {
       title: "AIClass ASEAN",
       date: "December 4, 2025",
       type: "Online Courses Taken",
-      location: "AIClass ASEAN",
-      preview: certificatePreview("ai-class-asean.webp")
-    },
-    {
-      title: "Getting Started with Cisco Packet Tracer",
-      date: "December 1, 2025",
-      type: "Online Courses Taken",
-      location: "Cisco Networking Academy",
-      preview: certificatePreview("cisco-packet-tracer.webp")
+      location: "AIClass ASEAN"
     },
     {
       title: "Basics of Python",
       date: "December 2, 2025",
       type: "Online Courses Taken",
-      location: "Online",
-      preview: certificatePreview("basics-python.webp")
+      location: "Great Learning / Online"
     },
     {
-      title: "Web Design",
-      date: "November 30, 2025",
+      title: "Getting Started with Cisco Packet Tracer",
+      date: "December 1, 2025",
       type: "Online Courses Taken",
-      location: "FreeCodeCamp",
-      preview: certificatePreview("web-design.webp")
+      location: "Cisco Networking Academy"
     },
     {
-      title: "Course C",
+      title: "Responsive Web Design",
       date: "November 30, 2025",
       type: "Online Courses Taken",
-      location: "Code.org",
-      preview: certificatePreview("course-c.webp")
+      location: "FreeCodeCamp"
     },
     {
-      title: "Minecraft Hour of Code",
+      title: "Course C: Computer Science Fundamentals",
       date: "November 30, 2025",
       type: "Online Courses Taken",
-      location: "Code.org",
-      preview: certificatePreview("minecraft-hour-of-code.webp")
+      location: "Code.org"
+    },
+    {
+      title: "Minecraft Hour of Code: AI for Good",
+      date: "November 30, 2025",
+      type: "Online Courses Taken",
+      location: "Code.org"
+    },
+    {
+      title: "AI for Oceans",
+      date: "November 30, 2025",
+      type: "Online Courses Taken",
+      location: "Code.org"
+    },
+    // --- Digital Badges ---
+    {
+      title: "Computer Hardware Basics Badge",
+      date: "December 9, 2025",
+      type: "Badges",
+      location: "Cisco Networking Academy · Credly"
     },
     {
       title: "Hardware and Upgrade Support Badge",
       date: "December 17, 2025",
       type: "Badges",
-      location: "Cisco Networking Academy",
-      preview: certificatePreview("hardware-upgrade-support-badge.webp")
-    },
-    {
-      title: "Computer Hardware Basics Badge",
-      date: "December 9, 2025",
-      type: "Badges",
-      location: "Cisco Networking Academy",
-      preview: certificatePreview("computer-hardware-basics-badge.webp")
+      location: "Cisco Networking Academy · Credly"
     },
     {
       title: "Introduction to Modern AI Badge",
       date: "December 8, 2025",
       type: "Badges",
-      location: "Cisco Networking Academy",
-      preview: certificatePreview("modern-ai-badge.webp")
+      location: "Cisco Networking Academy · Credly"
+    },
+    // --- Certifications & Licensures ---
+    {
+      title: "Computer Systems Servicing",
+      certificateLevel: "NCII",
+      date: "July 3, 2024",
+      type: "Certifications / Trainings",
+      location: "TESDA · International School of Skills and Excellence"
     }
   ],
   resume: {
     education: [
       {
         title: "Bachelor of Science in Information Technology",
-        subtitle: "BSIT Graduate",
+        subtitle: "Northeastern College · 2022 to 2026",
         detail:
-          "Northeastern College, 2022 to 2026. Academic achievements include Cum Laude, Outstanding On-the-Job Trainee, and Multimedia Artist of the Year."
+          "BSIT Graduate · Cum Laude, Outstanding On-the-Job Trainee, Multimedia Artist of the Year."
       }
     ],
     experience: [
       {
-        title: "Internship / OJT Experience",
-        subtitle: "Northeastern College Information Systems / Electronic Data Processing, 2025 to 2026",
+        title: "IT Instructor",
+        subtitle: "Northeastern College · Present",
         detail:
-          "Assisted with maintenance, troubleshooting, IT operations, and web development tasks."
+          "Teaching IT fundamentals, programming concepts, and practical computer skills to college students."
+      },
+      {
+        title: "Information Systems / EDP Intern",
+        subtitle: "Northeastern College EDP · 2025 to 2026",
+        detail:
+          "Assisted with maintenance, troubleshooting, IT operations, and internal web development."
       }
     ],
     trainings: [
       {
-        title: "Professional Learning",
-        subtitle: "Courses and events in AI, cybersecurity, hardware, networking, and web development",
+        title: "Continuous Technical Learning",
+        subtitle: "50+ Courses, Seminars & Certifications",
         detail:
-          "Built supplementary technical knowledge through Cisco Networking Academy, Free Code Camp, institutional seminars, and technology-focused webinars."
+          "TESDA NCII Computer Systems Servicing, AI tool usage, cybersecurity, and web development."
       }
     ],
     internship: {
@@ -603,21 +590,18 @@ export const portfolioData = {
       ]
     },
     technical: [
-      "Frontend and backend web development",
-      "PC hardware and software fundamentals",
-      "Database-backed CRUD systems",
-      "Hardware installation and maintenance",
-      "Network fundamentals",
-      "Helpdesk troubleshooting",
-      "Documentation and structured reporting"
+      "Hardware Servicing (NCII)",
+      "Network Setup & Cabling",
+      "IT Helpdesk & Diagnostics",
+      "Full-Stack Web Dev",
+      "Technical Documentation"
     ],
     soft: [
-      "Communication",
-      "Adaptability",
-      "Willingness to learn",
-      "Process-oriented thinking",
-      "Collaboration",
-      "User guidance"
+      "Classroom Instruction",
+      "User Support & Guidance",
+      "Technical Mentoring",
+      "Problem Solving",
+      "Clear Communication"
     ]
   },
   socials: [
@@ -647,7 +631,7 @@ export const portfolioData = {
     }
   ],
   contact: {
-    email: "rodallenagregado19@gmail.com",
+    email: "devdahon@northeasterncollege.edu.ph",
     phone: "09770317480",
     note:
       "For instructor, helpdesk, or junior developer opportunities, contact me through the details provided here."

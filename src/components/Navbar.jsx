@@ -9,11 +9,10 @@ export function Navbar({ activeSection, onSectionNavigate }) {
     ["About", "#about"],
     ["Projects", "#projects"],
     ["Skills", "#skills"],
-    ["Resume", "#resume"],
-    ["Certs", "#certificates"],
-    ["Activity", "#activity"],
+    ["Credentials", "#resume"],
     ["Contact", "#contact"]
   ];
+
   const handleNavClick = (event, href) => {
     if (
       !href.startsWith("#") ||
@@ -69,7 +68,13 @@ export function Navbar({ activeSection, onSectionNavigate }) {
               key={href}
               href={href}
               onClick={(event) => handleNavClick(event, href)}
-              className={activeSection === href.slice(1) ? "is-active" : ""}
+              className={
+                activeSection === href.slice(1) ||
+                (href === "#resume" && (activeSection === "resume" || activeSection === "certificates")) ||
+                (href === "#contact" && (activeSection === "contact" || activeSection === "activity"))
+                  ? "is-active"
+                  : ""
+              }
               aria-current={activeSection === href.slice(1) ? "page" : undefined}
             >
               {label}

@@ -12,6 +12,9 @@ export function ProjectCard({ project, TechIcon, variant = "default", projectNum
             alt={project.preview.alt}
             className="project-card__preview-image"
             loading="lazy"
+            decoding="async"
+            width="600"
+            height="340"
           />
         ) : (
           <div

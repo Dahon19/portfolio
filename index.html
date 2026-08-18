@@ -15,40 +15,26 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
     <title>Dev Dahon | Portfolio</title>
   </head>
   <body>
     <div id="root"></div>
-    <script>
-      (function () {
-        const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
-        const isViteDevPort = ["4173", "5173", "5174", "5175"].includes(window.location.port);
-        const isViteDevServer = isLocalHost && isViteDevPort;
-
-        if (!isViteDevServer) {
-          const stylesheet = document.createElement("link");
-          stylesheet.rel = "stylesheet";
-          stylesheet.href = "/assets/app-B6x-qd0Z.css";
-          document.head.appendChild(stylesheet);
-
-          const script = document.createElement("script");
-          script.type = "module";
-          script.crossOrigin = "";
-          script.src = "/assets/app-BWkZS5Lb.js";
-          document.body.appendChild(script);
-        }
-      })();
-    </script>
-    <script type="module">
-      const isLocalHost = ["localhost", "127.0.0.1"].includes(window.location.hostname);
-      const isViteDevPort = ["4173", "5173", "5174", "5175"].includes(window.location.port);
-
-      if (isLocalHost && isViteDevPort) {
-        import("/src/main.jsx");
-      }
-    </script>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
