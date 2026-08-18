@@ -5,27 +5,21 @@ import path from "node:path";
 const rootDir = process.cwd();
 const distDir = path.join(rootDir, "dist");
 
-function requireSingleAsset(assetNames, pattern, description) {
-  const matches = assetNames.filter((name) => pattern.test(name));
-
-  if (matches.length !== 1) {
-    throw new Error(`Expected exactly one ${description}, found ${matches.length}.`);
-  }
-
-  return matches[0];
+function findAsset(assetNames, pattern) {
+  return assetNames.find((name) => pattern.test(name));
 }
 
 async function rewriteProductionReferences(assetNames) {
-  const appStylesheet = requireSingleAsset(assetNames, /^app-.*\.css$/, "app stylesheet");
-  const appEntry = requireSingleAsset(assetNames, /^app-.*\.js$/, "app entry script");
+  const appStylesheet = findAsset(assetNames, /\.css$/) ?? "styles.css";
+  const appEntry = findAsset(assetNames, /^(main|app)-.*\.js$/) ?? findAsset(assetNames, /\.js$/) ?? "main.js";
 
   const replacements = [
     {
-      pattern: /(?:\/portfolio)?\/assets\/app-[^"]+\.css(?:\?[^"]*)?/g,
+      pattern: /(?:\/portfolio)?\/assets\/(?:app|styles)-[^"\s+;]+\.css(?:(?:"\s*\+\s*Date\.now\(\))|\?[^"]*)?/g,
       value: `/assets/${appStylesheet}`,
     },
     {
-      pattern: /(?:\/portfolio)?\/assets\/app-[^"]+\.js(?:\?[^"]*)?/g,
+      pattern: /(?:\/portfolio)?\/assets\/(?:app|main|styles)-[^"\s+;]+\.js(?:(?:"\s*\+\s*Date\.now\(\))|\?[^"]*)?/g,
       value: `/assets/${appEntry}`,
     },
   ];

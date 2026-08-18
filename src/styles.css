@@ -24,6 +24,28 @@
   --gold-glow: rgba(212, 175, 55, 0.22);
   --gold-border: rgba(212, 175, 55, 0.35);
 
+  /* Vibrant Accent Palette */
+  --accent-cyan: #06b6d4;
+  --accent-cyan-glow: rgba(6, 182, 212, 0.25);
+  --accent-indigo: #6366f1;
+  --accent-indigo-glow: rgba(99, 102, 241, 0.25);
+  --accent-emerald: #10b981;
+  --accent-emerald-glow: rgba(16, 185, 129, 0.25);
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
+  --accent-blue: #2563eb;
+  
+  /* Brand Tech Colors */
+  --brand-react: #00d8ff;
+  --brand-laravel: #ff2d20;
+  --brand-php: #777bb4;
+  --brand-js: #f7df1e;
+  --brand-python: #3776ab;
+  --brand-mysql: #00758f;
+  --brand-bootstrap: #7952b3;
+  --brand-vite: #646cff;
+  --brand-arduino: #00979d;
+
   --line-light: rgba(9, 9, 11, 0.12);
   --line-dark: rgba(255, 255, 255, 0.12);
 
@@ -510,10 +532,8 @@ section.timeline.section--dark {
 }
 
 [data-reveal] {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 420ms var(--ease), transform 420ms var(--ease);
-  transition-delay: var(--delay, 0ms);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 [data-reveal].is-visible,
@@ -2406,14 +2426,15 @@ section.timeline.section--dark {
 .certificate-card__status {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.2rem 0.55rem;
+  gap: 0.35rem;
+  padding: 0.22rem 0.65rem;
   border-radius: var(--radius-pill);
-  background: rgba(212, 175, 55, 0.12);
-  color: var(--ink-dark);
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.28);
   font-family: "DM Mono", monospace;
-  font-size: 0.65rem;
-  font-weight: 600;
+  font-size: 0.68rem;
+  font-weight: 700;
   letter-spacing: 0.02em;
 }
 
