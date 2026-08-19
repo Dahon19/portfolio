@@ -64,6 +64,7 @@ import { SkillCategoryCard } from "./components/SkillCategoryCard";
 import { ProjectCard } from "./components/ProjectCard";
 import { CertificateGroup } from "./components/CertificateGroup";
 import { TimelineItem } from "./components/TimelineItem";
+import { CoverflowCarousel } from "./components/ui/coverflow-carousel";
 import { portfolioData } from "./data/portfolioData";
 
 const rotatingHeroWords = [
@@ -390,7 +391,7 @@ function HeroSection() {
           <aside className="hero__panel">
             <div className="hero__portrait-stage" data-reveal style={{ "--delay": "120ms" }}>
               <div className="hero__portrait-backdrop" aria-hidden="true">
-                <img src={avatarImageSrc} alt="" width="340" height="340" decoding="async" fetchpriority="high" />
+                <img src={avatarImageSrc} alt="" width="340" height="340" decoding="async" fetchPriority="high" />
               </div>
               <div className="hero__portrait-light hero__portrait-light--gold" aria-hidden="true" />
               <div className="hero__portrait-light hero__portrait-light--blue" aria-hidden="true" />
@@ -411,7 +412,7 @@ function HeroSection() {
                         width="320"
                         height="320"
                         decoding="async"
-                        fetchpriority="high"
+                        fetchPriority="high"
                       />
                     </div>
                     <div className="hero-card__light-sweep" aria-hidden="true" />

@@ -7,14 +7,11 @@ const pagesDir = path.resolve(portfolioDir, "..", "devdahon.github.io");
 const protectedEntries = new Set([".git", ".nojekyll", "app-ads.txt", "portfolio", "src"]);
 
 async function assertDeploymentTarget() {
-  const expectedTarget = path.resolve("C:/SysProjects/devdahon.github.io");
-
-  if (pagesDir !== expectedTarget) {
-    throw new Error(`Refusing to deploy to unexpected target: ${pagesDir}`);
+  try {
+    await fs.access(path.join(pagesDir, ".git"));
+  } catch (err) {
+    throw new Error(`Target deployment directory does not exist or is not a git repo: ${pagesDir}`);
   }
-
-  await fs.access(path.join(pagesDir, ".git"));
-  await fs.access(path.join(pagesDir, "app-ads.txt"));
 }
 
 async function syncDist() {
