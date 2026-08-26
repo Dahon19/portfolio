@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:pages": "npm run build && node scripts/sync-pages.mjs",
-    "deploy:root": "npm run build:pages && npm run build:pages && node scripts/deploy-root-pages.mjs",
+    "deploy:root": "npm run build && node scripts/deploy-root-pages.mjs",
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
@@ -17,8 +16,7 @@
     "lucide-react": "^0.525.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-icons": "^5.6.0",
-    "simple-icons": "^13.21.0"
+    "react-icons": "^5.6.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.7.0",

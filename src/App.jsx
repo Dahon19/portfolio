@@ -62,7 +62,7 @@ import avatarImageSrc from "./assets/rod-allen-avatar.jpg";
 import { SectionHeading } from "./components/SectionHeading";
 import { SkillCategoryCard } from "./components/SkillCategoryCard";
 import { ProjectCard } from "./components/ProjectCard";
-import { CertificateGroup } from "./components/CertificateGroup";
+import { CertificateOrbitNavigator } from "./components/CertificateOrbitNavigator";
 import { TimelineItem } from "./components/TimelineItem";
 import { CoverflowCarousel } from "./components/ui/coverflow-carousel";
 import { portfolioData } from "./data/portfolioData";
@@ -244,30 +244,6 @@ function useReducedMotionPreference() {
 
   return prefersReducedMotion;
 }
-
-const certificateGroupLabels = {
-  "Webinars / Seminars Attended": "Webinars & Seminars",
-  "Online Courses Taken": "Online Courses",
-  Badges: "Digital Badges",
-  "Certifications / Trainings": "Certifications",
-  certifications: "Certifications",
-  seminars: "Webinars & Seminars",
-  courses: "Online Courses"
-};
-
-const certificateIcons = {
-  "Webinars & Seminars": GraduationCap,
-  "Online Courses": BookOpenText,
-  "Digital Badges": Sparkles,
-  Certifications: Award
-};
-
-const certificateGroupOrder = [
-  "Certifications",
-  "Online Courses",
-  "Digital Badges",
-  "Webinars & Seminars"
-];
 
 /* ==========================================================================
    SITE HEADER: Obsidian & Gold Floating Navigation Bar
@@ -575,51 +551,14 @@ function ResumeSection() {
    SECTION 4: CERTIFICATES & BADGES (3D Coverflow & Grid)
    ========================================================================== */
 function CertificatesSection() {
-  const [activeGroup, setActiveGroup] = useState("All Records");
+  const certificates = useMemo(() => {
+    return [...portfolioData.certificates].sort((a, b) => {
+      const featuredDifference = Number(Boolean(b.featured)) - Number(Boolean(a.featured));
+      if (featuredDifference) return featuredDifference;
 
-  const groupedCertificates = useMemo(() => {
-    const groups = portfolioData.certificates.reduce((accumulator, item) => {
-      const groupLabel = certificateGroupLabels[item.type] ?? item.type;
-
-      if (!accumulator[groupLabel]) {
-        accumulator[groupLabel] = [];
-      }
-
-      accumulator[groupLabel].push(item);
-      return accumulator;
-    }, {});
-
-    // Sort items within each group: featured credentials first, then reverse chronological order
-    Object.values(groups).forEach((items) => {
-      items.sort((a, b) => {
-        const featA = a.featured ? 1 : 0;
-        const featB = b.featured ? 1 : 0;
-        if (featA !== featB) return featB - featA;
-
-        const timeA = a.date ? Date.parse(a.date) || 0 : 0;
-        const timeB = b.date ? Date.parse(b.date) || 0 : 0;
-        return timeB - timeA;
-      });
+      return (Date.parse(b.date) || 0) - (Date.parse(a.date) || 0);
     });
-
-    const orderedGroups = certificateGroupOrder
-      .filter((group) => groups[group]?.length)
-      .map((group) => [group, groups[group]]);
-    const extraGroups = Object.entries(groups).filter(
-      ([group]) => !certificateGroupOrder.includes(group)
-    );
-
-    return [...orderedGroups, ...extraGroups];
   }, []);
-
-  const totalCount = useMemo(() => portfolioData.certificates.length, []);
-
-  const displayedGroups = useMemo(() => {
-    if (activeGroup === "All Records") {
-      return groupedCertificates;
-    }
-    return groupedCertificates.filter(([group]) => group === activeGroup);
-  }, [activeGroup, groupedCertificates]);
 
   return (
     <section className="certificates section" id="certificates">
@@ -627,53 +566,11 @@ function CertificatesSection() {
         <SectionHeading
           eyebrow="Verified Credentials"
           title="Certificates, Courses & Badges"
-          subtitle="Explore verified professional development records categorized into Webinars & Seminars, Online Courses, Digital Badges, and Technical Certifications."
+          subtitle="Explore verified professional development records across technical certifications, online courses, digital badges, webinars, and seminars."
           align="left"
         />
 
-        <div className="certificates-tabs" role="tablist" aria-label="Professional development categories">
-          <button
-            type="button"
-            role="tab"
-            aria-selected={activeGroup === "All Records"}
-            className={`certificates-tabs__button${activeGroup === "All Records" ? " is-active" : ""}`}
-            onClick={() => setActiveGroup("All Records")}
-          >
-            <span>All Records</span>
-            <small>{totalCount}</small>
-          </button>
-
-          {groupedCertificates.map(([group, certificates]) => (
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeGroup === group}
-              className={`certificates-tabs__button${activeGroup === group ? " is-active" : ""}`}
-              key={group}
-              onClick={() => setActiveGroup(group)}
-            >
-              <span>{group}</span>
-              <small>{certificates.length}</small>
-            </button>
-          ))}
-        </div>
-
-        <div className="certificates__list" style={{ display: "grid", gap: "2rem" }}>
-          {displayedGroups.map(([groupTitle, certificates], index) => (
-            <CertificateGroup
-              key={groupTitle}
-              title={groupTitle}
-              certificates={certificates}
-              icon={certificateIcons[groupTitle]}
-              delay={index * 80}
-              initialLimit={activeGroup === "All Records" ? 3 : 18}
-              initialView={activeGroup === "All Records" ? "grid" : "orbit"}
-              showViewToggle={activeGroup !== "All Records"}
-              onSelectCategory={() => setActiveGroup(groupTitle)}
-              isAllRecordsOverview={activeGroup === "All Records"}
-            />
-          ))}
-        </div>
+        <CertificateOrbitNavigator certificates={certificates} />
       </div>
     </section>
   );
