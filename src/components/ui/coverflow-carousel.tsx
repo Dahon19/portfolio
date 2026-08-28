@@ -8,13 +8,19 @@ const useIsoLayoutEffect =
   typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect;
 
 export interface CoverflowSlide {
-  src: string;
-  alt: string;
+  src?: string;
+  alt?: string;
   title?: string;
   subtitle?: string;
   description?: string;
   tags?: string[];
   meta?: { label: string; value: string }[];
+  data?: unknown;
+}
+
+export interface CoverflowRenderContext {
+  index: number;
+  isActive: boolean;
 }
 
 export interface CoverflowCarouselProps {
@@ -31,9 +37,15 @@ export interface CoverflowCarouselProps {
   fade?: number;
   /** Any CSS length. Everything else is derived from it, so the rake scales. */
   cardWidth?: string;
+  /** CSS aspect-ratio used by each card. */
+  cardAspectRatio?: string;
+  /** CSS height for the stage, normally derived from cardWidth. */
+  stageHeight?: string;
   /** Space between cards, as a fraction of card width. */
   gap?: number;
   loop?: boolean;
+  /** Milliseconds between automatic advances. Set to 0 to disable autoplay. */
+  autoPlayInterval?: number;
   showCaption?: boolean;
   showPagination?: boolean;
   showNavigation?: boolean;
@@ -41,6 +53,10 @@ export interface CoverflowCarouselProps {
   label?: string;
   className?: string;
   cardClassName?: string;
+  renderSlide?: (
+    slide: CoverflowSlide,
+    context: CoverflowRenderContext,
+  ) => React.ReactNode;
 }
 
 export function CoverflowCarousel({
@@ -51,14 +67,18 @@ export function CoverflowCarousel({
   falloff = 0.56,
   fade = 0.1,
   cardWidth = "clamp(180px, 24vw, 320px)",
+  cardAspectRatio = "16 / 11",
+  stageHeight = "calc(var(--cf-card) * 11 / 16)",
   gap = 0.08,
   loop = true,
+  autoPlayInterval = 0,
   showCaption = true,
   showPagination = true,
   showNavigation = true,
   label = "Cover carousel",
   className,
   cardClassName,
+  renderSlide,
 }: CoverflowCarouselProps) {
   const count = slides.length;
 
@@ -80,10 +100,14 @@ export function CoverflowCarousel({
   } | null>(null);
 
   const [selected, setSelected] = React.useState(0);
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
+  const [isFocusWithin, setIsFocusWithin] = React.useState(false);
 
   /** Nearest whole card, folded back into 0..count-1. */
   const indexAt = React.useCallback(
-    (pos: number) => ((Math.round(pos) % count) + count) % count,
+    (pos: number) =>
+      count === 0 ? 0 : ((Math.round(pos) % count) + count) % count,
     [count],
   );
 
@@ -91,7 +115,7 @@ export function CoverflowCarousel({
   // every card for numbers React never needs to see.
   const paint = React.useCallback(() => {
     const width = widthRef.current;
-    if (!width) return;
+    if (!width || count === 0) return;
     const pitch = width * (1 + gap);
     const pos = posRef.current;
 
@@ -120,7 +144,12 @@ export function CoverflowCarousel({
 
       // A card is teleported across the ring at exactly half a turn out, so it
       // has to be gone by then or the jump is visible.
-      const edge = loop ? Math.min(1, Math.max(0, count / 2 - distance)) : 1;
+      const edge =
+        count === 1
+          ? 1
+          : loop
+            ? Math.min(1, Math.max(0, count / 2 - distance))
+            : 1;
       card.style.opacity = String(Math.max(0, 1 - fade * distance) * edge);
       card.style.zIndex = String(100 - Math.round(distance));
     });
@@ -128,9 +157,21 @@ export function CoverflowCarousel({
 
   const settle = React.useCallback(
     (target: number) => {
+      if (count === 0) return;
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
       targetRef.current = target;
       setSelected(indexAt(target));
+
+      const reduceMotion =
+        typeof window !== "undefined" &&
+        window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+      if (reduceMotion) {
+        posRef.current = target;
+        paint();
+        rafRef.current = null;
+        return;
+      }
 
       const step = () => {
         const remaining = target - posRef.current;
@@ -148,7 +189,7 @@ export function CoverflowCarousel({
       };
       rafRef.current = requestAnimationFrame(step);
     },
-    [indexAt, paint],
+    [count, indexAt, paint],
   );
 
   const clamp = React.useCallback(
@@ -158,6 +199,7 @@ export function CoverflowCarousel({
 
   const goTo = React.useCallback(
     (index: number) => {
+      if (count === 0) return;
       // Take the shorter way round rather than unwinding the whole ring.
       const target = loop
         ? index + Math.round((targetRef.current - index) / count) * count
@@ -168,16 +210,50 @@ export function CoverflowCarousel({
   );
 
   const nudge = React.useCallback(
-    (by: number) => settle(clamp(Math.round(targetRef.current) + by)),
-    [clamp, settle],
+    (by: number) => {
+      if (count <= 1) return;
+      settle(clamp(Math.round(targetRef.current) + by));
+    },
+    [clamp, count, settle],
   );
 
+  React.useEffect(() => {
+    if (
+      autoPlayInterval <= 0 ||
+      count <= 1 ||
+      isDragging ||
+      isHovered ||
+      isFocusWithin
+    ) {
+      return undefined;
+    }
+
+    const reduceMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduceMotion) return undefined;
+
+    const timer = window.setTimeout(() => nudge(1), autoPlayInterval);
+    return () => window.clearTimeout(timer);
+  }, [
+    autoPlayInterval,
+    count,
+    isDragging,
+    isFocusWithin,
+    isHovered,
+    nudge,
+    selected,
+  ]);
+
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (count <= 1) return;
     if (rafRef.current !== null) {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
     }
     event.currentTarget.setPointerCapture(event.pointerId);
+    event.currentTarget.focus({ preventScroll: true });
     targetRef.current = posRef.current;
     dragRef.current = {
       id: event.pointerId,
@@ -186,6 +262,7 @@ export function CoverflowCarousel({
       v: 0,
       t: performance.now(),
     };
+    setIsDragging(true);
   };
 
   const onPointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
@@ -211,6 +288,7 @@ export function CoverflowCarousel({
     const drag = dragRef.current;
     if (!drag || drag.id !== event.pointerId) return;
     dragRef.current = null;
+    setIsDragging(false);
     // Let a flick carry, but never more than two cards.
     const carried = Math.max(-2, Math.min(2, drag.v * 0.18));
     settle(clamp(Math.round(posRef.current + carried)));
@@ -251,6 +329,14 @@ export function CoverflowCarousel({
       role="region"
       aria-roledescription="carousel"
       aria-label={label}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocusCapture={() => setIsFocusWithin(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setIsFocusWithin(false);
+        }
+      }}
     >
       <div className="relative" style={{ position: "relative" }}>
         <div
@@ -279,7 +365,7 @@ export function CoverflowCarousel({
           <div
             className="coverflow-stage relative select-none"
             style={{
-              height: "calc(var(--cf-card) * 11 / 16)",
+              height: stageHeight,
               transformStyle: "preserve-3d",
             }}
           >
@@ -291,26 +377,31 @@ export function CoverflowCarousel({
                 }}
                 role="group"
                 aria-roledescription="slide"
-                aria-label={`${index + 1} of ${count}`}
+                aria-label={`${slide.title ? `${slide.title}, ` : ""}${index + 1} of ${count}`}
                 onClick={() => goTo(index)}
                 className={cn(
                   "coverflow-card absolute left-1/2 top-0 overflow-hidden rounded-2xl bg-muted shadow-xl will-change-transform",
+                  index === selected && "is-active",
                   cardClassName,
                 )}
-                style={{ width: "var(--cf-card)", aspectRatio: "16 / 11", cursor: "pointer" }}
+                style={{ width: "var(--cf-card)", aspectRatio: cardAspectRatio, cursor: count > 1 ? "pointer" : "default" }}
               >
-                <img
-                  src={slide.src}
-                  alt={slide.alt}
-                  draggable={false}
-                  className="h-full w-full select-none object-cover"
-                />
+                {renderSlide ? (
+                  renderSlide(slide, { index, isActive: index === selected })
+                ) : (
+                  <img
+                    src={slide.src || ""}
+                    alt={slide.alt || slide.title || ""}
+                    draggable={false}
+                    className="h-full w-full select-none object-cover"
+                  />
+                )}
               </div>
             ))}
           </div>
         </div>
 
-        {showNavigation && (
+        {showNavigation && count > 1 && (
           <>
             <button
               type="button"
@@ -362,7 +453,7 @@ export function CoverflowCarousel({
         </div>
       )}
 
-      {showPagination && (
+      {showPagination && count > 1 && (
         <div className="coverflow-pagination">
           {slides.map((_, index) => (
             <button

@@ -1,4 +1,8 @@
-const certificatePreviewModules = import.meta.glob("../assets/certificate-previews/**/*.{webp,png,jpg,jpeg,svg}", {
+const certificatePreviewModules = import.meta.glob([
+  "../assets/certificate-previews/*.webp",
+  "../assets/certificate-previews/Courses/*.{webp,png,jpg,jpeg,svg}",
+  "../assets/certificate-previews/Badges/*.{webp,png,jpg,jpeg,svg}"
+], {
   eager: true,
   import: "default"
 });
@@ -221,318 +225,341 @@ export const portfolioData = {
       date: "November 22, 2024",
       type: "Webinars / Seminars Attended",
       location: "Gordon College · College of Computer Studies & Syntax Squad",
-      preview: certificatePreview("5g-and-ai-how-5g-accelerates-ai-powered-technology-and-edge-computing.jpg")
+      preview: certificatePreview("5g-and-ai-how-5g-accelerates-ai-powered-technology-and-edge-computing.webp")
     },
     {
       title: "AI x Design: Boost Your Creativity, Speed & Style",
       date: "November 28, 2025",
       type: "Webinars / Seminars Attended",
       location: "DICT Region V · Department of Information and Communications Technology",
-      featured: true
+      featured: true,
+      preview: certificatePreview("ai-x-design-boost-your-creativity-speed-style.webp")
     },
     {
       title: "Introduction to RAN, 5G, and Open RAN",
       date: "November 23, 2024",
       type: "Webinars / Seminars Attended",
       location: "USAID BEACON Project · International Development / Online",
-      featured: true
+      featured: true,
+      preview: certificatePreview("introduction-to-ran-5g-and-open-ran.webp")
     },
     {
       title: "Batch 2 of Hour of Code: Learn AI & Coding the Fun Way!",
       date: "November 22, 2025",
       type: "Webinars / Seminars Attended",
       location: "DICT MIMAROPA · Department of Information and Communications Technology",
-      featured: true
+      featured: true,
+      preview: certificatePreview("batch-2-of-hour-of-code-learn-ai-coding-the-fun-way.webp")
     },
     {
       title: "Building a Personal Brand in IT",
       date: "November 20, 2024",
       type: "Webinars / Seminars Attended",
       location: "DICT / Online",
-      preview: certificatePreview("building-a-personal-brand-in-it.jpg")
+      preview: certificatePreview("building-a-personal-brand-in-it.webp")
     },
     {
       title: "Capstone Project Software Quality and Usability",
       date: "December 7, 2024",
       type: "Webinars / Seminars Attended",
       location: "Northeastern College · College of Information and Technology",
-      preview: certificatePreview("capstone-project-software-quality-and-usability.jpg")
+      preview: certificatePreview("capstone-project-software-quality-and-usability.webp")
     },
     {
       title: "Cloud and DevOps Basics",
       date: "January 8, 2026",
       type: "Webinars / Seminars Attended",
       location: "DICT / Online",
-      preview: certificatePreview("cloud-and-devops-basics.jpg")
+      preview: certificatePreview("cloud-and-devops-basics.webp")
     },
     {
       title: "Cutting-Edge Strategies and Innovation in Software Technologies",
       date: "November 8, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("cutting-edge-strategies-and-innovation-in-software-technologies.jpg")
+      preview: certificatePreview("cutting-edge-strategies-and-innovation-in-software-technologies.webp")
     },
     {
       title: "Data Analytics and Visualization Essentials",
       date: "January 19, 2026",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("data-analytics-and-visualization-essentials.jpg")
+      preview: certificatePreview("data-analytics-and-visualization-essentials.webp")
     },
     {
       title: "Data Privacy and Protection in the Digital Age",
       date: "November 7, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("data-privacy-and-protection-in-the-digital-age.jpg")
+      preview: certificatePreview("data-privacy-and-protection-in-the-digital-age.webp")
     },
     {
       title: "Decipher the Code: Challenges and Opportunities of AI Adoption Through the Lens of Multigenerational Workforce",
       date: "November 30, 2025",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("decipher-the-code-challenges-and-opportunities-of-ai-adoption-through-the-lens-of-multigenerational-workforce.jpg")
+      preview: certificatePreview("decipher-the-code-challenges-and-opportunities-of-ai-adoption-through-the-lens-of-multigenerational-workforce.webp")
     },
     {
       title: "Design Thinking and Mobile App Wireframing",
       date: "November 27, 2025",
       type: "Webinars / Seminars Attended",
       location: "DICT Region V / Zoom",
-      preview: certificatePreview("design-thinking-and-mobile-app-wireframing.jpg")
+      preview: certificatePreview("design-thinking-and-mobile-app-wireframing.webp")
     },
     {
       title: "Embracing Cyber Security for Tomorrow: Advanced Networking & Defense",
       date: "November 22, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("embracing-cyber-security-for-tomorrow-advanced-netwroking-defense.jpg")
+      preview: certificatePreview("embracing-cyber-security-for-tomorrow-advanced-netwroking-defense.webp")
     },
     {
       title: "FreshMedia Fusion: Multimedia Innovation for Future Creative Software Developers",
       date: "November 17, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("freshmedia-fusion-a-webinar-on-multimedia-innovation-for-future-creative-software-developers.jpg")
+      preview: certificatePreview("freshmedia-fusion-a-webinar-on-multimedia-innovation-for-future-creative-software-developers.webp")
     },
     {
       title: "Hour of Code Session under the AI SmartCT",
       date: "November 27, 2025",
       type: "Webinars / Seminars Attended",
       location: "AI SmartCT",
-      preview: certificatePreview("hour-of-code-session-under-the-ai-smartct.jpg")
+      preview: certificatePreview("hour-of-code-session-under-the-ai-smartct.webp")
     },
     {
       title: "How to 3D Model: Fundamentals of 3D Design and Modeling",
       date: "November 29, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("how-to-3d-model-fundamentals-of-3d-design-and-modeling.jpg")
+      preview: certificatePreview("how-to-3d-model-fundamentals-of-3d-design-and-modeling.webp")
     },
     {
       title: "Introduction to RAN, 5G, and Open RAN",
       date: "November 23, 2024",
       type: "Webinars / Seminars Attended",
       location: "USAID / Online",
-      preview: certificatePreview("introduction-to-ran-5g-and-open-ran.jpg")
+      preview: certificatePreview("introduction-to-ran-5g-and-open-ran.webp")
     },
     {
       title: "Leadership Training",
       date: "December 7, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("leadership-training.jpg")
+      preview: certificatePreview("leadership-training.webp")
     },
     {
       title: "Linux Fundamentals",
       date: "November 30, 2024",
       type: "Webinars / Seminars Attended",
       location: "USAID / Online",
-      preview: certificatePreview("linux-fundamentals.jpg")
+      preview: certificatePreview("linux-fundamentals.webp")
     },
     {
       title: "Network Security",
       date: "December 7, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("network-security.jpg")
+      preview: certificatePreview("network-security.webp")
     },
     {
       title: "Oplan Paskong Sigurado",
       date: "May 29, 2026",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("oplan-paskong-sigurado.jpg")
+      preview: certificatePreview("oplan-paskong-sigurado.webp")
     },
     {
       title: "Simplifying Artificial Intelligence for the Next Generation",
       date: "November 18, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("simplifying-artificial-intelligence-for-the-next-generation.jpg")
+      preview: certificatePreview("simplifying-artificial-intelligence-for-the-next-generation.webp")
     },
     {
       title: "Smart Moves: How AI Can Power Your Studies, Work, and Future",
       date: "December 17, 2025",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("smart-moves-how-ai-can-power-your-studies-work-and-future-png.jpg")
+      preview: certificatePreview("smart-moves-how-ai-can-power-your-studies-work-and-future-png.webp")
     },
     {
       title: "Step-by-Step Roadmap to Land Data Analyst Role",
       date: "December 27, 2025",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("step-by-step-roadmap-to-land-data-analyst-role.jpg")
+      preview: certificatePreview("step-by-step-roadmap-to-land-data-analyst-role.webp")
     },
     {
       title: "The Human Side of AI: Ethics, Integrity, and Impact",
       date: "November 29, 2025",
       type: "Webinars / Seminars Attended",
       location: "DICT Region V / Zoom and Facebook Live",
-      preview: certificatePreview("the-human-side-of-ai-ethics-integrity-and-impact.jpg")
+      preview: certificatePreview("the-human-side-of-ai-ethics-integrity-and-impact.webp")
     },
     {
       title: "The New Era of Marketing: Decoding AI Marketing Automation",
       date: "November 5, 2024",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("the-new-era-of-marketing-decoding-ai-marketing-automation.jpg")
+      preview: certificatePreview("the-new-era-of-marketing-decoding-ai-marketing-automation.webp")
     },
     {
       title: "The People-Pleaser Career: A Practical Roadmap for UI/UX Design Field",
       date: "November 30, 2025",
       type: "Webinars / Seminars Attended",
       location: "Online",
-      preview: certificatePreview("the-people-pleaser-career-a-practical-roadmap-for-ui-ux-design-field.jpg")
+      preview: certificatePreview("the-people-pleaser-career-a-practical-roadmap-for-ui-ux-design-field.webp")
     },
     {
       title: "Casting a Safe Line: Women Navigating Phishing Waters",
       date: "October 18, 2024",
       type: "Webinars / Seminars Attended",
       location: "Google Meet",
-      preview: certificatePreview("webinar-on-casting-a-safe-line-women-navigating-phishing-waters.jpg")
+      preview: certificatePreview("webinar-on-casting-a-safe-line-women-navigating-phishing-waters.webp")
     },
     {
       title: "i-ACT4SmartCity: Industry-Academe Congress on Technologies for Smart City",
       date: "October 16, 2024",
       type: "Webinars / Seminars Attended",
-      location: "Cauayan City, Isabela"
+      location: "Cauayan City, Isabela",
+      preview: certificatePreview("i-act4smartcity-industry-academe-congress-on-technologies-for-smart-city-i-act4smartcity.webp")
     },
     // --- Online Courses ---
     {
       title: "Master ChatGPT",
       date: "December 20, 2025",
       type: "Online Courses Taken",
-      location: "UniAthena"
+      location: "UniAthena",
+      preview: certificatePreview("Courses/Master ChatGPT.png")
     },
     {
       title: "Hardware and Upgrade Support",
       date: "December 17, 2025",
       type: "Online Courses Taken",
-      location: "Cisco Networking Academy"
+      location: "Cisco Networking Academy",
+      preview: certificatePreview("Courses/Hardware and Upgrade Support.webp")
     },
     {
       title: "Artificial Intelligence (AI) for Social Impact",
       date: "December 12, 2025",
       type: "Online Courses Taken",
-      location: "ADBI E-Learning"
+      location: "ADBI E-Learning",
+      preview: certificatePreview("Courses/Artificial Intelligence for Social Impact.webp")
     },
     {
       title: "Computer Hardware Basics",
       date: "December 9, 2025",
       type: "Online Courses Taken",
-      location: "Cisco Networking Academy"
+      location: "Cisco Networking Academy",
+      preview: certificatePreview("Courses/Computer Hardware Basics.webp")
     },
     {
       title: "Introduction to Modern AI",
       date: "December 8, 2025",
       type: "Online Courses Taken",
-      location: "Cisco Networking Academy"
+      location: "Cisco Networking Academy",
+      preview: certificatePreview("Courses/Introduction to Modern AI.webp")
     },
     {
       title: "Basics of SQL Statements and Indexes",
       date: "December 7, 2025",
       type: "Online Courses Taken",
-      location: "Great Learning / Online"
+      location: "Great Learning / Online",
+      preview: certificatePreview("Courses/Basics of SQL Statements and Indexes.webp")
     },
     {
       title: "Basics of Artificial Intelligence",
       date: "December 7, 2025",
       type: "Online Courses Taken",
-      location: "Great Learning / Online"
+      location: "Great Learning / Online",
+      preview: certificatePreview("Courses/Basics of Artificial Intelligence.png")
     },
     {
       title: "Basics of Artificial Intelligence: Learning Models",
       date: "December 4, 2025",
       type: "Online Courses Taken",
-      location: "Great Learning / Online"
+      location: "Great Learning / Online",
+      preview: certificatePreview("Courses/Basics of Artificial Intelligence  Learning Models.webp")
     },
     {
       title: "Basics of Machine Learning Algorithms",
       date: "December 4, 2025",
       type: "Online Courses Taken",
-      location: "Great Learning / Online"
+      location: "Great Learning / Online",
+      preview: certificatePreview("Courses/Basics of Machine Learning Algorithms.webp")
     },
     {
       title: "AIClass ASEAN",
       date: "December 4, 2025",
       type: "Online Courses Taken",
-      location: "AIClass ASEAN"
+      location: "AIClass ASEAN",
+      preview: certificatePreview("Courses/AIClassASEAN.png")
     },
     {
       title: "Basics of Python",
       date: "December 2, 2025",
       type: "Online Courses Taken",
-      location: "Great Learning / Online"
+      location: "Great Learning / Online",
+      preview: certificatePreview("Courses/Basics of Python.png")
     },
     {
       title: "Getting Started with Cisco Packet Tracer",
       date: "December 1, 2025",
       type: "Online Courses Taken",
-      location: "Cisco Networking Academy"
+      location: "Cisco Networking Academy",
+      preview: certificatePreview("Courses/Cisco Packet Tracer.webp")
     },
     {
       title: "Responsive Web Design",
       date: "November 30, 2025",
       type: "Online Courses Taken",
-      location: "FreeCodeCamp"
+      location: "FreeCodeCamp",
+      preview: certificatePreview("Courses/Web Design.png")
     },
     {
       title: "Course C: Computer Science Fundamentals",
       date: "November 30, 2025",
       type: "Online Courses Taken",
-      location: "Code.org"
+      location: "Code.org",
+      preview: certificatePreview("Courses/Course C.jpg")
     },
     {
       title: "Minecraft Hour of Code: AI for Good",
       date: "November 30, 2025",
       type: "Online Courses Taken",
-      location: "Code.org"
+      location: "Code.org",
+      preview: certificatePreview("Courses/Minecraft.jpg")
     },
     {
       title: "AI for Oceans",
       date: "November 30, 2025",
       type: "Online Courses Taken",
-      location: "Code.org"
+      location: "Code.org",
+      preview: certificatePreview("Courses/AI for Oceans.jpg")
     },
     // --- Digital Badges ---
     {
       title: "Computer Hardware Basics Badge",
       date: "December 9, 2025",
       type: "Badges",
-      location: "Cisco Networking Academy · Credly"
+      location: "Cisco Networking Academy · Credly",
+      preview: certificatePreview("Badges/Computer Hardware Basics Badge.png")
     },
     {
       title: "Hardware and Upgrade Support Badge",
       date: "December 17, 2025",
       type: "Badges",
-      location: "Cisco Networking Academy · Credly"
+      location: "Cisco Networking Academy · Credly",
+      preview: certificatePreview("Badges/Hardware and Upgrade Support Badge.png")
     },
     {
       title: "Introduction to Modern AI Badge",
       date: "December 8, 2025",
       type: "Badges",
-      location: "Cisco Networking Academy · Credly"
+      location: "Cisco Networking Academy · Credly",
+      preview: certificatePreview("Badges/Introduction To Modern AI Badge.png")
     },
     // --- Certifications & Licensures ---
     {

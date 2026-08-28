@@ -10,8 +10,24 @@
       name="description"
       content="Rod Allen B. Agregado portfolio for web development, technical support, and IT instruction."
     />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="shortcut icon" type="image/svg+xml" href="./favicon.svg" />
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #050507;
+      }
+
+      #boot-surface {
+        position: fixed;
+        inset: 0;
+        z-index: 4999;
+        background:
+          radial-gradient(circle at 50% 42%, rgba(212, 175, 55, 0.15), transparent 20rem),
+          linear-gradient(145deg, #09090b, #050507);
+      }
+    </style>
+    <link rel="icon" type="image/webp" href="/src/assets/logo-mark.webp" />
+    <link rel="shortcut icon" type="image/webp" href="/src/assets/logo-mark.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -34,6 +50,7 @@
     <title>Dev Dahon | Portfolio</title>
   </head>
   <body>
+    <div id="boot-surface" aria-hidden="true"></div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

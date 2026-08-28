@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import officialLogo from "./assets/logo-mark.webp";
 import {
   ArrowRight,
   Award,
@@ -245,6 +246,98 @@ function useReducedMotionPreference() {
   return prefersReducedMotion;
 }
 
+function PageRefreshLoader({ reducedMotion }) {
+  const [progress, setProgress] = useState(reducedMotion ? 100 : 0);
+  const [phase, setPhase] = useState("loading");
+
+  useEffect(() => {
+    document.getElementById("boot-surface")?.remove();
+  }, []);
+
+  useEffect(() => {
+    let animationFrame;
+    let completeTimer;
+    let exitTimer;
+
+    if (reducedMotion) {
+      setProgress(100);
+      setPhase("complete");
+      exitTimer = window.setTimeout(() => setPhase("hidden"), 120);
+    } else {
+      const startedAt = performance.now();
+      const duration = 1500;
+
+      const updateProgress = (now) => {
+        const elapsed = Math.min((now - startedAt) / duration, 1);
+        const easedProgress = 1 - Math.pow(1 - elapsed, 3);
+        setProgress(Math.round(easedProgress * 100));
+
+        if (elapsed < 1) {
+          animationFrame = window.requestAnimationFrame(updateProgress);
+          return;
+        }
+
+        completeTimer = window.setTimeout(() => {
+          setPhase("complete");
+          exitTimer = window.setTimeout(() => setPhase("hidden"), 720);
+        }, 180);
+      };
+
+      animationFrame = window.requestAnimationFrame(updateProgress);
+    }
+
+    return () => {
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      if (completeTimer) window.clearTimeout(completeTimer);
+      if (exitTimer) window.clearTimeout(exitTimer);
+    };
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (phase === "hidden") {
+      document.body.classList.remove("is-page-loading");
+      return undefined;
+    }
+
+    document.body.classList.add("is-page-loading");
+    return () => document.body.classList.remove("is-page-loading");
+  }, [phase]);
+
+  if (phase === "hidden") return null;
+
+  return (
+    <div
+      className={`page-loader ${phase === "complete" ? "is-complete" : ""}`}
+      role="status"
+      aria-live="polite"
+      aria-label={`Preparing portfolio, ${progress}% complete`}
+    >
+      <div className="page-loader__content">
+        <div className="page-loader__signal" aria-hidden="true">
+          <span />
+          <span />
+          <span />
+        </div>
+
+        <div className="page-loader__copy">
+          <span>WELCOME</span>
+          <strong>Preparing portfolio</strong>
+        </div>
+
+        <div className="page-loader__progress-row" aria-hidden="true">
+          <div className="page-loader__track">
+            <span
+              className="page-loader__fill"
+              style={{ transform: `scaleX(${progress / 100})` }}
+            />
+          </div>
+          <span className="page-loader__percentage">{progress}%</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ==========================================================================
    SITE HEADER: Obsidian & Gold Floating Navigation Bar
    ========================================================================== */
@@ -268,8 +361,8 @@ function SiteHeader() {
         <a href="#home" className="brand">
           <span className="brand-mark" aria-hidden="true">
             <img
-              src={`${import.meta.env.BASE_URL}favicon.svg`}
-              alt="RA Logo"
+              src={officialLogo}
+              alt=""
               className="brand-logo"
             />
           </span>
@@ -548,7 +641,7 @@ function ResumeSection() {
 }
 
 /* ==========================================================================
-   SECTION 4: CERTIFICATES & BADGES (3D Coverflow & Grid)
+   SECTION 4: CERTIFICATES & BADGES (Category Navigation & 3D Cardflow)
    ========================================================================== */
 function CertificatesSection() {
   const certificates = useMemo(() => {
@@ -598,7 +691,7 @@ function ProjectsSection() {
         <SectionHeading
           eyebrow="Technical Projects"
           title="Featured Projects"
-          subtitle="Swipe through the interactive 3D Coverflow showcase to explore each project's architecture, impact, and technology stack."
+          subtitle="Explore web, mobile, and IoT projects, each highlighting its purpose, core functionality, and technology stack."
           align="left"
         />
 
@@ -891,6 +984,7 @@ export default function App() {
 
   return (
     <>
+      <PageRefreshLoader reducedMotion={reducedMotion} />
       <SiteHeader />
       <main className="main">
         <HeroSection />

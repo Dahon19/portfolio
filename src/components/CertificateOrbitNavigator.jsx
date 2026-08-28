@@ -1,17 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Award,
   BookOpenText,
   Calendar,
   CheckCircle2,
-  ChevronLeft,
-  ChevronRight,
   MapPin,
   Presentation,
   ShieldCheck
 } from "lucide-react";
-
-const ITEMS_PER_PAGE = 6;
+import { CoverflowCarousel } from "./ui/coverflow-carousel";
 
 const certificateCategoryDefinitions = [
   {
@@ -36,7 +33,36 @@ const certificateCategoryDefinitions = [
   }
 ];
 
-function CertificateDetails({ certificate }) {
+function getCertificateCaption(certificate) {
+  const issuer = certificate.location
+    ?.split(/\s*(?:·|\/)\s*/)
+    .map((part) => part.trim())
+    .find((part) => part && part.toLowerCase() !== "online");
+
+  if (certificate.type === "Badges") {
+    return issuer
+      ? `Verified digital badge issued by ${issuer}.`
+      : "Verified digital badge recognizing completed technical learning.";
+  }
+
+  if (["Online Courses Taken", "courses"].includes(certificate.type)) {
+    return issuer
+      ? `Course completion credential issued by ${issuer}.`
+      : "Course completion credential for structured online learning.";
+  }
+
+  if (["Certifications / Trainings", "certifications"].includes(certificate.type)) {
+    return issuer
+      ? `${certificate.certificateLevel ?? "Professional"} competency credential issued by ${issuer}.`
+      : "Professional competency and technical training credential.";
+  }
+
+  return issuer
+    ? `Professional learning participation credential issued by ${issuer}.`
+    : "Participation credential for a professional learning session.";
+}
+
+function CertificateDetails({ certificate, isActive }) {
   return (
     <>
       <div className="certificate-card__top">
@@ -55,6 +81,24 @@ function CertificateDetails({ certificate }) {
           ? `${certificate.title} - ${certificate.certificateLevel}`
           : certificate.title}
       </h3>
+
+      <p className="certificate-card__caption">
+        {getCertificateCaption(certificate)}
+      </p>
+
+      {certificate.preview ? (
+        <div className="certificate-card__preview">
+          <img
+            src={certificate.preview}
+            alt={`${certificate.title} certificate preview`}
+            className="certificate-card__preview-image"
+            loading="eager"
+            fetchPriority={isActive ? "high" : "auto"}
+            decoding="async"
+            draggable="false"
+          />
+        </div>
+      ) : null}
 
       <div className="certificate-card__meta">
         <MapPin size={13} className="certificate-card__meta-icon" aria-hidden="true" />
@@ -81,7 +125,6 @@ export function CertificateOrbitNavigator({ certificates }) {
       ?? certificateCategories[0]?.label
       ?? ""
   );
-  const [currentPage, setCurrentPage] = useState(1);
 
   const selectedCategory = certificateCategories.find(
     (category) => category.label === activeCategory
@@ -89,16 +132,17 @@ export function CertificateOrbitNavigator({ certificates }) {
 
   const categoryCertificates = selectedCategory?.certificates ?? [];
   const totalItems = categoryCertificates.length;
-  const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE) || 1;
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [activeCategory]);
-
-  const paginatedCertificates = useMemo(() => {
-    const start = (currentPage - 1) * ITEMS_PER_PAGE;
-    return categoryCertificates.slice(start, start + ITEMS_PER_PAGE);
-  }, [categoryCertificates, currentPage]);
+  const certificateSlides = useMemo(
+    () => categoryCertificates.map((certificate) => ({
+      src: certificate.preview,
+      title: certificate.certificateLevel
+        ? `${certificate.title} - ${certificate.certificateLevel}`
+        : certificate.title,
+      alt: `${certificate.title} certificate preview`,
+      data: certificate
+    })),
+    [categoryCertificates]
+  );
 
   const ActiveIcon = selectedCategory?.icon || Award;
 
@@ -139,9 +183,6 @@ export function CertificateOrbitNavigator({ certificates }) {
             </span>
             <div>
               <h3 className="certificate-container__title">{selectedCategory?.label}</h3>
-              <p className="certificate-container__subtitle">
-                Showing {totalItems > 0 ? (currentPage - 1) * ITEMS_PER_PAGE + 1 : 0}–{Math.min(currentPage * ITEMS_PER_PAGE, totalItems)} of {totalItems} credentials
-              </p>
             </div>
           </div>
           <span className="certificate-container__badge">
@@ -149,57 +190,29 @@ export function CertificateOrbitNavigator({ certificates }) {
           </span>
         </div>
 
-        <div className="certificate-grid" key={`${activeCategory}-${currentPage}`}>
-          {paginatedCertificates.map((certificate, idx) => (
+        <CoverflowCarousel
+          key={activeCategory}
+          slides={certificateSlides}
+          cardWidth="clamp(240px, 28vw, 360px)"
+          cardAspectRatio="4 / 5"
+          stageHeight="calc(var(--cf-card) * 5 / 4)"
+          autoPlayInterval={4500}
+          showCaption={false}
+          showNavigation={true}
+          showPagination={true}
+          label={`${selectedCategory?.label ?? "Certificates"} 3D cardflow`}
+          className="certificate-coverflow"
+          cardClassName="certificate-coverflow__slide"
+          renderSlide={(slide, { isActive }) => (
             <div
-              key={`${certificate.title}-${idx}`}
-              className="certificate-card certificate-card--text certificate-card--grid-item"
+              className={`certificate-card certificate-card--text certificate-card--coverflow ${slide.data.preview ? "has-preview" : "without-preview"} ${isActive ? "is-active" : ""}`}
             >
-              <CertificateDetails certificate={certificate} />
+              <div className="certificate-card__content">
+                <CertificateDetails certificate={slide.data} isActive={isActive} />
+              </div>
             </div>
-          ))}
-        </div>
-
-        {totalPages > 1 && (
-          <div className="certificate-pagination">
-            <button
-              type="button"
-              className="certificate-pagination__btn"
-              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-              disabled={currentPage === 1}
-              aria-label="Previous page"
-            >
-              <ChevronLeft size={16} aria-hidden="true" />
-              <span>Previous</span>
-            </button>
-
-            <div className="certificate-pagination__pages">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-                <button
-                  key={pageNum}
-                  type="button"
-                  className={`certificate-pagination__page-num ${pageNum === currentPage ? "is-active" : ""}`}
-                  onClick={() => setCurrentPage(pageNum)}
-                  aria-label={`Go to page ${pageNum}`}
-                  aria-current={pageNum === currentPage ? "page" : undefined}
-                >
-                  {pageNum}
-                </button>
-              ))}
-            </div>
-
-            <button
-              type="button"
-              className="certificate-pagination__btn"
-              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-              disabled={currentPage === totalPages}
-              aria-label="Next page"
-            >
-              <span>Next</span>
-              <ChevronRight size={16} aria-hidden="true" />
-            </button>
-          </div>
-        )}
+          )}
+        />
       </div>
     </div>
   );
