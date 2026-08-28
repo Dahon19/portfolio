@@ -620,11 +620,9 @@ export const portfolioData = {
       "Hardware Servicing (NCII)",
       "Network Setup & Cabling",
       "IT Helpdesk & Diagnostics",
-      "Full-Stack Web Dev",
       "Technical Documentation"
     ],
     soft: [
-      "Classroom Instruction",
       "User Support & Guidance",
       "Technical Mentoring",
       "Problem Solving",

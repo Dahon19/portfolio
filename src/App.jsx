@@ -11,7 +11,6 @@ import {
   Database,
   ExternalLink,
   FolderGit2,
-  GraduationCap,
   Laptop2,
   Layers,
   Mail,
@@ -153,7 +152,6 @@ const itemIconMap = {
   "Printer & Peripherals": MonitorSmartphone,
   "Software Deployment": Laptop2,
   "Cisco Packet Tracer": FaNetworkWired,
-  "Classroom Instruction": GraduationCap,
   "Technical Mentoring": BookOpenText,
   "Helpdesk Troubleshooting": ShieldCheck,
   "System Workflows": Layers,
@@ -467,10 +465,6 @@ function HeroSection() {
               <div className="hero__portrait-lines" aria-hidden="true" />
 
               <div className="hero-card hero-card--portrait">
-                <div className="hero-card__header-row">
-                  <div className="hero-card__badge">DevDahon</div>
-                </div>
-
                 <div className="hero-card__photo-stage is-avatar">
                   <div className="hero-card__crossfade-wrap">
                     <div className="hero-card__photo-layer hero-card__photo-layer--avatar is-active">
@@ -489,11 +483,6 @@ function HeroSection() {
                 </div>
 
                 <p className="hero-card__name">{portfolioData.profile.displayName}</p>
-                <div className="hero-card__meta" aria-label="Profile highlights">
-                  <span>IT Instructor</span>
-                  <span>BSIT Cum Laude</span>
-                  <span>NCII Certified</span>
-                </div>
               </div>
             </div>
           </aside>
@@ -589,15 +578,6 @@ function ResumeSection() {
               <p className="internship-summary">
                 Maintained college IT infrastructure, performed PC hardware diagnostics and maintenance, assisted with network cabling and setup, and supported institutional systems.
               </p>
-
-              <div className="internship-tags-wrap">
-                <span className="internship-tags-label">Key Focus:</span>
-                <div className="internship-spotlight__tags">
-                  {internship.technologies.map((item) => (
-                    <span key={item}>{item}</span>
-                  ))}
-                </div>
-              </div>
             </article>
 
             <div className="timeline__cards">

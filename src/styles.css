@@ -605,20 +605,6 @@ section.timeline.section--dark {
   color: rgba(255, 255, 255, 0.88) !important;
 }
 
-.section--dark .internship-tags-wrap {
-  border-top-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.section--dark .internship-tags-label {
-  color: var(--gold-bright) !important;
-}
-
-.section--dark .internship-spotlight__tags span {
-  background: rgba(212, 175, 55, 0.12) !important;
-  border: 1px solid var(--gold-border) !important;
-  color: var(--gold-light) !important;
-}
-
 .section--dark .timeline-item__label {
   color: var(--gold-bright) !important;
 }
@@ -1135,25 +1121,6 @@ section.timeline.section--dark {
   transform: translateY(-4px);
 }
 
-.hero-card__header-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.1rem 1.1rem 0.8rem;
-}
-
-.hero-card__badge {
-  padding: 0.35rem 0.75rem;
-  border-radius: var(--radius-pill);
-  background: var(--gold-primary);
-  color: var(--black-950);
-  font-family: "DM Mono", monospace;
-  font-size: 0.64rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-}
-
 .hero-card__toggle-btn {
   display: inline-flex;
   align-items: center;
@@ -1350,28 +1317,10 @@ section.timeline.section--dark {
 }
 
 .hero-card__name {
-  padding: 1.1rem 1.3rem 0.5rem;
+  padding: 1.1rem 1.3rem 1.3rem;
   color: var(--white-pure);
   font-size: 1.1rem;
   font-weight: 700;
-}
-
-.hero-card__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 0 1.3rem 1.3rem;
-}
-
-.hero-card__meta span {
-  color: #a1a1aa;
-  font-size: 0.72rem;
-}
-
-.hero-card__meta span:not(:last-child)::after {
-  margin-left: 0.5rem;
-  color: var(--gold-primary);
-  content: "•";
 }
 
 /* White & Gold About Section */
@@ -2230,23 +2179,6 @@ section.timeline.section--dark {
   font-size: 0.93rem;
   color: var(--ink-dark);
   line-height: 1.55;
-}
-
-.internship-tags-wrap {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--line-light);
-}
-
-.internship-tags-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--gold-dark);
 }
 
 .internship-spotlight {
